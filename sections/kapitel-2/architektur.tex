@@ -1,0 +1,34 @@
+\subsection{Architektur eines Expertensystems}
+Beierle und Kern-Isberner betonen, dass die Trennung zwischen der Darstellung des Wissens (Wissensbasis) und der Wissensverarbeitung (Wissensverarbeitungskomponente) der wichtigste Aspekt eines Wissensbasierten Systems ist. \cite[S.11]{beierle2014}. Die Wissensbasis kann man sich als eine Art Datenstruktur vorstellen, in der das benötigte Wissen gespeichert wird. Die Wissensverarbeitungskomponente umfasst eine Menge von anwendungsunabhängigen Algorithmen, die mithilfe der Wissensbasis eine Lösung für ein gegebenes Problem erarbeiten. Somit stehen die Wissensbasis und die Wissensverarbeitungskomponente in einer engen Beziehung zueinander.\\
+Allgemein umfasst ein Expertensystem folgende Bestandteile \cite[S.75]{greer2010}:
+\begin{itemize}
+\item \textit{Wissensbasis}, die Expertenwissen in Form von Fakten in einer bestimmten Sprache speichert sowie Regeln zur Wissensorganisation beinhaltet.
+\item \textit{Inferenzmaschine}, die unter Berücksichtigung des zugrunde liegenden Wissensbedarfs die Wissensbasis
+durchsucht bis das System einen Problemlösungsvorschlag erarbeitet hat oder herausfindet, dass keiner existiert.
+\item \textit{Dialogkomponente}, die eine Schnittstelle zwischen dem Nutzer und dem System darstellt. 
+\item \textit{Erklärungskomponente}, die dem Benutzer erläutert, warum und auf welche Weise eine bestimmte Lösung gefunden bzw. nicht gefunden wurde \cite[S.126]{haun2000}.
+\item \textit{Wissensakquisitionskomponente}, die den Entwickler des Expertensystems bei der Erweiterung, Änderung und Wartung der Wissensbasis unterstützt.
+\end{itemize}
+Laut Tecuci stellen Wissensbasis und Inferenzmaschine grundlegende Bestandteile eines Expertensystems dar und bilden damit den Kern des Expertensystems \cite[S.1444]{tecuci1992}. Dialogkomponente, Erklärungskomponente und Wissensakquisitionskomponente gehören zur sogenannten Schale und sind für die Kommunikation zwischen dem Systemverwalter und dem Nutzer zuständig (siehe Abbildung \ref{expertensystem_haun}). 
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/expertensystem_haun.png}
+	\caption{Expertensystems nach Haun, \cite[S.126]{haun2000}}
+	\label{expertensystem_haun}
+\end{figure}
+Im Hinblick auf die Interaktion gibt es drei Gruppen, die mit dem Expertensystem interagieren: 
+\begin{itemize}
+\item \textit{Nutzer}, der das Expertensystem zum Lösen eines Problems benutzt und mit der Dialogkomponente kommuniziert. Der Wissensingenieur und der Experte können ebenso als Nutzer auftreten \cite[S.758]{wachsmuth1993}.
+\item \textit{Wissensingenieur}, der sich mit dem Aufbau und Wartung der Wissensbasis beschäftigt. Unter anderem ist Wissensmodellierung ein wichtiger Aufgabenbereich eines Wissensingenieurs \cite[S.742]{wachsmuth1993}.
+\item \textit{Experte}, der über spezifisches Erfahrungswissen verfügt, das für das Expertensystem relevant ist.
+\end{itemize}
+Der Ablauf der Kommunikation zwischen dem Nutzer und dem Expertensystem sieht folgendermaßen aus: 
+\begin{itemize}
+\item Der Nutzer schickt eine Anfrage an die Dialogkomponente des Expertensystems.
+\item Die Dialogkomponente übermittelt die Anfrage an die Inferenzmaschine.
+\item Die Inferenzmaschine erarbeitet eine Lösung für das gegebene Problem mittels der Wissensbasis und gibt das Ergebnis an die Dialogkomponente zurück. 
+\item Anschließend teilt die Dialogkomponente dem Nutzer die Lösung des Problems mit. Falls keine Lösung zum Problem existiert, wird eine entsprechende Fehlermeldung angezeigt.
+\end{itemize}
+Auf der anderen Seite können die Inhalte der Wissensbasis von einem Wissensingenieur mithilfe der Wissensakquisitionskomponente beeinflusst werden. Der Wissenserwerb durch den Wissensingenieur ist die verbreitetste Vorgehensweise, neue Daten für ein wissensbasiertes System zu erschließen. Meistens handelt es sich um ein Interview zwischen dem Wissensingenieur und dem Experten \cite[S.76]{greer2010}, \cite[S.210]{fujihara1997}. Neben dem Interview kann der Wissensingenieur eine Recherche der verfügbaren Wissensquellen wie Text, technische Zeichnungen oder Web-Ressourcen durchführen. Anschließend werden die Daten vom Wissensingenieur formalisiert und in die Wissensbasis gespeichert. \\
+Die Wissensbasis kann in einigen Fällen von einem fachlichen Experten beeinflusst werden. Dafür ist eine geeignete Expertenschnittstelle innerhalb der Wissensakquisitionskomponente notwendig, die den Experten ermöglicht, ihr Erfahrungswissen selbst zu formalisieren und gegebenenfalls zu warten \cite[S.743]{wachsmuth1993}. Die Überprüfung des Dateninputs ist ebenfalls die Aufgabe der Wissensakquisitionskomponente. Dies kann mittels Durchführung automatisierten Tests bei jeder Änderungsanfrage erfolgen, um die Konsistenz der Wissensbasis zu gewährleisten \cite[S.743]{wachsmuth1993}.\\
+Um ein geeignetes Konzept der automatisierten Datenerfassung zu entwickeln, ist ein grundlegendes Verständnis von der Struktur und Funktionsweise der Wissensbasis sowie der Wissensakquisitionskomponente erforderlich. Im weiteren Verlauf der Arbeit werden die Erkenntnisse über die Wissensbasis und die Wissensakquisitionskomponente erläutert, die in der Forschung von Expertensystemen entstanden sind.

@@ -1,0 +1,34 @@
+\section{Grundlagen von Expertensystemen}\label{sec:Expertensysteme}
+\subsection{Begriffsdefinition}
+Ursprünglich waren Expertensysteme Anwendungsprogramme, die logische Schlussfolgerungen aus einer Wissensbasis ziehen konnten. Außerdem konnten sie überprüfen, ob eine Aussage aus einer vorhandenen Wissensbasis abgeleitet werden kann \cite[S.75]{greer2010}. Daher handelt es sich in der früheren Literatur meist um Anwendungen, die ihr Wissen in Form von logischen Ausdrücken darstellen und in der Lage waren, neue Erkenntnisse vom bestehenden Wissen abzuleiten \cite{tecuci1992}. Im Laufe der Zeit hat sich das Konzept eines Expertensystems auf andere Anwendungsbereiche verbreitet. Aus diesem Grund gibt es mehrere Definitionen, die im Allgemeinen ähnlich sind und im Spezifischen Merkmale des zugehörigen Anwendungsbereichs beinhalten.\\
+Allgemein lässt sich sagen, dass ein Expertensystem ein Computersystem (Hardware und Software) ist, das in einem bestimmten Bereich Wissen und Schlussfolgerungsfähigkeit eines menschlichen Experten nachbildet \cite[S.12]{beierle2014}. Aus Sicht der Wirtschaftsinformatik zielen Expertensysteme drauf ab, das Expertenwissen menschlicher Fachleute in der Wissensbasis eines Computers abzuspeichern und für eine Vielzahl von Problemlösungen zu nutzen \cite[S.59]{mertens2012}. Im Weiteren gehen Beierle und Kern-Isberner auf die Eigenschaften ein, die ein Expertensystem aufweisen soll \cite[S.12]{beierle2014}. Im Rahmen dieser Arbeit sind folgende Eingenschaften besonders relevant:
+\begin{itemize}
+\item Anwendung des Wissens eines oder mehrerer Experten, um Probleme in einem bestimmten Anwendungsbereich zu lösen.
+\item Leicht lesbare Wissensdarstellung.
+\item Möglichst anschauliche und intuitive Benutzerschnittstelle.
+\item Leichte Wartbarkeit und Erweiterbarkeit des Wissens im Expertensystem.
+\item Unterstützung beim Wissenstransfer vom Experten zum System.
+\end{itemize}
+Es ist auch wichtig anzumerken, dass die Begriffe \grqq{}Künstliche Intelligenz\grqq{}, \grqq{}Wissensbasiertes System\grqq{} und \grqq{}Expertensystem\grqq{} in einer engen Beziehung zueinander stehen. Haun gibt eine systematische Abgrenzung dieser Begriffe, die sich folgendermaßen beschreiben lässt \cite[S.30]{haun2000}:
+\begin{itemize}
+\item \textit{Künstliche Intelligenz} stellt den Oberbegriff dar und bildet den theoretischen Rahmen für die Entwicklung von Wissensbasierten Systemen und Expertensystemen.
+\item \textit{Wissensbasierte Systeme} sind eine Teilmenge der Anwendungen der künstlichen Intelligenz. Sie wenden die Wissensverarbeitung auf ein konkretes Aufgabengebiet an und verwalten allgemeines Wissen explizit und getrennt von dem Rest des Systems.
+\item \textit{Expertensysteme}, die ein Teilbereich der Wissensbasierten Systeme sind, stellen eine Spezialisierung von Wissensbasierten Systemen dar. Sie verwalten spezifisches Expertenwissen, das von einem Experten stammt und auf praxisbezogene Probleme angewandt wird.
+\end{itemize}
+Graphisch lässt sich die vorliegende Abgrenzung in der Abbildung \ref{Abgrenzung} darstellen:
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=0.55\textwidth]{images/abgrenzung.png}
+	\caption{Begriffsabgrenzung, \cite[S.30]{haun2000}}
+	\label{Abgrenzung}
+\end{figure} 
+Nach dieser Agbrenzung lässt sich feststellen, dass der Unterschied zwischen einem Wissensbasierten System und einem Expertensystem darin besteht, dass das Wissen im Endeffekt von einem Experten stammt. Allerdings ist dieses Kriterium zu einfach und nicht besonders aussagekräftig. Beierle und Kern-Isberner weisen drauf hin, dass nach diesem Kriterium viele existierenden Wissensbasierten Systeme als Expertensysteme bezeichnet werden könnten \cite{beierle2014}[S.11]. Aufgrund dessen stellen die Autoren die Eigenschaften dar, die ein Experte in der Regel besitzt. Im Hinblick auf das Thema der vorliegenden Arbeit sind folgende Merkmale vom Interesse:
+\begin{itemize}
+\item Experten sind selten und teuer.
+\item Experten sind nicht immer verfügbar.
+\item Leistungsfähigkeit der Experten ist nicht konstant, sondern kann nach Tagesverlauf schwanken.
+\item Expertenwissen kann oft nicht als solches weitergegeben werden.
+\item Expertenwissen kann verloren gehen.
+\end{itemize}
+Ein gutes Beispiel hinsichtlich der Gefahr, dass Expertenwissen verloren gehen kann, wird in \cite{gebus2009}[S.94] vorgestellt. Gebus nimmt den Bezug auf die sogenannte Baby-Boomgeneration, die bald in die Rente geht. Infolgedessen verlassen gleichzeitig viele Experten Unternehmen. Damit geht ebenso das Expertenwissen verloren.\\
+Zusammenfassend lässt sich sagen, dass die Entwicklung eines Expertensystems eine hohes Potenzial besitzt. Allerdings kann ein Expertensystem nicht als Ersatz eines menschlichen Experten betrachtet werden. Vielmehr geht es um eine Erfassung, Darstellung und Pflege des Expertenwissens in einem Expertensystems, um die Arbeitsprozesse effizienter zu gestalten und sowohl erfahrene als auch neue Anwender in einem bestimmten Wissensbereich bei der Aufgabenabwicklung zu unterstützen.

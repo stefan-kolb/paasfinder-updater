@@ -1,0 +1,60 @@
+% Einbindung der Konfigurationsdatei
+\input{includes/config.tex}
+
+\begin{document}
+
+% Titelblatt erstellen
+\maketitle{Bachelor}{Wirtschaftsinformatik}{Automatisierung der Datenerfassung für Wissensdatenbanken im technischen Kontext}{Vasilyev Petr}{31.03.2017}
+
+% Erstellung der Inhaltsverzeichnisses
+\pagenumbering{Roman}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+%\listoftablesD
+%\newpage
+
+%\lstlistoflistings
+%\newpage
+
+\fancyhead[LO]{\footnotesize\sc\nouppercase{Abkürzungsverzeichnis}}
+\input{abbreviations/abbreviations.tex}
+\newpage
+\fancyhead[LO]{\footnotesize\sc\nouppercase{\leftmark}}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+%
+% Hier einzelne Kapitel mit \input{sections/Kapitel-File} einfügen.
+% Bei größeren Arbeiten empfiehlt es sich, noch genauer aufzuteilen.
+%
+\input{sections/kapitel-1.tex}
+\newpage
+\input{sections/kapitel-2/definition.tex}
+\input{sections/kapitel-2/architektur.tex}
+\input{sections/kapitel-2/wissensbasis.tex}
+\input{sections/kapitel-2/wissensakquisitionskomponente.tex}
+\newpage
+\input{sections/kapitel-3.tex}
+\input{sections/kapitel-4.tex}
+\input{sections/kapitel-5.tex}
+\input{sections/kapitel-6.tex}
+\input{sections/kapitel-7.tex}
+\newpage
+
+% Einstellungen für Literaturverzeichnis
+\addcontentsline{toc}{section}{\bibname}
+\bibliographystyle{geralpha}
+\selectlanguage{german}
+
+% Hier das Literaturverzeichnis einbinden
+\bibliography{bibliography/references}
+\newpage
+
+% Eigenständigkeitserklärung
+\makedeclaration{Bachelorarbeit}{31.03.2017}{Petr Vasilyev}
+
+\end{document}
