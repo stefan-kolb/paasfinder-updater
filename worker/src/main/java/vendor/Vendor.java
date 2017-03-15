@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Vendor {
@@ -20,14 +21,14 @@ public class Vendor {
     private boolean extensible;
 
     private Hosting hosting;
-    private Pricing[] pricings;
+    private List<Pricing> pricings;
     private Quality qos;
     private Scaling scaling;
-    private Runtime[] runtimes;
-    private Middleware[] middlewares;
-    private Framework[] frameworks;
+    private List<Runtime> runtimes;
+    private List<Middleware> middlewares;
+    private List<Framework> frameworks;
     private Service service;
-    private Infrastructure[] infrastructures;
+    private List<Infrastructure> infrastructures;
 
     public boolean isValid(){
         return !name.isEmpty();

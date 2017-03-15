@@ -2,10 +2,12 @@ package vendor;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Quality {
 
     private float uptime;
-    private String[] compliance;
+    private List<String> compliance;
 
 }

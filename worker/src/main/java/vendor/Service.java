@@ -2,18 +2,20 @@ package vendor;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Service {
 
-    private Native[] natives;
-    private Addon[] addons;
+    private List<Native> natives;
+    private List<Addon> addons;
 
     @Data
     static class Native {
         private String name;
         private String description;
         private String type;
-        private String[] versions;
+        private List<String> versions;
     }
 
     @Data

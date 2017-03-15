@@ -2,12 +2,13 @@ package vendor;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Framework {
 
     private String name;
     private String runtime;
-    // list
-    private String[] versions;
+    private List<String> versions;
 
 }
