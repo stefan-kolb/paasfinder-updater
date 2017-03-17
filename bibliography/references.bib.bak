@@ -56,7 +56,7 @@
   title     = {{Grundz{\"u}ge der Wirtschaftsinformatik}},
   publisher = {Springer-Verlag},
   year      = {2012},
-  author    = {{Peter Mertens} and {Freimut Bodendorf} and { Wolfgang König }and Arnold Picot Matthias Schumann Thomas Hess},
+  author    = {{Peter Mertens} and {Freimut Bodendorf} and {Wolfgang K{\"o}nig} and {Arnold Picot} and {Matthias Schumann} and {Thomas Hess}},
 }
 
 @Book{jackson1990,
@@ -106,9 +106,10 @@
   title   = {A framework for knowledge base refinement through multistrategy learning and knowledge acquisition},
   journal = {Knowledge Acquisition},
   year    = {1994},
+  pages   = {137 -- 162},
 }
 
-@InBook{ipke93,
+@InBook{wachsmuth1993,
   chapter   = {7},
   pages     = {714--766},
   title     = {{Expertensysteme und Wissensmodellierung}},
@@ -118,15 +119,14 @@
   booktitle = {Einf{\"u}hrung in die k{\"u}nstliche Intelligenz},
 }
 
-@Article{leung90,
+@Article{leung1990,
   author  = {{K. S. Leung} and {M. H. Wong}},
   title   = {An Expert-System Shell Using Structured Knowledge: An Object-Oriented Approach},
   journal = {Computer},
   year    = {1990},
   volume  = {23},
   number  = {3},
-  pages   = {38-47},
-  month   = {March},
+  pages   = {38--47},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
