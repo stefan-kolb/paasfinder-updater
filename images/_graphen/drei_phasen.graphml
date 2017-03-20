@@ -128,7 +128,7 @@ Optimiert
     <node id="n7">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="22.517123644621762" width="109.1959088208884" x="154.66278292743192" y="192.8058815535834"/>
+          <y:Geometry height="22.517123644621762" width="109.1959088208884" x="154.66278292743192" y="181.8058815535834"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle hasColor="false" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="55.5498046875" x="26.823052066694203" y="1.0144211973108668">Experte<y:LabelModel>
