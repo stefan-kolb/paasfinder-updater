@@ -101,7 +101,7 @@
   author    = {{Georg Gottlob} and {Thomas Fr{\"u}hwirth} and {Werner Horn}},
 }
 
-@Article{duff1994,
+@Article{tecuci1994,
   author  = {{Gheorghe D. Tecuci} and {David Duff}},
   title   = {A framework for knowledge base refinement through multistrategy learning and knowledge acquisition},
   journal = {Knowledge Acquisition},
@@ -127,6 +127,12 @@
   volume  = {23},
   number  = {3},
   pages   = {38--47},
+}
+@InProceedings{lieberman1994,
+  author    = {{Henry Lieberman}},
+  title     = {{A User Interface for Knowledge Acquisition From Video}},
+  booktitle = {{Conference of the American Association for Artificial Intelligence}},
+  year      = {1994},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

@@ -1,18 +1,28 @@
 \subsection{Die Wissensträgerschnittstelle}
-Bei der Wissensträgerschnittstelle handelt es sich um eine Methode zur Datenerfassung, die einen direkten Wissenstransfer zwischen einem Wissensträger und dem Expertensystem ermöglicht. Da die Daten manuell eingegeben und maschinell verarbeitet werden, bezeichnet man die Wissensträgerschnittstelle als semi-automatisierte Wissenserfassungsmethode. Im Folgenden werden zwei Anwendungsbeispiele aus unterschiedlichen Bereichen betrachtet und in Bezug auf die wichtigsten Erkenntnisse bei der Entwicklung und dem Einsatz zusammengefasst. \\
-Ein Beispiel des Einsatzes der Wissensträgerschnittstelle bei einem Elektrotechnikunternehmen wird in \cite{gebus2009} vorgestellt. In der Fallstudie wird ein bereits bestehendes \ac{DSS} untersucht, das die Führungskräfte bei den Entscheidungen von nicht-strukturieren Problemen in der Produktion unterstützt \cite[S.94]{gebus2009}. Das Problem dabei besteht darin, dass in der Datenbank des DSS nur die Daten von Produkteigenschaften gesammelt werden. Die Produktionsprozesse werden allerdings von Experten gesteuert, die mithilfe des Erfahrungswissens Störungen in der Produktion beseitigen. Als Folge hat die Unternehmensführung einen begrenzten Überblick über die Situation in der Produktionsabteilung. Außerdem besteht die Gefahr, dass das spezifische Expertenwissen verloren geht falls der Wissensträger das Unternehmen verlässt.\\
-Die Zielsetzung von \cite{gebus2009} ist das Expertenwissen ins System zu integrieren und dementsprechend ein wissensbasiertes System zu schaffen. Um das Wissen aus der Produktionsabteilung zu erschließen, wollen Gebus und Leivisk{\"a} das System um eine Schnittstelle (User Interface) für Anlagenbediener erweitern. Als erster Schritt spezifizieren Gebus und Leivisk{\"a} die Nutzergruppen des Systems:
+Bei der Wissensträgerschnittstelle handelt es sich um eine Methode zur Datenerfassung, die einen direkten Wissenstransfer zwischen einem Wissensträger und dem Expertensystem ermöglicht. Da die Daten manuell eingegeben und maschinell verarbeitet werden, bezeichnet man die Wissensträgerschnittstelle als semi-automatisierte Wissenserfassungsmethode. Im Folgenden wird ein Anwendungsbeispiel aus der Praxis betrachtet und in Bezug auf die Erkenntnisse bei der Entwicklung und dem Einsatz erläutert.\\
+Das Praxisbeispiel wird in der \cite{gebus2009} vorgestellt und bezieht sich auf die Wissenserfassung aus der Produktion eines Elektrotechnikunternehmens. In der Fallstudie wird ein bereits bestehendes \ac{DSS} betrachtet, das die Führungskräfte bei den Entscheidungen von nicht-strukturieren Problemen in der Produktion unterstützt \cite[S.94]{gebus2009}. Das DSS verfügt bereits über eine Datenbank, die allerdings nur Daten von Produkteigenschaften enthält. Die eigentlichen Prozesse werden allerdings von Experten gesteuert, die mithilfe des Erfahrungswissens Störungen in der Produktion beseitigen. Dieses Erfahrungswissen über Störungen wird im System nicht erfasst. Als Folge hat die Unternehmensführung einen begrenzten Überblick über die Situation in der Produktionsabteilung. Außerdem besteht die Gefahr, dass das spezifische Expertenwissen verloren geht, falls der Wissensträger das Unternehmen verlässt.\\
+Die Zielsetzung von \cite{gebus2009} ist die Erfassung des Expertenwissens aus der Produktion und die Integration dieses Wissens in die Entscheidungsprozesse auf der Organisationsebene. Im Großen und Ganzen handelt es sich um die Gestaltung eines wissensbasierten Systems. Um das Wissen aus der Produktionsabteilung zu erschließen, wollen Gebus und Leivisk{\"a} das System um eine Schnittstelle (User Interface) für Anlagenbediener erweitern. Die Entwicklung der Schnittstelle lässt sich wie folgt beschreiben:
+\begin{itemize}
+\item Die für die Schnittstelle relevante Zielgruppe wird definiert.
+\item Ausgehend von der Zielgruppe werden funktionale und nicht-funktionale Anforderungen an die Schnittstelle festgelegt.
+\item Anschließend wird die Schnittstelle evaluiert.
+\end{itemize}
+Im ersten Schritt definieren Gebus und Leivisk{\"a} die bestehenden Nutzergruppen des gesamten Systems \cite[S.97]{gebus2009}:
 \begin{itemize}
 \item Anlagenbediener (Experte), der sein Wissen zu den Störungen mittels der Wissensträgerschnittstelle in die Datenbank eingibt.
-\item Administrator, der das gesamte DSS verwaltet und gegebenenfalls die Systemeinstellungen im Hinblick auf die Informationen vom Experten anpasst.
+\item Administrator, der das gesamte DSS verwaltet und bei Bedarf die Systemeinstellungen anpasst.
 \item Qualitätsabteilung, die die Störungsstatistik analysiert, eine Qualitätsrückmeldung an die Produktion und einen Bericht an die Führungskraft übermittelt.
 \item Führungskraft, die eine umfangreiche Übersicht von der Qualitätsabteilung erhält und davon ausgehend Entscheidungen zur Prozessoptimierung trifft.
 \end{itemize}
-Jeder Nutzergruppe wird eine geeignete Benutzerschnittstelle zur Verfügung gestellt. Schematisch lässt sich die Struktur und die Informationsflüsse im DSS in der Abbildung \ref{dss_gebus} vereinfacht nachbilden.
+Im Rahmen der Fallstudie ist die Nutzergruppe der Anlagenbediener relevant, wobei das System jeder Nutzergruppe eine geeignete Benutzerschnittstelle zur Verfügung stellt. Schematisch lässt sich die Struktur und die Informationsflüsse im DSS in der Abbildung \ref{dss_gebus} vereinfacht nachbilden.
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/dss_gebus.png}
 	\caption{Die Struktur und die Informationsflüsse im DSS, \cite[S.98]{gebus2009}}
 	\label{dss_gebus}
 \end{figure} 
-%Gemäß
+Die Autoren betonen, dass die Expertenschnittstelle einfach und intuitiv wie möglich gehalten wurde, um die Dateneingabe zu einer alltäglichen Tätigkeit zu machen \cite[S.97]{gebus2009}. Im Hinblick auf die nicht-funktionalen Anforderungen werden beispielsweise Einstellungen und Maschinenbilder vom Administrator vorkonfiguriert und automatisch beim Hochfahren des Systems geladen. Die funktionalen Anforderungen umfassen die Erfassung einer Störung durch die Auswahl passender Maschine und das Markieren der betroffenen Stelle. Darauffolgend wird eine Vorlage mit möglichen Ursachen zur Auswahl angezeigt. Zusätzlich gibt es ein Feld zur Freitexteingabe, wenn die vorliegende Störung im System noch nicht vorhanden ist \cite[S.99]{gebus2009}.
+
+
+
+
