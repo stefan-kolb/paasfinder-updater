@@ -1,11 +1,11 @@
 \subsection{Die Wissensträgerschnittstelle}
 Bei der Wissensträgerschnittstelle handelt es sich um eine Methode zur Datenerfassung, die einen direkten Wissenstransfer zwischen einem Wissensträger und dem Expertensystem ermöglicht. Da die Daten manuell eingegeben und maschinell verarbeitet werden, bezeichnet man die Wissensträgerschnittstelle als semi-automatisierte Wissenserfassungsmethode. Im Folgenden wird ein Anwendungsbeispiel aus der Praxis betrachtet und in Bezug auf die Erkenntnisse bei der Entwicklung und dem Einsatz erläutert.\\
 Das Praxisbeispiel wird in der \cite{gebus2009} vorgestellt und bezieht sich auf die Wissenserfassung aus der Produktion eines Elektrotechnikunternehmens. In der Fallstudie wird ein bereits bestehendes \ac{DSS} betrachtet, das die Führungskräfte bei den Entscheidungen von nicht-strukturieren Problemen in der Produktion unterstützt \cite[S.94]{gebus2009}. Das DSS verfügt bereits über eine Datenbank, die allerdings nur Daten von Produkteigenschaften enthält. Die eigentlichen Prozesse werden allerdings von Experten gesteuert, die mithilfe des Erfahrungswissens Störungen in der Produktion beseitigen. Dieses Erfahrungswissen über Störungen wird im System nicht erfasst. Als Folge hat die Unternehmensführung einen begrenzten Überblick über die Situation in der Produktionsabteilung. Außerdem besteht die Gefahr, dass das spezifische Expertenwissen verloren geht, falls der Wissensträger das Unternehmen verlässt.\\
-Die Zielsetzung von \cite{gebus2009} ist die Erfassung des Expertenwissens aus der Produktion und die Integration dieses Wissens in die Entscheidungsprozesse auf der Organisationsebene. Im Großen und Ganzen handelt es sich um die Gestaltung eines wissensbasierten Systems. Um das Wissen aus der Produktionsabteilung zu erschließen, wollen Gebus und Leivisk{\"a} das System um eine Schnittstelle (User Interface) für Anlagenbediener erweitern. Die Entwicklung der Schnittstelle lässt sich wie folgt beschreiben:
+Die Zielsetzung von \cite{gebus2009} ist die Erfassung des Expertenwissens aus der Produktion und die Integration dieses Wissens in die Entscheidungsprozesse auf der Organisationsebene. Um das Wissen aus der Produktionsabteilung zu erschließen, erweitern Gebus und Leivisk{\"a} das bestehende System um eine Schnittstelle für Anlagenbediener. Die Umsetzung erfolgt in Form von einem Prototyp. Der Entwicklungsprozess lässt sich allgemein wie folgt beschreiben:
 \begin{itemize}
-\item Die für die Schnittstelle relevante Zielgruppe wird definiert.
-\item Ausgehend von der Zielgruppe werden funktionale und nicht-funktionale Anforderungen an die Schnittstelle festgelegt.
-\item Anschließend wird die Schnittstelle evaluiert.
+\item[1.] Die Definition der Zielgruppe, die für die Schnittstelle relevant ist.
+\item[2.] Ausgehen von der Zielgruppe werden die Informationsrepräsentation sowie funktionale und nicht-funktionale Anforderungen spezifiziert.
+\item[3.] Die Umsetzung und Evaluation des Prototyps.
 \end{itemize}
 Im ersten Schritt definieren Gebus und Leivisk{\"a} die bestehenden Nutzergruppen des gesamten Systems \cite[S.97]{gebus2009}:
 \begin{itemize}
@@ -17,12 +17,17 @@ Im ersten Schritt definieren Gebus und Leivisk{\"a} die bestehenden Nutzergruppe
 Im Rahmen der Fallstudie ist die Nutzergruppe der Anlagenbediener relevant, wobei das System jeder Nutzergruppe eine geeignete Benutzerschnittstelle zur Verfügung stellt. Schematisch lässt sich die Struktur und die Informationsflüsse im DSS in der Abbildung \ref{dss_gebus} vereinfacht nachbilden.
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.9\textwidth]{images/dss_gebus.png}
+	\includegraphics[width=0.85\textwidth]{images/dss_gebus.png}
 	\caption{Die Struktur und die Informationsflüsse im DSS, \cite[S.98]{gebus2009}}
 	\label{dss_gebus}
 \end{figure} 
-Die Autoren betonen, dass die Expertenschnittstelle einfach und intuitiv wie möglich gehalten wurde, um die Dateneingabe zu einer alltäglichen Tätigkeit zu machen \cite[S.97]{gebus2009}. Im Hinblick auf die nicht-funktionalen Anforderungen werden beispielsweise Einstellungen und Maschinenbilder vom Administrator vorkonfiguriert und automatisch beim Hochfahren des Systems geladen. Die funktionalen Anforderungen umfassen die Erfassung einer Störung durch die Auswahl passender Maschine und das Markieren der betroffenen Stelle. Darauffolgend wird eine Vorlage mit möglichen Ursachen zur Auswahl angezeigt. Zusätzlich gibt es ein Feld zur Freitexteingabe, wenn die vorliegende Störung im System noch nicht vorhanden ist \cite[S.99]{gebus2009}.
-
-
-
+Bei der Informationsrepräsentation werden die Anlagenbilder benutzt. Die Autoren betonen, dass die Expertenschnittstelle einfach und intuitiv wie möglich gehalten wurde, um die Dateneingabe zu einer alltäglichen Tätigkeit zu machen \cite[S.97]{gebus2009}. Im Hinblick auf die nicht-funktionalen Anforderungen werden beispielsweise Einstellungen und Maschinenbilder vom Administrator vorkonfiguriert und automatisch beim Hochfahren des Systems geladen. Die funktionalen Anforderungen umfassen die Erfassung einer Störung durch die Auswahl des passenden Anlagebildes und das Markieren der betroffenen Stelle. Darauffolgend wird eine Vorlage mit möglichen Ursachen zur Auswahl angezeigt. Zusätzlich gibt es ein Feld zur Freitexteingabe, wenn die vorliegende Störung im System noch nicht vorhanden ist \cite[S.99]{gebus2009}.\\
+In der Evaluation wurden drei benutzerorientierte Verbesserungspotentiale \cite[S.100]{gebus2009}:
+\begin{itemize}
+\item Nutzbarkeit (Usability): wie einfach und intuitiv ist das System zu verwenden.
+\item Nützlichkeit (Usefulness): wie nützlich ist das System für primäre (Anlagenbediener) und sekundäre (z.B. Qualitätsabteilung) Nutzer.
+\item Nutzung (Usage): inwiefern wird das System verwendet.
+\end{itemize} 
+Statistisch gesehen gab es in der betrachteten Periode 183 Anlagenausfälle. Allerdings wurden nur 70 Fälle kommentiert, was die Nutzungsrate von 38\% ergibt. Laut Gebus und Leivisk{\"a} lag es daran, dass einige Elemente wie Checkboxen eher verwirrend waren. Mit der angepassten Schnittstelle konnte die Nutzungsrate fast bei 100\% erreicht werden. Hinsichtlich der Nützlichkeit gab es positive Bewertungen. Es wurde festgestellt, dass die Umwandlung des Systems aus einer reinen Datensammlung über Störungen zu einem Informationsaustauschsystem Vorteile für alle Nutzergruppen bringt. In der Abbildung \ref{dss_gebus} sieht man deutlich, dass die Informationen, die in der Datenbank gespeichert werden, von allen Beteiligten genutzt werden. Der Administrator kann mithilfe der Daten das System entsprechend anpassen. Die Qualitätsabteilung setzt die Informationen zur Berichterstellung für die Führungskräfte und die Produktion. Die Unternehmensführung erhält ein umfangreicheres Bild über die Lade in der Produktion und kann aufgrund dessen bessere Entscheidungen bei der Produktionsoptimierung treffen. \\
+Zusammenfassend lässt sich sagen, dass die Entwicklung der Wissensträgerschnittstelle aus drei Phasen besteht. In der ersten Phase wird die Zielgruppe definiert. Im Hinblick auf die Zielgruppe werden die geeignete Informationsrepräsentation sowie die funktionalen und nicht-funktionalen Anforderungen an die Schnittstelle festgelegt. Die dritte Phase umfasst die Implementierung mit der darauffolgenden Evaluation, in dem die Schnittstelle nach drei Kriterien bewertet wird, und zwar Nutzbarkeit (Usability), Nützlichkeit (Usefulness) und Nutzung (Usage).
 
