@@ -15,14 +15,6 @@
   pages   = {1444--1460},
 }
 
-@Article{tecuci1994,
-  author  = {{Gheorghe D. Tecuci} and {David Duff}},
-  title   = {A framework for knowledge base refinement through multistrategy learning and knowledge acquisition},
-  journal = {Knowledge Acquisition},
-  year    = {1994},
-  pages   = {137 -- 162},
-}
-
 @Article{fujihara1997,
   author  = {{H. Fujihara} and {D. B. Simmons} and {N. C. Ellis} and {R. E. Shannons}},
   title   = {{Knowledge Conceptualization Tool}},
@@ -45,14 +37,12 @@
   pages   = {93--101},
 }
 
-@Article{leung1990,
-  author  = {{K. S. Leung} and {M. H. Wong}},
-  title   = {An Expert-System Shell Using Structured Knowledge: An Object-Oriented Approach},
-  journal = {Computer},
-  year    = {1990},
-  volume  = {23},
-  number  = {3},
-  pages   = {38--47},
+@InProceedings{kolb2014,
+  author    = {{Stefan Kolb} and {Guido Wirtz}},
+  title     = {{Towards Application Portability in Platform as a Service}},
+  booktitle = {{8th International Symposium on Service Oriented System Engineering (SOSE)}},
+  year      = {2014},
+  pages     = {218--229},
 }
 
 @Book{riley1998,
@@ -125,11 +115,13 @@
   publisher	= {Springer-Verlag}
 }
 
-@Book{krug2014,
-  title     = {Don't Make Me Think, Revisited: A Common Sense Approach to Web Usability},
-  publisher = {New Riders},
-  year      = {2014},
-  author    = {{Steve Krug}},
+
+@Article{tecuci1994,
+  author  = {{Gheorghe D. Tecuci} and {David Duff}},
+  title   = {A framework for knowledge base refinement through multistrategy learning and knowledge acquisition},
+  journal = {Knowledge Acquisition},
+  year    = {1994},
+  pages   = {137 -- 162},
 }
 
 @InBook{wachsmuth1993,
@@ -142,8 +134,18 @@
   booktitle = {Einf{\"u}hrung in die k{\"u}nstliche Intelligenz},
 }
 
+@Article{leung1990,
+  author  = {{K. S. Leung} and {M. H. Wong}},
+  title   = {An Expert-System Shell Using Structured Knowledge: An Object-Oriented Approach},
+  journal = {Computer},
+  year    = {1990},
+  volume  = {23},
+  number  = {3},
+  pages   = {38--47},
+}
+
 @Phdthesis{tandon2016,
-  author    = {{Niket Tandon}},
+  author    = {Niket Tandon},
   title     = {Commonsense Knowledge Acquisition and Applications},
   school    = {Saarland University, Saarbr{\"{u}}cken, Germany},
   year      = {2016},
@@ -160,3 +162,12 @@
   institution = {International Organization for Standardization},
   year        = {1998},
 }
+
+@Book{krug2014,
+  title     = {Don't Make Me Think, Revisited: A Common Sense Approach to Web Usability},
+  publisher = {New Riders},
+  year      = {2014},
+  author    = {{Steve Krug}},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

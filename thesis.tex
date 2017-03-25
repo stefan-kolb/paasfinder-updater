@@ -27,11 +27,14 @@
 \fancyhead[LO]{\footnotesize\sc\nouppercase{\leftmark}}
 \setcounter{page}{1}
 \pagenumbering{arabic}
+
 %
-% Hier einzelne Kapitel mit \input{sections/Kapitel-File} einfügen.
-% Bei größeren Arbeiten empfiehlt es sich, noch genauer aufzuteilen.
+% Einzelne Kapitel mit \input{sections/Kapitel-File} einfügen.
 %
-\input{sections/kapitel-1.tex}
+\input{sections/kapitel-1/motivation.tex}
+\input{sections/kapitel-1/verwandte-arbeiten.tex}
+\input{sections/kapitel-1/zielsetzung.tex}
+\input{sections/kapitel-1/aufbau.tex}
 \newpage
 \input{sections/kapitel-2/definition.tex}
 \input{sections/kapitel-2/architektur.tex}
@@ -47,7 +50,6 @@
 \input{sections/kapitel-4.tex}
 \input{sections/kapitel-5.tex}
 \input{sections/kapitel-6.tex}
-\input{sections/kapitel-7.tex}
 \newpage
 
 % Einstellungen für Literaturverzeichnis
