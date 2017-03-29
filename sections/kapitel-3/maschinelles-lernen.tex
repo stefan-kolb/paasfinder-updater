@@ -1,9 +1,57 @@
-\newpage
 \subsection{Maschinelles Lernen beim Wissenserwerb}
-Eine Anwendung des maschinellen Lernens bei der Automatisierung des Wissenserwerbs wird in \cite{castro2001} vorgestellt. Die grundlegende Idee dabei orientiert sich an \cite{tecuci1992}, indem die Wissensakquisition als ein Prozess der der Erweiterung, Aktualisierung und Verbesserung der unvollständigen Wissensbasis betrachtet wird. Der vorliegende Algorithmus verwendet die Induktion und den Algorithmus mit Fuzzylogik, um neues Wissen aus einer Trainingsmenge zu erschließen. Wie bereits im Kapitel \ref{subsec:Wissensakquisitionskomponente} erwähnt wurde, werden bei der Induktion allgemeine Schlussfolgerungen auf Basis von Einzelfällen erzielt. Bei der Fuzzylogik handelt es sich um graduelle Aussagen, die mithilfe der vagen Prädikaten beschrieben werden \cite[S.27]{beierle2014}. Castro et al betonen, dass die Induktion und die Fuzzylogik effektiv mit dem unvollständigen Wissen arbeiten, das bei der Erfassung des Expertenwissens oft der Fall ist \cite[S.308]{castro2001}.\\
-Weitere Punkte:
+Eine weitere Möglichkeit zur Automatisierung des Wissenserwerbs stellen die Methoden des maschinellen Lernens dar. In der Literatur gibt es eine Reihe der Ansäzte, die sich damit beschäftigen (z.B. \cite{castro2001} und \cite{webb1996}). Trotz der Unterschieden in der Umsetzung gibt es eine entscheidende Gemeinsamkeit. Beide Methoden basieren auf der Zusammenarbeit zwischen dem Experten und dem Lernalgorithmus. Im Folgenden wird der Ansatz von \cite{castro2001} genauer betrachtet.\\
+In der Arbeit von \cite{castro2001} handelt es sich um die Anwendung des maschinellen Lernens bei der Erfassung des Expertenwissens im Medizinbereich. Das Konzept der Wissensbasiserweiterung orientiert sich an \cite{tecuci1992} und besteht darin, dass anfangs eine initiale Wissensbasis gebaut und inkrementell verbessert wird, indem der Experte die Fragen vom System beantwortet. Bei der Erstellung der Fragen wird ein Lernalgorithmus verwendet. Die Idee des Lernalgorithmus besteht in der Erschließung des allgemeinen Expertenwissens aus den Trainingsdaten der Schlussfolgerungen eines Experten.\\
+Der Kern des Lernalgorithmus besteht aus dem induktiven Lernen und dem generischen Algorithmus von \cite{castro1999}, der auf der Fuzzylogik basiert ist. Bei der Induktion handelt es sich um das Erschließen der allgemeinen Schlussfolgerungen aus den Einzelfällen. Die Fuzzylogik beschäftigt sich mit den graduellen Aussagen, die nicht eindeutig falsch oder wahr bezeichnet werden können. Diese Aussagen werden mithilfe der vagen Prädikaten beschrieben. Ein typisches Beispiel ist das Prädikat \glqq{}groß\grqq{}. Eine 1,80 m große Person wird als \glqq{}groß\grqq{} bezeichnet, während eine 1,75 m Person ist nicht genau so \glqq{}groß\grqq{}, aber auch nicht \glqq{}klein\grqq{} ist \cite[S.27]{beierle2014}.\\
+Der Lernalgorithmus ist wie folgt aufgebaut \cite[S.316]{castro2001}:
 \begin{itemize}
-\item Wissensrepräsentation  
-\item Algorithmus
-\item Beispiel
+\item[1.] Eingabe der Trainingsdaten.
+\item[2.] Entfernen des Rausches aus den Trainingsdaten.
+\item[3.] Ermittlung der Genen, die sich nicht ändern können.
+\item[4.] Ermittlung der Menge der initialen Regeln mithilfe des Algorithmus von \cite{castro1999}.
+\item[5.] Anwendung des Algorithmus von \cite{castro1999} zur Ermittlung der Menge der Regeln, die das allgemeine Expertenwissen aus der Trainingsmenge beschreiben.
+\item[6.] Ausschluss der Regeln, die ein Teil anderer Regeln sind.
+\item[7.] Ende.
 \end{itemize}
+Aufgrund der hohen Komplexität und des spezifischen Anwendungsbereichs des Algorithmus wird es im Weiteren auf den ersten Schritt beschränkt, der das grundlegende Verständnis über den Algorithmus liefert.\\
+Als Erstes definieren Castro et al die Wissensrepräsentation. Es werden folgende Informationstypen unterschieden \cite[S.309]{castro2001}:
+\begin{itemize}
+\item \textit{Numerische Information}, die aus einer empirischen Beobachtung stammt und als eine Beispielmenge von Input-Output-Beziehungen erfasst wird.
+\item \textit{Sprachinformation}, die von einem Experten stammt und in Form von IF-THEN-Regeln beschrieben wird.
+\end{itemize}
+Die Trainingsmenge wird folgendermaßen definiert (siehe Formeln \ref{eq:trainingsmenge} und \ref{eq:training}):
+\begin{equation}
+	\theta = \lbrace e_1 \dots e_m \rbrace
+	\label{eq:trainingsmenge}
+\end{equation}
+\begin{equation}
+	e_i = ((x_{i0}, \dots , x_{in}), y_j)
+	\label{eq:training}
+\end{equation}
+wobei:
+\begin{itemize}
+\item[\( \theta \)] = Trainingsmenge;
+\item[\( e_i \)] = Schlussfolgerung
+\item[\( m \)] = Anzahl der vorhandenen Schlussfolgerungen;
+\item[\( n \)] = Anzahl der Input-Variablen in der Schlussfolgerung;
+\item[\( x_{in} \)] = Input-Variablen
+\item[\( y_j \)] = Output-Wert (Expertenschlussfolgerung).
+\end{itemize}
+Die Output-Werte nach der Formel \ref{eq:training} stellen die Teilmenge des kartesischen Produkts aller Input- und Output-Werten \(X^n \times Y \) dar. Das Ziel ist die Approximation der Funktion \( \Omega: X^n \rightarrow Y \) durch die Ermittlung von Fuzzy-IF-THEN-Regeln, um das allgemeine Expertenwissen aus der Trainingsmenge zu erschließen. Fuzzy-IF-THEN-Regel wird wie folgt definiert (siehe Formel \ref{eq:fuzzy-regel}):
+\begin{equation}
+	R_j : \mbox{ IF } X \mbox{ is } E \mbox{ THEN } Y \mbox{ is } y_i 
+	\label{eq:fuzzy-regel}
+\end{equation}
+wobei:
+\begin{itemize}
+\item[\( R_j \)] = eine Regel
+\item[\( X \)] = Menge der Variablen in den Schlussfolgerungen;
+\item[\( E \)] = Teilmengen der Fuzzy-Labels
+\item[\( Y \)] = Expertenschlussfolgerung
+\end{itemize}
+Castro et al treffen die Annahmen, dass die Teilmengen der Fuzzy-Labels \( E \) aus einer endlichen Menge der Labels $\mathcal{L}$ entnommen sind (siehe Formel \ref{eq:fuzzy-labels}):
+\begin{equation}
+	\mathcal{L} = \lbrace L_{i1}, \dots , L_{ik} \rbrace
+	\label{eq:fuzzy-labels}
+\end{equation}
+Dabei ist \( k \) die Anzahl der Labels und \( E_i \) ist eine Expertenschlussfolgerung, die ein Element der Funktionsmenge \( \mathcal{P}(\mathcal{L}_i) \), oder zusammenfassend \( E_i \in \mathcal{P}(\mathcal{L}_i) \).\\
+Das Ergebnis der Durchführung des Algorithmus ist eine Menge der Regeln, die bei der Erstellung der Fragen verwendet werden. Dabei kann die Differenzstrategie eingesetzt werden \cite[S.317]{castro2001}. Bei der Differenzstrategie werden die Regeln gesucht, die zu einem Konflikt führen, wenn sie gleichzeitig angewandt werden. Um den Konflikt zu lösen, kann der Experte eine neue Variable zulassen. Alternativ kann der Experte eine neue Meta-Regel definieren, wie z.B wenn \( R_i \) und \( R_j \) sich widersprechen, soll \( R_i \) bevorzugt werden, da es die allgemeinere Klasse repräsentiert \cite[S.318]{castro2001}.
