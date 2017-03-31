@@ -1,6 +1,28 @@
-\subsection{Automatisierte Datenerfassung}
-Ungefähr grober Plan:
+\subsection{Datenextraktion aus dem Web}
+Das Web stellt eine der wichtigsten Quellen der unstrukturierten und semi-strukturierten Daten dar. Es wurden zahlreiche Methoden der Datenextraktion aus dem Web entwickelt, die in unterschiedlichen Anwendungsbereichen eingesetzt werden. Ferrara et al unterscheiden dabei zwei Kategorien der Algorithmen zur Datenextraktion, nämlich Tree Matching Algorithmen und Algorithmen des maschinellen Lernens \cite[S.302]{ferrara2014}. Da das maschinelle Lernen wird explizit im Abschnitt \ref{subsec: Maschinelles-Lernen} angesprochen, wird im Weiteren ein Beispiel eines Tree Matching Algorithmus betrachtet.\\
+Aufgrund der Struktur der Webressourcen ist die Erfassung der Daten aus dem Web nicht einfach. Ferrara et al nennen folgende Herausforderungen, die bei der Datenerfassung aus Webressourcen vorkommen \cite[S.302]{ferrara2014}:
 \begin{itemize}
-\item Paper: \cite{ferrara2014}
-\item Paper: \cite{fayyad1996}
+\item \textit{Automatisierungsgrad}: Die Erfassung der Webdaten soll oft von einem menschlichen Experten überwacht werden, um die Genauigkeit der Daten zu gewährleisten.
+\item \textit{Skalierbarkeit}: Bei den umfangreichen Webressourcen soll innerhalb kürzer Zeit schnell eine große Datenmenge bearbeitet werden.
+\item \textit{Datenschutz}: Wenn es um die Erfassung der personenbezogenen Daten geht (bei sozialen Netzwerken wie Facebook), soll die Privatsphäre des Individuums nicht beeinträchtigt werden.
+\item \textit{Änderung der Ressourcenstruktur}: Die Struktur der Webressourcen ändert sich oft. Die Datenerfassungsmethoden für das Web sollen eine gewisse Flexibilität besitzen, um weiterhin korrekt zu funktionieren.
+\item \textit{Trainingsdaten}: Das maschinelle Lernen braucht eine Trainingsmenge der Webseiten, die manuell mit Labels annotiert werden. Dies ist eine schwierige und fehleranfällige Aufgabe.
 \end{itemize}
+Ein Verfahren, das am meisten zur Datenerfassung aus dem Web bekannt ist, nutzt die semi-strukturierten Dokumente, die in \acf{HTML} beschrieben werden. Eine HTML-Seite wird in \acf{DOM}\footnote{https://www.w3.org/DOM} definiert. Die Idee vom DOM besteht darin, dass die HTML-Webseite ein Baum darstellt, der mittels HTML-Tags (z.B. Button-Tag) ausgezeichnet wird. Tags können weitere Tags beinhalten und bilden somit eine hierarchische Struktur. Diese hierarchische Baumstruktur ermöglicht effiziente Datensuche in einer HTML-Seite \cite[S.303]{ferrara2014}.\\
+Da HTML ein Dialekt von \acf{XML} ist, kann \acf{XPath}\footnote{https://www.w3.org/TR/xpath} für die Navigation in DOM eingesetzt werden. In einem XPath-Ausdruck können beliebige Elemente einer HTML-Webseite ausgewählt werden. In Abbildung \ref{xpath} werden zwei Beispiele dargestellt. Im ersten Fall (A) wird genau ein Element (die erste Zelle in der ersten Reihe) ausgewählt. Im Beispiel (B) werden mehrere Elemente (alle Zellen der zweiten Reihe) angesprochen \cite[S.303]{ferrara2014}.
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/xpath.png}
+	\caption{XPath im Dokumentenbaum, \cite[S.304]{ferrara2014}}
+	\label{xpath}
+\end{figure} 
+Der Hauptnachteil von XPath besteht darin, dass XPath-Ausdrücke strikt an der DOM-Struktur gebunden sind. Wenn eine Änderung im DOM stattfindet, funktioniert der von der Änderung betroffene Ausdruck nicht mehr. Aus diesem Grund müssen die XPath-Ausdrücke nach jeder Veränderung der HTML-Webseite manuell angepasst werden. In Bezug auf dieses Problem wurde im letzten Release von XPath\footnote{https://www.w3.org/TR/xpath20} relative XPath-Ausdrücke eingeführt \cite[S.304]{ferrara2014}.\\
+Eine Beispiel des Verfahrens zur Datenextraktion ist ein Web Wrapper. Unter dem Web Wrapper wird ein Verfahren verstanden, das eine oder mehrere Algorithmen zur Datensuche beinhaltet. Dabei werden die Daten in unstrukturierten oder semi-strukturieren Dokumenten erfasst und in eine strukturierte Form transformiert. Ein Wrapper-Lebenszyklus umfasst folgende Schritte \cite[S.305]{ferrara2014}:
+\begin{itemize}
+\item[1.]\textit{Generierung}: Definition des Wrappers.
+\item[2.]\textit{Ausführung}: Datenerfassung mithilfe des Wrappers.
+\item[3.]\textit{Wartung}: Anpassung des Wrappers bei der Änderung der DOM-Struktur.
+\end{itemize}
+Nach Ferrara et al kann ein Web Wrapper unter Verwendung von regulären Ausdrücken, logikbasiertem Ansatz, Baumansatz oder maschinellem Lernen generiert werden \cite[S.306]{ferrara2014}. Im Weiteren wird der Ansatz von regulären Ausdrücken im Rahmen des zweiten Schritts (Ausführung) verdeutlicht.\\
+Reguläre Ausdrücke ermöglichen die Erkennung von Patterns in der unstrukturierten bzw. semi-strukturierten Dokumenten mithilfe der Regeln, die z.B. in Form von Wortgrenzen oder HTML-Tags definiert werden. Der Vorteil der regulären Ausdrücken besteht darin, dass der Benutzer die Elemente auf einfache Weise in einem grafischen Interface auswählen kann. Die dazugehörigen Regeln werden dann automatisch generiert. Eine mögliche Umsetzung des Wrappers wird in \cite{sahuguet1999} mit W4F vorgestellt. Das Tool verfügt über eine Hilfsmethode, die den Benutzer bei der Auswahl der Elementen unterstützt. Auf Basis der ausgewählten Elementen werden die Regeln erstellt. Allerdings sind die Regeln in Bezug auf DOM-Änderungen nicht flexibel. Dies führt dazu, dass die Regeln stets von einem menschlichen Experten angepasst werden sollen \cite[S.306]{ferrara2014}.\\
+\textbf{Weiter mit Wartung ... }

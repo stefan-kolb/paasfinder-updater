@@ -1,10 +1,10 @@
-\subsection{Maschinelles Lernen beim Wissenserwerb}
+\subsection{Maschinelles Lernen beim Wissenserwerb}\label{subsec: Maschinelles-Lernen}
 Eine weitere Möglichkeit zur Automatisierung des Wissenserwerbs stellen die Methoden des maschinellen Lernens dar. In der Literatur gibt es eine Reihe der Ansäzte, die sich damit beschäftigen (z.B. \cite{castro2001} und \cite{webb1996}). Trotz der Unterschieden in der Umsetzung gibt es eine entscheidende Gemeinsamkeit. Beide Methoden basieren auf der Zusammenarbeit zwischen dem Experten und dem Lernalgorithmus. Im Folgenden wird der Ansatz von \cite{castro2001} genauer betrachtet.\\
-In der Arbeit von \cite{castro2001} handelt es sich um die Anwendung des maschinellen Lernens bei der Erfassung des Expertenwissens im Medizinbereich. Das Konzept der Wissensbasiserweiterung orientiert sich an \cite{tecuci1992} und besteht darin, dass anfangs eine initiale Wissensbasis gebaut und inkrementell verbessert wird, indem der Experte die Fragen vom System beantwortet. Bei der Erstellung der Fragen wird ein Lernalgorithmus verwendet. Die Idee des Lernalgorithmus besteht in der Erschließung des allgemeinen Expertenwissens aus den Trainingsdaten der Schlussfolgerungen eines Experten.\\
-Der Kern des Lernalgorithmus besteht aus dem induktiven Lernen und dem generischen Algorithmus von \cite{castro1999}, der auf der Fuzzylogik basiert ist. Bei der Induktion handelt es sich um das Erschließen der allgemeinen Schlussfolgerungen aus den Einzelfällen. Die Fuzzylogik beschäftigt sich mit den graduellen Aussagen, die nicht eindeutig falsch oder wahr bezeichnet werden können. Diese Aussagen werden mithilfe der vagen Prädikaten beschrieben. Ein typisches Beispiel ist das Prädikat \glqq{}groß\grqq{}. Eine 1,80 m große Person wird als \glqq{}groß\grqq{} bezeichnet, während eine 1,75 m Person ist nicht genau so \glqq{}groß\grqq{}, aber auch nicht \glqq{}klein\grqq{} ist \cite[S.27]{beierle2014}.\\
-Der Lernalgorithmus ist wie folgt aufgebaut \cite[S.316]{castro2001}:
+In der Arbeit von \cite{castro2001} handelt es sich um die Anwendung des maschinellen Lernens bei der Erfassung des Expertenwissens im Medizinbereich. Das Konzept der Wissensbasiserweiterung orientiert sich an \cite{tecuci1992} und besteht darin, dass anfangs eine initiale Wissensbasis gebaut und inkrementell verbessert wird, indem der Experte die Fragen vom System beantwortet. Bei der Erstellung der Fragen wird ein Lernverfahren eingesetzt. Die Idee des Lernverfahrens besteht in der Erschließung des allgemeinen Expertenwissens aus den Trainingsdaten der Schlussfolgerungen eines Experten.\\
+Der Kern des Verfahrens besteht aus dem induktiven Lernen und dem generischen Algorithmus von \cite{castro1999}, der auf der Fuzzylogik basiert ist. Bei der Induktion handelt es sich um das Erschließen der allgemeinen Schlussfolgerungen aus den Einzelfällen. Die Fuzzylogik beschäftigt sich mit den graduellen Aussagen, die nicht eindeutig falsch oder wahr bezeichnet werden können. Diese Aussagen werden mithilfe der vagen Prädikaten beschrieben. Ein typisches Beispiel ist das Prädikat \glqq{}groß\grqq{}. Eine 1,80 m große Person wird als \glqq{}groß\grqq{} bezeichnet, während eine 1,75 m Person ist nicht genau so \glqq{}groß\grqq{}, aber auch nicht \glqq{}klein\grqq{} ist \cite[S.27]{beierle2014}.\\
+Das Lernverfahren umfasst folgenden Schritte \cite[S.316]{castro2001}:
 \begin{itemize}
-\item[1.] Eingabe der Trainingsdaten.
+\item[1.] Eingabe der Trainingsmenge \( \theta \).
 \item[2.] Entfernen des Rausches aus den Trainingsdaten.
 \item[3.] Ermittlung der Genen, die sich nicht ändern können.
 \item[4.] Ermittlung der Menge der initialen Regeln mithilfe des Algorithmus von \cite{castro1999}.
@@ -12,7 +12,7 @@ Der Lernalgorithmus ist wie folgt aufgebaut \cite[S.316]{castro2001}:
 \item[6.] Ausschluss der Regeln, die ein Teil anderer Regeln sind.
 \item[7.] Ende.
 \end{itemize}
-Aufgrund der hohen Komplexität und des spezifischen Anwendungsbereichs des Algorithmus wird es im Weiteren auf den ersten Schritt beschränkt, der das grundlegende Verständnis über den Algorithmus liefert.\\
+Aufgrund der hohen Komplexität und des spezifischen Anwendungsbereichs des Verfahrens wird es im Weiteren auf den ersten Schritt beschränkt, der das grundlegende Verständnis zu dem vorliegenden Ansatz liefert.\\
 Als Erstes definieren Castro et al die Wissensrepräsentation. Es werden folgende Informationstypen unterschieden \cite[S.309]{castro2001}:
 \begin{itemize}
 \item \textit{Numerische Information}, die aus einer empirischen Beobachtung stammt und als eine Beispielmenge von Input-Output-Beziehungen erfasst wird.
@@ -29,24 +29,22 @@ Die Trainingsmenge wird folgendermaßen definiert (siehe Formeln \ref{eq:training
 \end{equation}
 wobei:
 \begin{itemize}
-\item[\( \theta \)] = Trainingsmenge;
-\item[\( e_i \)] = Schlussfolgerung
-\item[\( m \)] = Anzahl der vorhandenen Schlussfolgerungen;
-\item[\( n \)] = Anzahl der Input-Variablen in der Schlussfolgerung;
-\item[\( x_{in} \)] = Input-Variablen
+\item[\( e_i \)] = eine Schlussfolgerung,
+\item[\( m \)] = Anzahl der vorhandenen Schlussfolgerungen,
+\item[\( x_{in} \)] = Input-Variable,
+\item[\( n \)] = Anzahl der Input-Variablen in der Schlussfolgerung,
 \item[\( y_j \)] = Output-Wert (Expertenschlussfolgerung).
 \end{itemize}
-Die Output-Werte nach der Formel \ref{eq:training} stellen die Teilmenge des kartesischen Produkts aller Input- und Output-Werten \(X^n \times Y \) dar. Das Ziel ist die Approximation der Funktion \( \Omega: X^n \rightarrow Y \) durch die Ermittlung von Fuzzy-IF-THEN-Regeln, um das allgemeine Expertenwissen aus der Trainingsmenge zu erschließen. Fuzzy-IF-THEN-Regel wird wie folgt definiert (siehe Formel \ref{eq:fuzzy-regel}):
+Die Output-Werte nach der Formel \ref{eq:training} stellen die Teilmenge des kartesischen Produkts aller Input- und Output-Werten \(X^n \times Y \) dar. Das Ziel ist die Approximation der Funktion \( \Omega: X^n \rightarrow Y \) durch die Ermittlung von Fuzzy-IF-THEN-Regeln, um das allgemeine Expertenwissen aus der Trainingsmenge zu erschließen. Fuzzy-IF-THEN-Regel \( R_j \) wird wie folgt definiert (siehe Formel \ref{eq:fuzzy-regel}):
 \begin{equation}
 	R_j : \mbox{ IF } X \mbox{ is } E \mbox{ THEN } Y \mbox{ is } y_i 
 	\label{eq:fuzzy-regel}
 \end{equation}
 wobei:
 \begin{itemize}
-\item[\( R_j \)] = eine Regel
-\item[\( X \)] = Menge der Variablen in den Schlussfolgerungen;
-\item[\( E \)] = Teilmengen der Fuzzy-Labels
-\item[\( Y \)] = Expertenschlussfolgerung
+\item[\( X \)] = Menge der Variablen in den Schlussfolgerungen,
+\item[\( E \)] = Teilmengen der Fuzzy-Labels,
+\item[\( Y \)] = Expertenschlussfolgerung.
 \end{itemize}
 Castro et al treffen die Annahmen, dass die Teilmengen der Fuzzy-Labels \( E \) aus einer endlichen Menge der Labels $\mathcal{L}$ entnommen sind (siehe Formel \ref{eq:fuzzy-labels}):
 \begin{equation}
@@ -54,4 +52,4 @@ Castro et al treffen die Annahmen, dass die Teilmengen der Fuzzy-Labels \( E \) 
 	\label{eq:fuzzy-labels}
 \end{equation}
 Dabei ist \( k \) die Anzahl der Labels und \( E_i \) ist eine Expertenschlussfolgerung, die ein Element der Funktionsmenge \( \mathcal{P}(\mathcal{L}_i) \), oder zusammenfassend \( E_i \in \mathcal{P}(\mathcal{L}_i) \).\\
-Das Ergebnis der Durchführung des Algorithmus ist eine Menge der Regeln, die bei der Erstellung der Fragen verwendet werden. Dabei kann die Differenzstrategie eingesetzt werden \cite[S.317]{castro2001}. Bei der Differenzstrategie werden die Regeln gesucht, die zu einem Konflikt führen, wenn sie gleichzeitig angewandt werden. Um den Konflikt zu lösen, kann der Experte eine neue Variable zulassen. Alternativ kann der Experte eine neue Meta-Regel definieren, wie z.B wenn \( R_i \) und \( R_j \) sich widersprechen, soll \( R_i \) bevorzugt werden, da es die allgemeinere Klasse repräsentiert \cite[S.318]{castro2001}.
+Das Ergebnis der Durchführung des Lernverfahrens ist eine Menge der Regeln, die bei der Erstellung der Fragen verwendet werden. Dabei kann die Differenzstrategie eingesetzt werden \cite[S.317]{castro2001}. Bei der Differenzstrategie werden die Regeln gesucht, die zu einem Konflikt führen, wenn sie gleichzeitig angewandt werden. Um den Konflikt zu lösen, kann der Experte eine neue Variable zulassen. Alternativ kann der Experte eine neue Meta-Regel definieren, wie z.B wenn \( R_i \) und \( R_j \) sich widersprechen, soll \( R_i \) bevorzugt werden, da es die allgemeinere Klasse repräsentiert \cite[S.318]{castro2001}.
