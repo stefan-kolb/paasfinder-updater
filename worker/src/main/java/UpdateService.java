@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.*;
 
+import spark.Spark;
 import vendor.*;
 import static spark.Spark.*;
 
@@ -52,7 +53,8 @@ public class UpdateService {
         });
 
         // insert a vendor
-        post("/vendors", (request, response) -> {
+        post("/test", "application/json", (request, response) -> {
+            System.out.println("Received request from " + request.raw().getRemoteAddr());
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 Vendor creation = mapper.readValue(request.body(), Vendor.class);
@@ -68,6 +70,25 @@ public class UpdateService {
                 response.status(HTTP_BAD_REQUEST);
                 return "";
             }
+        });
+
+        options("/*", (request,response)-> {
+
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if(accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
+
+        before((request,response)-> {
+            response.header("Access-Control-Allow-Origin", "*");
         });
     }
 }
