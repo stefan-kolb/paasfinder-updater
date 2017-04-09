@@ -2,20 +2,21 @@ package vendor;
 
 import lombok.Data;
 
-import java.sql.Time;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class Vendor {
+public class Vendor implements Serializable {
 
-    private int id;
+    private static final long serialVersionUID = 1L;
+
+    private String id;
     private String name;
-    private Time revision;
-    private Date vendor_verified;
+    private String revision;
+    private String vendor_verified;
     private String url;
     private String status;
-    private Date status_since;
+    private String status_since;
     private String type;
     private String platform;
     private boolean extensible;
@@ -30,7 +31,7 @@ public class Vendor {
     private Service service;
     private List<Infrastructure> infrastructures;
 
-    public boolean isValid(){
-        return !name.isEmpty();
-    }
+    private String contributorName;
+    private String contributorEmail;
+    private String contributorMessage;
 }

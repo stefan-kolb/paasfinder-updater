@@ -1,79 +1,59 @@
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.*;
 
-import spark.Spark;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import vendor.*;
 import static spark.Spark.*;
 
 public class UpdateService {
 
-    private static final int HTTP_BAD_REQUEST = 400;
-    private static final String CONTENT_TYPE = "application/json; charset=utf-8";
-
     public static class Model {
-        private List<Vendor> updatedVendors = new ArrayList<>();
+        private static List<Vendor> vendors = new ArrayList<>();
 
-        public void storeVendor(Vendor data){
-            updatedVendors.add(data);
+        public static Vendor store(Vendor vendor){
+            vendors.add(vendor);
+            return vendor;
         }
 
         public List<Vendor> getAllVendors(){
-            return updatedVendors;
+            return vendors;
         }
     }
 
-    public static String dataToJson(Object data) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            StringWriter sw = new StringWriter();
-            mapper.writeValue(sw, data);
-            return sw.toString();
-        } catch (IOException e){
-            throw new RuntimeException("IOException from a StringWriter?");
-        }
-    }
+    private static Gson GSON = new GsonBuilder().create();
 
     public static void main( String[] args) {
         port(9090);
+
         Model model = new Model();
 
         redirect.get("/", "/vendors");
 
-        // get all vendors
-        get("/vendors", (request, response) -> {
-            response.status(200);
-            response.type(CONTENT_TYPE);
-            return dataToJson(model.getAllVendors());
+        before((request,response)-> {
+            response.header("Access-Control-Allow-Origin", "*");
         });
 
-        // insert a vendor
-        post("/test", "application/json", (request, response) -> {
+        get("/vendors", (request, response) -> {
+            response.status(200);
+            response.type("application/json; charset=utf-8");
+            return GSON.toJson(model.getAllVendors());
+        });
+
+        post("/add", "application/json", (request, response) -> {
             System.out.println("Received request from " + request.raw().getRemoteAddr());
+            Vendor toStore = null;
             try {
-                ObjectMapper mapper = new ObjectMapper();
-                Vendor creation = mapper.readValue(request.body(), Vendor.class);
-                if (!creation.isValid()) {
-                    response.status(HTTP_BAD_REQUEST);
-                    return "Vendor has incorrect structure!";
-                }
-                model.storeVendor(creation);
-                response.status(200);
-                response.type(CONTENT_TYPE);
-                return "";
-            } catch (JsonParseException jpe) {
-                response.status(HTTP_BAD_REQUEST);
-                return "";
+                toStore = GSON.fromJson(request.body(), Vendor.class);
+            } catch (JsonSyntaxException e) {
+                response.status(400);
+                return "INVALID JSON";
             }
+            Model.store(toStore);
+            return GSON.toJson(toStore);
         });
 
         options("/*", (request,response)-> {
-
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
                 response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
@@ -85,10 +65,6 @@ public class UpdateService {
             }
 
             return "OK";
-        });
-
-        before((request,response)-> {
-            response.header("Access-Control-Allow-Origin", "*");
         });
     }
 }
