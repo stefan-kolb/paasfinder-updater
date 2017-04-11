@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
-  <!--Created by yEd 3.16.2.1-->
+  <!--Created by yEd 3.17-->
   <key attr.name="Beschreibung" attr.type="string" for="graph" id="d0"/>
   <key for="port" id="d1" yfiles.type="portgraphics"/>
   <key for="port" id="d2" yfiles.type="portgeometry"/>
@@ -73,8 +73,8 @@ komponente<y:LabelModel>
           <y:Geometry height="78.16935504149006" width="111.95722655492898" x="208.77388495953147" y="308.63253040903624"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="53.46484375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="94.453125" x="8.75205077746449" y="12.352255645745004">Wissens–
-akquisitions-
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="53.46484375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="89.4765625" x="11.24033202746449" y="12.352255645745004">Wissens–
+erwerbs-
 komponente<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
@@ -190,7 +190,6 @@ komponente<y:LabelModel>
       </data>
     </node>
     <node id="n10">
-      <data key="d5"/>
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="70.13700103759766" width="56.558998107910156" x="-249.17216743260843" y="168.45074844360352"/>
@@ -211,7 +210,6 @@ komponente<y:LabelModel>
       </data>
     </node>
     <node id="n11">
-      <data key="d5"/>
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="64.96826171875" width="56.554100036621094" x="-249.1697183969639" y="359.9095694309881"/>
@@ -232,7 +230,6 @@ komponente<y:LabelModel>
       </data>
     </node>
     <node id="n12">
-      <data key="d5"/>
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="64.53585815429688" width="56.554996490478516" x="-249.1701666238926" y="266.9807303789462"/>
@@ -350,7 +347,6 @@ komponente<y:LabelModel>
       </data>
     </edge>
     <edge id="e8" source="n11" target="n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="23.497698994600142" sy="-16.185683051129274" tx="-55.98526166976421" ty="28.490809309452573"/>
@@ -361,7 +357,6 @@ komponente<y:LabelModel>
       </data>
     </edge>
     <edge id="e9" source="n3" target="n11">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-63.13929008098319" sy="28.345117080867055" tx="16.36549615245346" ty="-16.33137527971479"/>
@@ -372,7 +367,6 @@ komponente<y:LabelModel>
       </data>
     </edge>
     <edge id="e10" source="n3" target="n12">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-62.647160035724795" sy="-25.508666451920305" tx="26.29706483273074" ty="22.959882021766305"/>
@@ -383,7 +377,6 @@ komponente<y:LabelModel>
       </data>
     </edge>
     <edge id="e11" source="n12" target="n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="32.42568714300481" sy="22.853071608782955" tx="-55.95024599120288" ty="-25.615476864903655"/>
@@ -394,7 +387,6 @@ komponente<y:LabelModel>
       </data>
     </edge>
     <edge id="e12" source="n10" target="n2">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="17.389767157475575" sy="-12.664093767868223" tx="-60.01600695919328" ty="-17.412328638576213"/>
@@ -405,7 +397,6 @@ komponente<y:LabelModel>
       </data>
     </edge>
     <edge id="e13" source="n2" target="n10">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="6.776324408852616" ty="4.748234870707989"/>

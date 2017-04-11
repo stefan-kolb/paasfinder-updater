@@ -1,6 +1,6 @@
 \subsection{Maschinelles Lernen beim Wissenserwerb}\label{subsec: Maschinelles-Lernen}
 In diesem Abschnitt handelt es sich um einen Ausblick in weitere Wissenserwerbsmethoden, und zwar die Anwendung des maschinellen Lernens. In der Literatur gibt es eine Reihe der Ans‰zte, die sich damit besch‰ftigen (z.B. \cite{castro2001} und \cite{webb1996}). Trotz der Unterschieden in der Umsetzung gibt es eine entscheidende Gemeinsamkeit. Beide Methoden basieren auf der Zusammenarbeit zwischen dem Experten und dem Lernalgorithmus. Im Folgenden wird der Ansatz von \cite{castro2001} genauer betrachtet.\\
-In der Arbeit von \cite{castro2001} handelt es sich um die Anwendung des maschinellen Lernens bei der Erfassung des Expertenwissens im Medizinbereich. Das Konzept der Wissensbasiserweiterung orientiert sich an \cite{tecuci1992} und besteht darin, dass anfangs eine initiale Wissensbasis gebaut und inkrementell verbessert wird, indem der Experte die Fragen vom System beantwortet. Bei der Erstellung der Fragen wird ein Lernverfahren eingesetzt. Die Idee des Lernverfahrens besteht in der Erschlieﬂung des allgemeinen Expertenwissens aus den Trainingsdaten der Schlussfolgerungen eines Experten.\\
+In der Arbeit von \cite{castro2001} handelt es sich um die Anwendung des maschinellen Lernens bei der Erfassung des Expertenwissens im Medizinbereich. Das Konzept der Wissensbasiserweiterung orientiert sich an \cite{tecuci1992} und besteht darin, dass anfangs eine initiale Wissensbasis gebaut und inkrementell verbessert wird, indem der Experte die Fragen vom System beantwortet. Bei der Erstellung der Fragen wird ein Lernverfahren eingesetzt. Die Idee des Lernverfahrens besteht in der Erschlieﬂung des naheliegenden Expertenwissens aus den Trainingsdaten der Schlussfolgerungen eines Experten.\\
 Der Kern des Verfahrens besteht aus dem induktiven Lernen und dem generischen Algorithmus von \cite{castro1999}, der auf der Fuzzylogik basiert ist. Bei der Induktion handelt es sich um das Erschlieﬂen der allgemeinen Schlussfolgerungen aus den Einzelf‰llen. Die Fuzzylogik besch‰ftigt sich mit den graduellen Aussagen, die nicht eindeutig falsch oder wahr bezeichnet werden kˆnnen. Diese Aussagen werden mithilfe der vagen Pr‰dikaten beschrieben. Ein typisches Beispiel ist das Pr‰dikat \glqq{}groﬂ\grqq{}. Eine 1,80 m groﬂe Person wird als \glqq{}groﬂ\grqq{} bezeichnet, w‰hrend eine 1,75 m Person ist nicht genau so \glqq{}groﬂ\grqq{}, aber auch nicht \glqq{}klein\grqq{} ist \cite[S.27]{beierle2014}.\\
 Das Lernverfahren umfasst folgenden Schritte \cite[S.316]{castro2001}:
 \begin{itemize}
@@ -8,7 +8,7 @@ Das Lernverfahren umfasst folgenden Schritte \cite[S.316]{castro2001}:
 \item[2.] Entfernen des Rausches aus den Trainingsdaten.
 \item[3.] Ermittlung der Genen, die sich nicht ‰ndern kˆnnen.
 \item[4.] Ermittlung der Menge der initialen Regeln mithilfe des Algorithmus von \cite{castro1999}.
-\item[5.] Anwendung des Algorithmus von \cite{castro1999} zur Ermittlung der Menge der Regeln, die das allgemeine Expertenwissen aus der Trainingsmenge beschreiben.
+\item[5.] Anwendung des Algorithmus von \cite{castro1999} zur Ermittlung der Menge der Regeln, die das naheliegende Expertenwissen aus der Trainingsmenge beschreiben.
 \item[6.] Ausschluss der Regeln, die ein Teil anderer Regeln sind.
 \item[7.] Ende.
 \end{itemize}
@@ -35,7 +35,7 @@ wobei:
 \item[\( n \)] = Anzahl der Input-Variablen in der Schlussfolgerung,
 \item[\( y_j \)] = Output-Wert (Expertenschlussfolgerung).
 \end{itemize}
-Die Output-Werte nach der Formel \ref{eq:training} stellen die Teilmenge des kartesischen Produkts aller Input- und Output-Werten \(X^n \times Y \) dar. Das Ziel ist die Approximation der Funktion \( \Omega: X^n \rightarrow Y \) durch die Ermittlung von Fuzzy-IF-THEN-Regeln, um das allgemeine Expertenwissen aus der Trainingsmenge zu erschlieﬂen. Fuzzy-IF-THEN-Regel \( R_j \) wird wie folgt definiert (siehe Formel \ref{eq:fuzzy-regel}):
+Die Output-Werte nach der Formel \ref{eq:training} stellen die Teilmenge des kartesischen Produkts aller Input- und Output-Werten \(X^n \times Y \) dar. Das Ziel ist die Approximation der Funktion \( \Omega: X^n \rightarrow Y \) durch die Ermittlung von Fuzzy-IF-THEN-Regeln, um das naheliegende Expertenwissen aus der Trainingsmenge zu erschlieﬂen. Fuzzy-IF-THEN-Regel \( R_j \) wird wie folgt definiert (siehe Formel \ref{eq:fuzzy-regel}):
 \begin{equation}
 	R_j : \mbox{ IF } X \mbox{ is } E \mbox{ THEN } Y \mbox{ is } y_i 
 	\label{eq:fuzzy-regel}

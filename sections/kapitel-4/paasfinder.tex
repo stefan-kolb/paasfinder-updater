@@ -1,7 +1,24 @@
-\subsection{Allgemein zum \textit{PaaSfinder}}
-\begin{itemize}
-\item der Zweck vom \textit{PaaSfinder}
-\item OpenSource und Github
-\item Struktur des Dateneintrags: JSON, Attribute, Bedeutung 
-\item Problem - Git-Repository runterladen, JSON ändern und pushen 
-\end{itemize}
+\subsection{Systembeschreibung}
+Die Umsetzung der Wissenserwerbskomponente erfolgt am Beispiel von \textit{PaaSfinder}\footnote{{\label{foot:paasfinder}}https://paasfinder.org}, ein Expertensystem und Open-Source-Projekt im Bereich von \acf{PaaS}. Das Ziel des Systems besteht darin, zahlreiche PaaS-Anbieter vergleichbar zu machen. \textit{PaaSfinder} verfügt bereits über eine Wissensdatenbank, die aufgrund der häufigen Änderungen auf dem PaaS-Markt aktualisiert werden muss. Ein PaaS-Eintrag wird in der Wissensbasis vom \textit{PaaSfinder} durch folgende Eigenschaften\footnote{https://github.com/stefan-kolb/paas-profiles\#profile-specification} spezifiziert:
+\begin{enumerate}
+\item \textbf{General Properties}: allgemeine Eingenschaften des PaaS-Anbieters (z.B. Name, URL, Status, Type, etc.)
+\item \textbf{Extensible}: generelle Erweiterungsmöglichkeit nach Kundenbedarf (z.B. spezielle Laufzeitumgebung)
+\item \textbf{Pricing}: verfügbare Preismodelle
+\item \textbf{Quality of Service}: die Servicequalität (z.B. Verfügbarkeit)
+\item \textbf{Hosting}: Art der Bereitstellung (z.B. privat)
+\item \textbf{Scaling}: Skalierbarkeit (z.B. Speichererweiterung)
+\item \textbf{Runtimes}: unterstützte Laufzeitumgebungen (z.B. Java\footnote{https://java.com})
+\item \textbf{Middleware} (z.B. Tomcat\footnote{https://tomcat.apache.org})
+\item \textbf{Frameworks} (z.B. Play\footnote{https://www.playframework.com})
+\item \textbf{Services} (z.B. Datenspeicher)
+\item \textbf{Infrastructures} (z.B. Informationen zum Standort)
+\end{enumerate}
+Die Struktur vom \textit{PaaSfinder} lässt sich in der Abbildung \ref{paasfinder} wie folgt beschreiben.
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/paasfinder.png}
+	\caption{Die Struktur vom \textit{PaaSfinder}}
+	\label{paasfinder}
+\end{figure} 
+Dem Benutzer wird \textit{PaaSfinder} als die auf einem Server laufende Web-Anwendung bereitgestellt. Die Wissensbasis und der Programmcode von \textit{PaaSfinder} befinden sich in einem Git\footnote{https://git-scm.com}-Repository. Bei Git handelt es sich um ein verteiltes System zur Projektverwaltung. Jeder, der dem Projekt beitragen möchte, kann das Repository des gesamten Projekts lokal speichern, gewünschte Änderungen vornehmen und anschließend einen Pull-Request\footnote{https://git-scm.com/docs/git-request-pull} erstellen. Der Pull-Request wird vom Projektmaster überprüft und zugehörige Änderungen übernommen (\glqq{}gemerged\grqq{}), falls keine Konflikte vorliegen. Wenn der Wissensträger mit dem Git-System nicht vertraut ist, kann ein direkter Kontakt (beispielsweise per E-Mail) mit dem Systementwickler aufgenommen werden. Die Daten werden dann manuell vom Systemverwalter in die Wissensbasis eingetragen.\\
+Sowohl der Beitrag mittels Pull-Requests als auch Kontakt mit dem Systementwickler entspricht dem direkten Wissenserwerb gemäß der Klassifikation in Kapitel \ref{subsec:Wissenserwerbskomponente}. Der Vorteil dabei ist, dass die Daten nicht manuell gesucht werden sollen, sondern gleich vom Wissensträger stammen. Anderseits wird die Datenerfassung durch Git-Kenntnisse des Wissensträgers beschränkt. Um den direkten Wissenserwerb zu erleichtern, wird im weiteren Verlauf die Wissensträgerschnittstelle entwickelt, die es dem Wissensträger ermöglicht, einen bestehenden PaaS-Eintrag zu aktualisieren. Nach dem erfolgreichen Absenden der Änderungen soll automatisch ein Pull-Request erstellt werden. 
