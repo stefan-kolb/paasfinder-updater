@@ -2,12 +2,11 @@
 Als erster Schnitt in der Automatisierung der Datenerfassung bei \textit{PaaSfinder} wird eine Schnittstele zur Dateneingabe entwickelt (Wissensträgerschnittstelle). Mithilfe der Schnittstelle soll die Aktualisierung eines bestehenden Profils ermöglicht werden. Das Anlegen oder das Löschen eines Profils liegt nicht im Anwendungsbereich der Schnittstelle. Der Ablauf wird in Abbildung \ref{fig:update-allgemein} veranschaulicht.
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.98\textwidth]{images/update.png}
+	\includegraphics[width=1.0\textwidth]{images/update.png}
 	\caption{Profilaktualisierung mittels Wissensträgerschnittstelle}
 	\label{fig:update-allgemein}
 \end{figure}
-Der Ablauf in Abbildung \ref{fig:update-allgemein} lässt sich in zwei Schritte aufteilen. Im ersten Schritt geht es um die Interaktion des Wissensträgers mit \textit{PaaSfinder}, um fehlende Informationen einem bestimmten Profil zu ergänzen. Der zweite Schritt umfasst die Verarbeitung der Daten und automatisierte Erstellung des Pull-Requests. In diesem Abschnitt wird der erste Schritt ausführlich besprochen. Der zweite Schritt, der sich mit der Datenübermittlung beschäftigt, wird im nächsten Abschnitt erläutert.\\
-Allgemein besteht der erste Schritt aus folgenden Aktionen:
+Der Ablauf in Abbildung \ref{fig:update-allgemein} lässt sich in zwei Schritte aufteilen. Dieser Abschnitt beschäftigt sich mit dem ersten Schritt, der die Daten von einem Wissensträger entgegennimmt, zusammenfasst und abschickt. Die Verarbeitung dieser Daten erfolgt im zweiten Schritt, der im nächsten Abschnitt besprochen wird. Allgemein besteht der erste Schritt aus folgenden Aktionen:
 \begin{enumerate}
 \item \textit{Profilauswahl} (Vendor Page)
 \item \textit{Aktualisieren} des Profils (Update Page)
@@ -17,12 +16,12 @@ Allgemein besteht der erste Schritt aus folgenden Aktionen:
 Der gesamte Prozess lässt sich in Abbildung \ref{fig:activity} als ein Aktivitätsdiagramm darstellen. Die verwendete Notation entspricht dem UML-Standard 2.5 \cite[S.398]{uml2}. Es werden Knoten (Rechteck) für Aktivitäten und Kanten (Pfeile) für Verbindungen verwendet. Bei den Verbindungen werden Kontrollfluss- und Datenflussverbindungen unterschieden. Im Fall einer Datenflussverbindung gibt es ein Ein- und der Ausgabe-Pin (kleiner Quadrat) am Anfang oder am Ende des Pfeils. Im vorliegenden Fall werden noch Fallunterscheidungen verwendet, die durch eine Raute gekennzeichnet sind.
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.9\textwidth]{images/activity.png}
+	\includegraphics[width=1.0\textwidth]{images/activity.png}
 	\caption{Aktivitätsdiagramm der Aktualisierung des PaaS-Profils}
 	\label{fig:activity}
 \end{figure}
 Ausgehend von einer Vendor Page wird der Ablauf mit \glqq{}Add an Update\grqq{} gestartet. Als nächstes werden die Daten eingegeben. Wenn das Profil aus Sicht des Wissensträgers vollständig ist, wird auf \glqq{}Review\grqq{} geklickt. Sonst wird der Schritt der Dateneingabe wiederholt. Falls der \glqq{}Review\grqq{}-Button geklickt wurde, gelangt man zur Review Page. Hier können die Daten überprüft werden. Wenn die Daten korrekt sind, kann das aktualisierte Profil mit dem Klick auf \glqq{}Submit\grqq{} an den Worker gesendet werden. Anderenfalls kann der Wissensträger zurück zur Dateneingabe gehen und die Daten überarbeiten. In jedem Zeitpunkt besteht die Möglichkeit, den Vorgang abzubrechen, indem das Browserfenster geschlossen wird. Die Daten werden nur dann gesendet, wenn der \glqq{}Submit\grqq{}-Button auf der Review Page geklickt wird. Im weiteren Verlauf wird die Implementierung der Page und Review Page beschrieben.\\
-Die Aufgabe der Update Page besteht in geeigneter Darstellung des Profils, sodass die Daten geändert werden können. Die Nutzereingaben sollen automatisch im Profil (also im JSON) zwischengespeichert werden. Das ist eine herausfordernde Aufgabe, da ein Profil, abgesehen von allgemeinen Eigenschaften (z.B. \glqq{}name\grqq{}), aus komplexen und teils verschachtelten Datentypen besteht. In Abbildung \ref{fig:profil} wird das am Beispiel von \glqq{}runtimes\grqq{} (Laufzeitumgehungen) gezeigt. Farbe gelb steht dabei für ein Objekt, grau für eine Liste und weiß für ein String (Zeichenkette). Hier umfasst ein Profil (\glqq{}vendor\grqq{}) eine Liste von \glqq{}runtimes\grqq{}. \glqq{}Runtime\grqq{} besteht wiederum aus \glqq{}language\grqq{} und \glqq{}versions\grqq{}.
+Die Update Page umfasst zwei Aspekte. Erstens sollen die Profildaten für den Wissensträger geeignet dargestellt werden Zweitens soll die Eingabe der Daten ermöglicht werden. Außerdem sollen die Änderungen am Profil dynamisch zwischengespeichert werden. Das ist eine herausfordernde Aufgabe, da ein Profil, abgesehen von allgemeinen Eigenschaften (z.B. \glqq{}name\grqq{}), aus komplexen und teils verschachtelten Datentypen besteht. In Abbildung \ref{fig:profil} wird das am Beispiel von \glqq{}runtimes\grqq{} (Laufzeitumgehungen) gezeigt. Farbe gelb steht dabei für ein Objekt, grau für eine Liste und weiß für ein String (Zeichenkette). Hier umfasst ein Profil (\glqq{}vendor\grqq{}) eine Liste von \glqq{}runtimes\grqq{}. \glqq{}Runtime\grqq{} besteht wiederum aus \glqq{}language\grqq{} und \glqq{}versions\grqq{}.
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=1.0\textwidth]{images/vendor.png}
@@ -37,37 +36,37 @@ Um diese Aufgabe zu lösen, werden die Daten in zwei Richtungen gebunden (two-way
 \end{itemize}
 Als erstes werden die für das Modell erforderliche Daten über \textit{PaaSfinder}-\acs{API}\footnote{https://paasfinder.org/api/vendors/} geholt und das Modell initialisiert. Da das Modell komplexe Datentypen umfasst, sind explizite JavaScript Klassen nötig. Beispielsweise gibt es für \glqq{}runtime\grqq{} und \glqq{}version\grqq{} jeweils eigene Klassen mit unterschiedlichem Verhalten. Die Klasse \glqq{}runtime\grqq{} beinhaltet z.B. die Methode zum Hinzufügen neuer Version. Nachdem das Modell initialisiert wurde, wird das Data-Binding zwischen dem Modell und der View aktiviert.\\
 Während die Update Page die Benutzerdaten entgegennimmt, werden die Daten auf der Review Page zusammenfasst, so dass der Wissensträger die Eingaben überprüfen kann. Die Profildaten von der Update zur Review Page werden mithilfe von Web Storage\footnote{https://www.w3.org/TR/webstorage/} ausgetauscht. W3C definiert zwei Arten der Speicherung, nämlich Session und Local Storage. Session Storage gilt ausschließlich innerhalb Browserfenster. Die Inhalte von Local Storage können dagegen innerhalb einer Domain zugegriffen werden und gelten zeitlich unbeschränkt. Selbst beim Fensterschließen bleiben die Daten erhalten und können bei Bedarf gelesen werden. Daher wird im Weiteren Local Storage betrachtet.\\
-Auf der Update Page wird das Profil beim Klicken auf \glqq{}Review\grqq{} in die Local Storage gespeichert. Das Speichern bzw. Lesen basiert wie bei JSON auf Schlüssel/Wert-Paar-Prinzip. Der Schlüssel ist dabei der Profilname, der bei der API benutzt wird. Da der Schlüssel als Parameter an die Review Page geschickt wird, können die Daten problemlos gelesen werden. Es besteht ebenso die Möglichkeit, das Profil auf der Update Page zurückzusetzen, indem die Profildaten aus der Local Storage gelöscht und erneut von der API angefordert werden.\\
-Eine beispielhafter Ablauf der Profilaktualisierung könne wie folgt aussehen:
+Auf der Update Page wird das Profil beim Klicken auf \glqq{}Review\grqq{} in die Local Storage gespeichert. Das Speichern bzw. Lesen basiert wie bei JSON auf Schlüssel/Wert-Paar-Prinzip. Der Schlüssel ist dabei der Profilname, der bei der API benutzt wird. Da der Schlüssel als Parameter an die Review Page geschickt wird, können die Daten problemlos gelesen werden. Es besteht ebenso die Möglichkeit, das Profil auf der Update Page zurückzusetzen, indem die Profildaten aus der Local Storage gelöscht und erneut von der \textit{PaaSfinder}-API angefordert werden.\\
+Im folgenden Beispiel wird das Profil \glqq{}Heroku\grqq{} aktualisiert, indem eine neue Version (1.9) zu Java in \glqq{}runtimes\grqq{} hinzugefügt wird.
 \begin{enumerate}
 \item Von der Vendor Page auf \glqq{}Add an Update\grqq{} klicken.
 	\begin{figure}[H] 
 		\centering
-		\includegraphics[width=0.85\textwidth]{images/vendor-page.png}
+		\includegraphics[width=1.0\textwidth]{images/vendor-page.png}
 		\caption{Vendor Page}
 		\label{fig:vendor-page}
 	\end{figure}
-\item Eine neue Version (1.9) zu Java hinzufügen (siehe Abbildung \ref{fig:update-page}).
+\item Eine neue Java Version (1.9) hinzufügen (siehe Abbildung \ref{fig:update-page}).
 	\begin{figure}[H] 
 		\centering
-		\includegraphics[width=0.75\textwidth]{images/update-page.png}
+		\includegraphics[width=1.0\textwidth]{images/update-page.png}
 		\caption{Update Page}
 		\label{fig:update-page}
 	\end{figure} 
-\item Anschlied die Kontaktdaten (Name, E-Mail und Nachricht) eintragen (siehe Abbildung \ref{fig:kontaktdatenform}). Diese Daten werden beim Pull-Request gebraucht.
+\item Bevor man zur Review Page kommt, sollen die Kontaktdaten (Name, E-Mail und Nachricht) angegeben werden (siehe Abbildung \ref{fig:kontaktdatenform}). Diese Daten sind für den zweiten Schnitt in Abbildung \ref{fig:update-allgemein} erforderlich.
 	\begin{figure}[H] 
 		\centering
-		\includegraphics[width=0.85\textwidth]{images/kontaktform.png}
+		\includegraphics[width=1.0\textwidth]{images/kontaktform.png}
 		\caption{Kontaktdatenform}
 		\label{fig:kontaktdatenform}
 	\end{figure} 
 \item Die Daten auf der Review Page überprüfen (siehe Abbildung \ref{fig:vendor-page}).
 	\begin{figure}[H] 
 		\centering
-		\includegraphics[width=0.85\textwidth]{images/review-page.png}
+		\includegraphics[width=1.0\textwidth]{images/review-page.png}
 		\caption{Review Page}
 		\label{fig:review-page}
 	\end{figure} 
-\item Anschließend die Daten durch \glqq{}Sumbit\grqq{} \ac{REST}-API übermitteln.
+\item Anschließend werden die Daten mit dem Klick auf den \glqq{}Sumbit\grqq{}-Button abgeschickt.
 \end{enumerate}
 Ein weiterer Punkt bei der Benutzereingaben ist die Validierung der Eingabedaten. In einigen Fällen können die Daten bereits auf der View-Ebene geprüft werden. Als Beispiel wird in der Kontaktform (Abbildung \ref{fig:kontaktdatenform}) bei der E-Mail Adresse mittels HTML-Attribut type=\glqq{}email\grqq{} sichergestellt, dass der Input formal der E-Mail Struktur einspricht. In anderen Fällen ist es nicht so einfach. Die Version kann leider nicht als eine Zahl behandelt werden, weil sie ein Asterix (*) enthalten kann. Die semantische Korrektheit der Eingaben (gibt es Java 1.9?) ist viel schwieriger werden von Fachexperten überprüft.
