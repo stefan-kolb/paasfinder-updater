@@ -1,6 +1,9 @@
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+/**
+ * For testing BaseEncoding Class.
+ */
 public class BaseEncoding {
     public static void main( String[] args) {
         // Encode using basic encoder
