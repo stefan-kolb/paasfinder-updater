@@ -1,10 +1,10 @@
-\subsection{Komponente der Datenverarbeitung}
+\subsection{Datenverarbeitungskomponente}\label{sec:Datenverarbeitungskomponente}
 Gemäß der Abbildung \ref{wissenserwerbskomponente} stellt die Datenverarbeitungskomponente ein Bindeglied zwischen der Wissensbasis (hier Git-Repository) und den Wissenserfassungsverfahren (z.B. Wissensträgerschnittstelle) dar. Auf Implementierung bezogen handelt es sich um ein Programm, das für eine kleine Aufgabe zuständig ist. Martin Flowler bezeichnet das als Mircoservice\footnote{https://www.martinfowler.com/articles/microservices.html}. Im Fall von \textit{PaaSfinder} wird dieser Microservice als \glqq{}Worker\grqq{} bezeichnet. Schematisch wird der Worker in Abbildung \ref{fig:worker} dargestellt.
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.99\textwidth]{images/worker.png}
+	\includegraphics[width=1.0\textwidth]{images/worker.png}
 	\caption{Der Aufgabenbereich vom Worker}
 	\label{fig:worker}
 \end{figure}
-Als erstes werden die Daten als ein JSON entgegengenommen. Im weiteren Schritt werden die Daten nach bestimmten Kriterien (z.B. der Name soll nicht null sein) geprüft und gegebenenfalls abgelehnt. Auch die Einschränkung, dass nur JSON Objekte akzeptiert werden, gehört zur Validierung. Anschließend werden die Daten bereitgestellt und als Pull-Request an das Repository geschickt.\\
-Der Worker wird als \ac{REST}-API umgesetzt. \textit{Hier die Beschreibung von REST...} 
+Der Aufgabenbereich vom Worker ist einfach. Zunächst sollen die Daten durch eine Schnittstelle empfangen werden.  Dabei wird der Ausschlusskriterium angewandt, dass nur die Daten in JSON Format akzeptiert werden. Sobald die Daten vorliegen, werden sie im nächste Schritt entsprechend für das Senden vorbereitet und an die Wissensbasis weitergegeben. In diesem Fall handelt es sich um die Erstellung eines Pull-Requests, der anschließemd an die Git-Repository gesendet wird.\\
+Wie bereits angedeutet wurde, folgt die Implementierung des Workers dem REST-Architekturstil. \ac{REST} und dazugehörige Grundprinzipien nach \cite{tilkov2015} erläutern.
