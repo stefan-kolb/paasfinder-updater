@@ -1,4 +1,4 @@
-\subsection{Datenverarbeitungskomponente}\label{sec:Datenverarbeitungskomponente}
+\subsection{Worker für Datenaktualisierung}\label{subsec:Worker}
 Gemäß der Abbildung \ref{wissenserwerbskomponente} stellt die Datenverarbeitungskomponente ein Bindeglied zwischen der Wissensbasis (hier Git-Repository) und den Wissenserfassungsverfahren (z.B. Wissensträgerschnittstelle) dar. Auf Implementierung bezogen handelt es sich um ein Programm, das für eine kleine Aufgabe zuständig ist. Martin Flowler bezeichnet das als Mircoservice\footnote{https://www.martinfowler.com/articles/microservices.html}. Im Fall von \textit{PaaSfinder} wird dieser Microservice als \glqq{}Worker\grqq{} bezeichnet. Schematisch wird der Worker in Abbildung \ref{fig:worker} dargestellt.
 \begin{figure}[H] 
 	\centering
@@ -7,4 +7,11 @@ Gemäß der Abbildung \ref{wissenserwerbskomponente} stellt die Datenverarbeitungs
 	\label{fig:worker}
 \end{figure}
 Der Aufgabenbereich vom Worker ist einfach. Zunächst sollen die Daten durch eine Schnittstelle empfangen werden.  Dabei wird der Ausschlusskriterium angewandt, dass nur die Daten in JSON Format akzeptiert werden. Sobald die Daten vorliegen, werden sie im nächste Schritt entsprechend für das Senden vorbereitet und an die Wissensbasis weitergegeben. In diesem Fall handelt es sich um die Erstellung eines Pull-Requests, der anschließemd an die Git-Repository gesendet wird.\\
-Wie bereits angedeutet wurde, folgt die Implementierung des Workers dem REST-Architekturstil. \ac{REST} und dazugehörige Grundprinzipien nach \cite{tilkov2015} erläutern.
+Die allgemeine Architektur des Workers basiert auf \ac{REST}-Stil, der ursprünglich aus der Dissertation von Fielding \cite{fielding2000} stammt. Das zentrale Konzept von REST sind Ressourcen \cite[S.35]{tilkov2015}. In diesem Fall sind das aktualisierte JSON-Objekte eines PaaS-Profils, die an die REST-Schnittstelle gesendet werden. Tilkov et al. \cite{tilkov2015} beschreiben REST durch folgende Grundprinzipien:
+\begin{itemize}
+\item Ressourcen mit eindeutiger Identifikation
+\item Verknüpfung/Hypermedia
+\item Standardmethoden
+\item Unterschiedliche Repräsentationen
+\item Statuslose (stateless) Kommunikation
+\end{itemize}
