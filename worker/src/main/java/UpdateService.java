@@ -3,6 +3,7 @@ import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import org.json.JSONObject;
 import vendor.*;
 import static spark.Spark.*;
 
@@ -40,17 +41,19 @@ public class UpdateService {
             return GSON.toJson(model.getAllVendors());
         });
 
-        post("/add", "application/json", (request, response) -> {
-            System.out.println("Received request from " + request.raw().getRemoteAddr());
-            Vendor toStore = null;
-            try {
-                toStore = GSON.fromJson(request.body(), Vendor.class);
-            } catch (JsonSyntaxException e) {
-                response.status(400);
-                return "INVALID JSON";
-            }
-            Model.store(toStore);
-            return GSON.toJson(toStore);
+        post("/vendors", "application/json", (request, response) -> {
+            JSONObject json = new JSONObject(request.body());
+
+            final String fileName =  json.get("id").toString().toLowerCase();
+            final String branchName = "updating-" + fileName;
+
+            UpdateClient client = new UpdateClient();
+            client.createBranch(branchName);
+            client.updateFile(fileName, json.toString(), "update message", branchName);
+            client.createPullRequest("title", "message", branchName);
+
+            response.status(200);
+            return "OK";
         });
 
         options("/*", (request,response)-> {
@@ -63,7 +66,6 @@ public class UpdateService {
             if(accessControlRequestMethod != null) {
                 response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
             }
-
             return "OK";
         });
     }

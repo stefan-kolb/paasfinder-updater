@@ -8,97 +8,102 @@ import java.util.Base64;
 public class UpdateClient {
 
     private final OkHttpClient client;
-    private final String baseURL;
-    private final String credentials = Base64.getEncoder().encodeToString("vasilpet:mKsd9045s".getBytes(StandardCharsets.UTF_8));
+    private final String baseURL = "https://api.github.com/repos/update-bot/paas-profiles";
+    private final String credentials = Base64.getEncoder().encodeToString("update-bot:ds457hrsf3".getBytes(StandardCharsets.UTF_8));
     private final MediaType mediaType = MediaType.parse("application/json");
 
-    public UpdateClient(String user, String repo) {
+    public UpdateClient() {
+        super();
         this.client = new OkHttpClient();
-        this.baseURL = "https://api.github.com/repos/" + user + "/" + repo;
     }
 
-    public void createNewBranch(String branchName) throws IOException {
+    public void createBranch(String branchName) throws IOException {
+        final String masterSHA = getMasterSHA();
+
+        JSONObject requestJSON = new JSONObject();
+        requestJSON.put("ref", "refs/heads/" + branchName);
+        requestJSON.put("sha", masterSHA);
+
+        RequestBody requestBody = RequestBody.create(mediaType, requestJSON.toString());
         Request request = new Request.Builder()
-                .url(baseURL + "/git/refs/heads/master")
-                .get()
+                .url(baseURL + "/git/refs")
+                .post(requestBody)
+                .addHeader("content-type", "application/json")
+                .addHeader("authorization", "Basic " + credentials)
                 .build();
 
-        Response responseMaster = client.newCall(request).execute();
-        JSONObject json = new JSONObject(responseMaster.body().string());
-        JSONObject object = json.getJSONObject("object");
-        String masterSHA = object.get("sha").toString();
-        System.out.println(responseMaster);
-        System.out.println("Master SHA: " + masterSHA);
+        Response response = client.newCall(request).execute();
+        System.out.println("Create Branch Response Code: " + response.code());
+    }
 
-        // 2 Create a branch
-        JSONObject jsonForBranch = new JSONObject();
-        jsonForBranch.put("ref", "refs/heads/" + branchName);
-        jsonForBranch.put("sha", masterSHA);
+    public void updateFile(String fileName, String content, String message, String branchName) throws IOException {
+        final String fileSHA = getFileSHA(fileName);
+        final String encodedContent = Base64.getEncoder().encodeToString(content.getBytes(StandardCharsets.UTF_8));
 
-        RequestBody body = RequestBody.create(mediaType, jsonForBranch.toString());
-        Request branchRequest = new Request.Builder()
-                .url(baseURL + "/git/refs")
+        JSONObject requestJSON = new JSONObject();
+        requestJSON.put("message", message);
+        requestJSON.put("content", encodedContent);
+        requestJSON.put("sha", fileSHA);
+        requestJSON.put("branch", branchName);
+
+        RequestBody requestBody = RequestBody.create(mediaType, requestJSON.toString());
+        Request request = new Request.Builder()
+                .url(baseURL + "/contents/profiles/" + fileName + ".json")
+                .put(requestBody)
+                .addHeader("content-type", "application/json")
+                .addHeader("authorization", "Basic " + credentials)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        System.out.println("Update File Response Code:" + response.code());
+    }
+
+    public void createPullRequest(String title, String message, String head) throws IOException {
+        JSONObject bodyJSON = new JSONObject();
+        bodyJSON.put("title", title);
+        bodyJSON.put("body", message);
+        bodyJSON.put("head", head);
+        bodyJSON.put("base", "master");
+        bodyJSON.put("maintainer_can_modify", true);
+
+        RequestBody body = RequestBody.create(mediaType, bodyJSON.toString());
+        Request request = new Request.Builder()
+                .url(baseURL + "/pulls")
                 .post(body)
                 .addHeader("content-type", "application/json")
                 .addHeader("authorization", "Basic " + credentials)
                 .build();
 
-        Response branchResponse = client.newCall(branchRequest).execute();
-        System.out.println(branchResponse);
+        Response response = client.newCall(request).execute();
+        System.out.println("Create Pull Request Response Code: " + response.code());
     }
 
-    public void updateFile(String fileName, String content, String branchName) throws IOException {
-        // 3 Get File SHA
-        Request requestFile = new Request.Builder()
-                .url(baseURL + "/contents/" + fileName)
+    public String getMasterSHA() throws IOException{
+        Request request = new Request.Builder()
+                .url(baseURL + "/git/refs/heads/master")
                 .get()
                 .build();
 
-        Response responseFile = client.newCall(requestFile).execute();
+        Response response = client.newCall(request).execute();
+        JSONObject responseJSON = new JSONObject(response.body().string());
+        JSONObject object = responseJSON.getJSONObject("object");
 
-        JSONObject jsonFile = new JSONObject(responseFile.body().string());
-        String fileSHA = jsonFile.get("sha").toString();
-
-        System.out.println(responseFile);
-        System.out.println("fileSHA: " + fileSHA);
-
-        // 4
-        JSONObject updatedFile = new JSONObject();
-        updatedFile.put("message", "my message");
-        String encodedContent = Base64.getEncoder().encodeToString(content.getBytes(StandardCharsets.UTF_8));
-        updatedFile.put("content", encodedContent);
-        updatedFile.put("sha", fileSHA);
-        updatedFile.put("branch", branchName);
-
-        RequestBody putFile = RequestBody.create(mediaType, updatedFile.toString());
-        Request requestPutFile = new Request.Builder()
-                .url(baseURL + "/contents/" + fileName)
-                .put(putFile)
-                .addHeader("content-type", "application/json")
-                .addHeader("authorization", "Basic " + credentials)
-                .build();
-
-        Response responsePutFile = client.newCall(requestPutFile).execute();
-        System.out.println(responsePutFile);
+        System.out.println("Master sha: " + object.get("sha").toString());
+        return object.get("sha").toString();
     }
 
-    public void createPullRequest(String title, String message, String head) throws IOException {
-        JSONObject jsonPR = new JSONObject();
-        jsonPR.put("title", title);
-        jsonPR.put("body", message);
-        jsonPR.put("head", head);
-        jsonPR.put("base", "master");
-        jsonPR.put("maintainer_can_modify", true);
-
-        RequestBody bodyPR = RequestBody.create(mediaType, jsonPR.toString());
+    public String getFileSHA(String fileName) throws IOException{
         Request request = new Request.Builder()
-                .url(baseURL + "/pulls")
-                .post(bodyPR)
-                .addHeader("content-type", "application/json")
-                .addHeader("authorization", "Basic " + credentials)
+                .url(baseURL + "/contents/profiles/" + fileName + ".json")
+                .get()
                 .build();
 
-        Response responsePR = client.newCall(request).execute();
-        System.out.println(responsePR);
+        Response response = client.newCall(request).execute();
+
+        JSONObject responseBody = new JSONObject(response.body().string());
+        System.out.println("File sha: " +responseBody.get("sha").toString());
+
+        return responseBody.get("sha").toString();
     }
+
 }
