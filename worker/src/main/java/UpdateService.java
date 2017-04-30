@@ -1,10 +1,16 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.commons.lang.RandomStringUtils;
-import org.json.JSONObject;
+import java.io.IOException;
 import static spark.Spark.*;
 
 public class UpdateService {
 
-    public static final int ID_LENGTH = 10;
+    private static final int ID_LENGTH = 10;
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static JsonParser jp = new JsonParser();
 
     public static String generateUniqueId() {
         return RandomStringUtils.randomAlphanumeric(ID_LENGTH);
@@ -31,16 +37,26 @@ public class UpdateService {
         });
 
         post("/vendor", "application/json", (request, response) -> {
-            JSONObject json = new JSONObject(request.body());
+            JsonObject jo = (JsonObject) jp.parse(request.body());
+            final String vendorKey =  jo.get("vendorKey").getAsString();
+            final String branchName = "updating-" + vendorKey + "-" + generateUniqueId();
+            final String updateMessage = "Updating " + vendorKey + ". " + jo.get("contributorMessage").getAsString();
+            final String titlePR = "PR " + vendorKey;
+            final String messagePR = "";
 
-            final String fileName =  json.get("vendorAPIKey").toString();
-            final String branchName = "updating-" + fileName + "-" + generateUniqueId();
+            jo.remove("contributorName");
+            jo.remove("contributorEmail");
+            jo.remove("contributorMessage");
+            jo.remove("vendorKey");
+            final String vendorJson = gson.toJson(jo);
 
-            UpdateClient client = new UpdateClient();
-            client.createBranch(branchName);
-            client.updateFile(fileName, json.toString(), "update message", branchName);
-            client.createPullRequest("title", "message", branchName);
-
+            try {
+                UpdateClient client = new UpdateClient();
+                client.createBranch(branchName);
+                client.updateFile(vendorKey, vendorJson, updateMessage, branchName);
+                client.createPullRequest(titlePR, messagePR, branchName);
+            } catch (IOException e){
+            }
             response.status(200);
             return "OK";
         });
