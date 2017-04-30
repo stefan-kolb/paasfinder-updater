@@ -10,7 +10,7 @@ public class UpdateService {
 
     private static final int ID_LENGTH = 10;
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static JsonParser jp = new JsonParser();
+    private static JsonParser jsonParser = new JsonParser();
 
     public static String generateUniqueId() {
         return RandomStringUtils.randomAlphanumeric(ID_LENGTH);
@@ -37,7 +37,7 @@ public class UpdateService {
         });
 
         post("/vendor", "application/json", (request, response) -> {
-            JsonObject jo = (JsonObject) jp.parse(request.body());
+            JsonObject jo = jsonParser.parse(request.body()).getAsJsonObject();
             final String vendorKey =  jo.get("vendorKey").getAsString();
             final String branchName = "updating-" + vendorKey + "-" + generateUniqueId();
             final String updateMessage = "Updating " + vendorKey + ". " + jo.get("contributorMessage").getAsString();
