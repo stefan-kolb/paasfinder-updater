@@ -42,31 +42,31 @@ Im folgenden Beispiel wird das Profil \glqq{}Heroku\grqq{} aktualisiert, indem e
 \item Von der Vendor Page auf \glqq{}Add an Update\grqq{} klicken.
 	\begin{figure}[H] 
 		\centering
-		\includegraphics[width=1.0\textwidth]{images/vendor-page.png}
+		\includegraphics[width=0.95\textwidth]{images/ablauf/vendor-page.png}
 		\caption{Vendor Page}
 		\label{fig:vendor-page}
 	\end{figure}
 \item Eine neue Java Version (1.9) hinzufügen (siehe Abbildung \ref{fig:update-page}).
 	\begin{figure}[H] 
 		\centering
-		\includegraphics[width=1.0\textwidth]{images/update-page.png}
+		\includegraphics[width=0.95\textwidth]{images/ablauf/update-page.png}
 		\caption{Update Page}
 		\label{fig:update-page}
-	\end{figure} 
-\item Bevor man zur Review Page kommt, sollen die Kontaktdaten (Name, E-Mail und Nachricht) angegeben werden (siehe Abbildung \ref{fig:kontaktdatenform}). Diese Daten sind für den zweiten Schnitt in Abbildung \ref{fig:update-allgemein} erforderlich.
-	\begin{figure}[H] 
-		\centering
-		\includegraphics[width=1.0\textwidth]{images/kontaktform.png}
-		\caption{Kontaktdatenform}
-		\label{fig:kontaktdatenform}
 	\end{figure} 
 \item Die Daten auf der Review Page überprüfen (siehe Abbildung \ref{fig:vendor-page}).
 	\begin{figure}[H] 
 		\centering
-		\includegraphics[width=1.0\textwidth]{images/review-page.png}
+		\includegraphics[width=0.95\textwidth]{images/ablauf/review-page.png}
 		\caption{Review Page}
 		\label{fig:review-page}
 	\end{figure} 
-\item Anschließend werden die Daten mit dem Klick auf den \glqq{}Sumbit\grqq{}-Button abgeschickt.
+\item Optional kann der Wissensträger seine Kontaktdaten (Name und E-Mail) sowie die Nachricht zum Update hinterlassen.
+	\begin{figure}[H] 
+		\centering
+		\includegraphics[width=0.95\textwidth]{images/ablauf/kontaktform.png}
+		\caption{Kontaktdatenform}
+		\label{fig:kontaktdatenform}
+	\end{figure} 
+\item Anschließend werden die Daten mit dem Klick auf den \glqq{}Sumbit\grqq{}-Button an die für die Datenübermittlung zuständige Schnittstelle abgeschickt.
 \end{enumerate}
-Ein weiterer Punkt bei der Benutzereingaben ist die Validierung der Eingabedaten. In einigen Fällen können die Daten bereits auf der View-Ebene geprüft werden. Als Beispiel wird in der Kontaktform (Abbildung \ref{fig:kontaktdatenform}) bei der E-Mail Adresse mittels HTML-Attribut type=\glqq{}email\grqq{} sichergestellt, dass der Input formal der E-Mail Struktur einspricht. In anderen Fällen ist es nicht so einfach. Die Version kann leider nicht als eine Zahl behandelt werden, weil sie ein Asterix (*) enthalten kann. Die semantische Korrektheit der Eingaben (gibt es Java 1.9?) ist viel schwieriger werden von Fachexperten überprüft.
+Ein wichtiger Aspekt bei der Entwicklung der Wissensträgerschnittstelle ist die Validierung der Eingabedaten. In einigen Fällen können problematische Eingaben bereits auf der Ebene der Benutzerschnittstelle (User Interface) verhindert werden. Als Beispiel wird in der Kontaktform (Abbildung \ref{fig:kontaktdatenform}) bei der E-Mail Adresse mittels HTML-Attributes type=\glqq{}email\grqq{} sichergestellt, dass der Input formal der E-Mail Struktur einspricht. Allerdings kann der vergleichbare Ansatz nicht immer angewandt werden. Ein Beispiel ist eine Version, die ein Sonderzeichen (z.B. *) oder einen Buchstaben enthalten kann.

@@ -1,17 +1,21 @@
-\subsection{Worker für Datenaktualisierung}\label{subsec:Worker}
-Gemäß der Abbildung \ref{wissenserwerbskomponente} stellt die Datenverarbeitungskomponente ein Bindeglied zwischen der Wissensbasis (hier Git-Repository) und den Wissenserfassungsverfahren (z.B. Wissensträgerschnittstelle) dar. Auf Implementierung bezogen handelt es sich um ein Programm, das für eine kleine Aufgabe zuständig ist. Martin Flowler bezeichnet das als Mircoservice\footnote{https://www.martinfowler.com/articles/microservices.html}. Im Fall von \textit{PaaSfinder} wird dieser Microservice als \glqq{}Worker\grqq{} bezeichnet. Schematisch wird der Worker in Abbildung \ref{fig:worker} dargestellt.
+\subsection{Worker für Datenübermittlung}\label{subsec:Worker}
+Der vorliegende Abschnitt befasst sich mit einem Teil der Wissenserwerbskomponente, der als Bindeglied zwischen den Wissenserfassungsmethoden und der Wissensbasis auftritt. In Abbildung \ref{fig:wissenserwerbskomponente} wurde dieses Bindeglied allgemein als Schnittstelle für die Datenübermittlung bezeichnet. Im Rahmen dieser Studie wird von einem \textit{Worker} gesprochen, der die Aufgabe der Datenübermittlung durchführen wird. Der Aufgabenbereich vom Worker lässt sich in Abbildung \ref{fig:worker} darstellen.
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=1.0\textwidth]{images/worker.png}
-	\caption{Der Aufgabenbereich vom Worker}
+	\includegraphics[width=1.0\textwidth]{images/anwendungsbereich_worker.png}
+	\caption{Anwendungsbereich vom Worker}
 	\label{fig:worker}
 \end{figure}
-Der Aufgabenbereich vom Worker ist einfach. Zunächst sollen die Daten durch eine Schnittstelle empfangen werden.  Dabei wird der Ausschlusskriterium angewandt, dass nur die Daten in JSON Format akzeptiert werden. Sobald die Daten vorliegen, werden sie im nächste Schritt entsprechend für das Senden vorbereitet und an die Wissensbasis weitergegeben. In diesem Fall handelt es sich um die Erstellung eines Pull-Requests, der anschließemd an die Git-Repository gesendet wird.\\
-Die allgemeine Architektur des Workers basiert auf \ac{REST}-Stil, der ursprünglich aus der Dissertation von Fielding \cite{fielding2000} stammt. Das zentrale Konzept von REST sind Ressourcen \cite[S.35]{tilkov2015}. In diesem Fall sind das aktualisierte JSON-Objekte eines PaaS-Profils, die an die REST-Schnittstelle gesendet werden. Tilkov et al. \cite{tilkov2015} beschreiben REST durch folgende Grundprinzipien:
+In Abbildung \ref{fig:worker} sieht man, dass der Worker aus \textit{UpdateService} und \textit{UpdateClient} besteht. UpdateService stellt eine Schnittstelle dar, die für den Empfang der Daten zuständig ist. Auf der anderen Seite befasst sich UpdateClient mit der Schnittstelle der Wissensbasis (Git-Repository), um einen Pull-Request erstellen zu können.\\
+Der Ablauf der Datenübermittlung lässt sich gemäß der Abbildung \ref{fig:worker} wie folgt beschreiben. Als erstes werden die Daten als JSON an den UpdateService geschickt (Request). Im nächsten Schritt wird das JSON vom UpdateService verarbeitet (\glqq{}geparsed\grqq{}{}) und die Pull-Request-Erstellung an den UpdateClient delegiert. An dieser Stelle wird davon ausgegangen, dass der Pull-Request erfolgreich erstellt wurde. Der genaue Ablauf der Pull-Request-Erstellung wird im späteren Verlauf detaillierter angesprochen. Nachdem der Pull-Request erstellt wurde, schickt der UpdateService eine Rückmeldung (Response) an die Wissenserfassungsmethode.\\
+Die Umsetzung des Workers erfolgt auf Basis von \ac{HTTP}\footnote{https://www.w3.org/Protocols} unter Verwendung von \ac{REST}-Architekturstil, der ursprünglich aus der Dissertation von Fielding \cite{fielding2000} stammt. Das zentrale Konzept vom Rest besteht in Ressourcen, die im globalen Raum mithilfe von \ac{URI}\footnote{https://tools.ietf.org/html/rfc3986} eindeutig identifiziert werden \cite[S.11,35]{tilkov2015}. Ein wichtiges Merkmal von REST ist die lose Kopplung zwischen dem Client und dem Server, auch als statuslose Kommunikation bezeichnet \cite[S.18]{tilkov2015}. Der Server (Worker) interessiert sich für den Client (Wissenserfassungsmethode) nur für den Zeitpunkt der Request-Verarbeitung. Danach ist der Zustand des Clients für den Server nicht mehr relevant.\\
+Der UpdateService wird auf Basis Spark\footnote{http://sparkjava.com} umgesetzt. Spark stellt ein Micro-Framework dar, das eine kompakte, Java-basierte Implementierung von REST-API ermöglicht. Um die Daten von außen empfangen zu können, stellt der UpdateService die \glqq{}/vendor\grqq{} Route zur Verfügung, die vom Typ POST\footnote{https://tools.ietf.org/html/rfc7231\#section-4.3.3} ist und JSON als Medientyp erwartet.\\
+Die Erstellung eines Pull-Requests erfolgt mithilfe von Github REST-API\footnote{https://developer.github.com/v3}. Diese Aufgabe wird durch den UpdateClient durchgeführt und setzt sich aus folgenden Schritten zusammen:
 \begin{itemize}
-\item Ressourcen mit eindeutiger Identifikation
-\item Verknüpfung/Hypermedia
-\item Standardmethoden
-\item Unterschiedliche Repräsentationen
-\item Statuslose (stateless) Kommunikation
+\item[1.] \acs{SHA}-Wert vom Master-Branch holen und einen neuen Branch erstellen
+\item[2.] \acs{SHA}-Wert der betroffenen JSON-Datei holen und die JSON-Datei innerhalb von Branch aktualisieren 
+\item[3.] einen Pull-Request erstellen
 \end{itemize}
+Diese Schritte werden der UpdateClient unter Verwendung von OkHttp\footnote{https://square.github.io/okhttp} implementiert und dem UpdateService als Methoden zur Verfügung gestellt.\\
+%Im folgenden Beispiel wird der Ablauf der Aktualisierung von dargestellt 
+\textit{Beispiel beschreiben}
