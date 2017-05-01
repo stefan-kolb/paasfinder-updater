@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class UpdateClient {
+class UpdateClient {
 
     private final OkHttpClient client;
     private final String baseURL = "https://api.github.com/repos/update-bot/paas-profiles";
@@ -13,12 +13,12 @@ public class UpdateClient {
     private final MediaType mediaType = MediaType.parse("application/json");
     private static JsonParser jsonParser = new JsonParser();
 
-    public UpdateClient() {
+    UpdateClient() {
         super();
         this.client = new OkHttpClient();
     }
 
-    public void createBranch(String branchName) throws IOException {
+    void createBranch(String branchName) throws IOException {
         JsonObject requestJson = new JsonObject();
         requestJson.addProperty("ref", "refs/heads/" + branchName);
         requestJson.addProperty("sha", getMasterSHA());
@@ -35,7 +35,7 @@ public class UpdateClient {
         System.out.println("Create Branch " + response);
     }
 
-    public void updateFile(String vendorKey, String content, String message, String branchName) throws IOException {
+    void updateFile(String vendorKey, String content, String message, String branchName) throws IOException {
         final String encodedContent = Base64.getEncoder().encodeToString(content.getBytes(StandardCharsets.UTF_8));
 
         JsonObject requestJson = new JsonObject();
@@ -56,7 +56,7 @@ public class UpdateClient {
         System.out.println("Update File " + response);
     }
 
-    public void createPullRequest(String title, String message, String head) throws IOException {
+    void createPullRequest(String title, String message, String head) throws IOException {
         JsonObject bodyJson = new JsonObject();
         bodyJson.addProperty("title", title);
         bodyJson.addProperty("body", message);
@@ -76,7 +76,7 @@ public class UpdateClient {
         System.out.println("Create Pull Request " + response);
     }
 
-    public String getMasterSHA() throws IOException{
+    String getMasterSHA() throws IOException{
         Request request = new Request.Builder()
                 .url(baseURL + "/git/refs/heads/master")
                 .get()
@@ -90,7 +90,7 @@ public class UpdateClient {
         return masterSHA;
     }
 
-    public String getFileSHA(String fileName) throws IOException{
+    String getFileSHA(String fileName) throws IOException{
         Request request = new Request.Builder()
                 .url(baseURL + "/contents/profiles/" + fileName + ".json")
                 .get()
@@ -98,6 +98,7 @@ public class UpdateClient {
 
         Response response = client.newCall(request).execute();
         JsonObject jo = jsonParser.parse(response.body().string()).getAsJsonObject();
+        System.out.println(jo);
         String sha = jo.get("sha").getAsString();
 
         System.out.println("File SHA: " + sha);

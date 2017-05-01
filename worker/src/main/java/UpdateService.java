@@ -9,6 +9,7 @@ import static spark.Spark.*;
 public class UpdateService {
 
     private static final int ID_LENGTH = 10;
+    private static final UpdateClient client = new UpdateClient();
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static JsonParser jsonParser = new JsonParser();
 
@@ -51,7 +52,6 @@ public class UpdateService {
             final String vendorJson = gson.toJson(jo);
 
             try {
-                UpdateClient client = new UpdateClient();
                 client.createBranch(branchName);
                 client.updateFile(vendorKey, vendorJson, updateMessage, branchName);
                 client.createPullRequest(titlePR, messagePR, branchName);
