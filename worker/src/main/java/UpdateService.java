@@ -17,7 +17,7 @@ public class UpdateService {
         return RandomStringUtils.randomAlphanumeric(ID_LENGTH);
     }
 
-    public static void main( String[] args) {
+    public static void main(String[] args) {
         port(9090);
 
         before((request,response)-> {
@@ -51,6 +51,7 @@ public class UpdateService {
             jo.remove("vendorKey");
             final String vendorJson = gson.toJson(jo);
 
+            // TODO: fein granularer
             try {
                 client.createBranch(branchName);
                 client.updateFile(vendorKey, vendorJson, updateMessage, branchName);
