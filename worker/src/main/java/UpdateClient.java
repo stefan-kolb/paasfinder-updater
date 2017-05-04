@@ -7,23 +7,19 @@ import java.util.Base64;
 
 class UpdateClient {
 
-    private final OkHttpClient client;
-    private final String baseURL = "https://api.github.com/repos/update-bot/paas-profiles";
-    private final String credentials = Base64.getEncoder().encodeToString("update-bot:ds457hrsf3".getBytes(StandardCharsets.UTF_8));
+    private final String user = System.getenv("UPDATEBOT_LOGIN");
+    private final String password = System.getenv("UPDATEBOT_PASSWORD");
+    private final String credentials = Base64.getEncoder().encodeToString((user + ":" + password).getBytes(StandardCharsets.UTF_8));
+    
+    private final OkHttpClient client = new OkHttpClient();
+    private final String baseURL = "https://api.github.com/repos/" + user + "/paas-profiles";
+
     private final MediaType mediaType = MediaType.parse("application/json");
     private static JsonParser jsonParser = new JsonParser();
 
-    UpdateClient() {
-        super();
-        this.client = new OkHttpClient();
-    }
-
-    void createBranch(String branchName) throws IOException {
-        JsonObject requestJson = new JsonObject();
-        requestJson.addProperty("ref", "refs/heads/" + branchName);
-        requestJson.addProperty("sha", getMasterSHA());
-
-        RequestBody requestBody = RequestBody.create(mediaType, requestJson.toString());
+    void createBranch(String branch) throws IOException {
+        JsonObject json = Helper.buildBranchRequestJson(branch, getMasterSHA());
+        RequestBody requestBody = RequestBody.create(mediaType, json.toString());
         Request request = new Request.Builder()
                 .url(baseURL + "/git/refs")
                 .post(requestBody)

@@ -9,7 +9,7 @@ public class Main {
         final String branchName = "updating-" + "test-" + UpdateService.generateUniqueId();
 
         client.createBranch(branchName);
-        client.updateFile("gondor", "Neue Zeile", "update acquia_cloud", branchName);
+        client.updateFile("heroku", "Neue Zeile", "update acquia_cloud", branchName);
         client.createPullRequest("title", "message", branchName);
     }
 }
