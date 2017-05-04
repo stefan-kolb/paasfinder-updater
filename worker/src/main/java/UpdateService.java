@@ -1,7 +1,7 @@
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import Messages.Branch;
+import Messages.File;
+import Messages.PullRequest;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.apache.commons.lang.RandomStringUtils;
 import java.io.IOException;
 import static spark.Spark.*;
@@ -10,8 +10,6 @@ public class UpdateService {
 
     private static final int ID_LENGTH = 10;
     private static final UpdateClient client = new UpdateClient();
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static JsonParser jsonParser = new JsonParser();
 
     public static String generateUniqueId() {
         return RandomStringUtils.randomAlphanumeric(ID_LENGTH);
@@ -38,26 +36,28 @@ public class UpdateService {
         });
 
         post("/vendor", "application/json", (request, response) -> {
-            JsonObject jo = jsonParser.parse(request.body()).getAsJsonObject();
+            JsonObject jo = client.jsonParser.parse(request.body()).getAsJsonObject();
             final String vendorKey =  jo.get("vendorKey").getAsString();
             final String branchName = "updating-" + vendorKey + "-" + generateUniqueId();
-            final String updateMessage = "Updating " + vendorKey + ". " + jo.get("contributorMessage").getAsString();
-            final String titlePR = "PR " + vendorKey;
-            final String messagePR = "";
 
-            jo.remove("contributorName");
-            jo.remove("contributorEmail");
-            jo.remove("contributorMessage");
-            jo.remove("vendorKey");
-            final String vendorJson = gson.toJson(jo);
-
-            // TODO: fein granularer
             try {
-                client.createBranch(branchName);
-                client.updateFile(vendorKey, vendorJson, updateMessage, branchName);
-                client.createPullRequest(titlePR, messagePR, branchName);
+                final Branch branch = new Branch(branchName, client.getMasterSHA());
+                client.postBranch(branch);
             } catch (IOException e){
             }
+
+            try {
+                final File file = new File(jo, client.getFileSHA(vendorKey), branchName);
+                client.putFile(file, vendorKey);
+            } catch (IOException e){
+            }
+
+            try {
+                PullRequest pullRequest = new PullRequest(branchName);
+                client.postPullRequest(pullRequest);
+            } catch (IOException e){
+            }
+
             response.status(200);
             return "OK";
         });
