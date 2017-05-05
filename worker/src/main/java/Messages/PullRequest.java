@@ -1,6 +1,10 @@
 package Messages;
 
-public class PullRequest {
+import java.io.Serializable;
+
+public class PullRequest implements Serializable {
+
+    private static final transient long serialVersionUID = 1L;
 
     private final String title;
     private final String head;

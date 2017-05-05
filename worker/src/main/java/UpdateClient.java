@@ -32,10 +32,10 @@ class UpdateClient {
         System.out.println("Create Branch " + response);
     }
 
-    void putFile(File file, String vendorKey) throws IOException {
+    void putFile(File file) throws IOException {
         RequestBody requestBody = RequestBody.create(mediaType, gson.toJson(file));
         Request request = new Request.Builder()
-                .url(baseURL + "/contents/profiles/" + vendorKey + ".json")
+                .url(baseURL + "/contents/profiles/" + file.getVendorKey() + ".json")
                 .put(requestBody)
                 .addHeader("content-type", "application/json")
                 .addHeader("authorization", "Basic " + credentials)
