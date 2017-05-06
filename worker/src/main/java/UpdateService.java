@@ -29,8 +29,8 @@ public class UpdateService {
         });
 
         post("/vendor", "application/json", (request, response) -> {
-            JsonObject vendor = client.jsonParser.parse(request.body()).getAsJsonObject();
-            final String vendorKey = vendor.get("vendorKey").getAsString();
+            JsonObject data = client.jsonParser.parse(request.body()).getAsJsonObject();
+            final String vendorKey = data.get("vendorKey").getAsString();
 
             final Branch branch = new Branch(vendorKey, client.getMasterSHA());
             try {
@@ -41,7 +41,7 @@ public class UpdateService {
             }
 
             try {
-                final File file = new File(vendor, client.getFileSHA(vendorKey), branch.getBranchName());
+                final File file = new File(data, client.getFileSHA(vendorKey), branch.getBranchName());
                 client.putFile(file);
             } catch (IOException e) {
                 response.status(422);

@@ -21,15 +21,15 @@ public class File implements Serializable{
     private final String sha;
     private final String branch;
 
-    public File(JsonObject vendor, String fileSHA, String branch){
+    public File(JsonObject data, String fileSHA, String branch){
         super();
-        this.contributorName = getAndRemoveProperty(vendor, "contributorName");
-        this.contributorEmail = getAndRemoveProperty(vendor, "contributorEmail");
-        this.contributorMessage = getAndRemoveProperty(vendor, "contributorMessage");
-        this.vendorKey = getAndRemoveProperty(vendor, "vendorKey");
+        this.contributorName = getAndRemoveProperty(data, "contributorName");
+        this.contributorEmail = getAndRemoveProperty(data, "contributorEmail");
+        this.contributorMessage = getAndRemoveProperty(data, "contributorMessage");
+        this.vendorKey = getAndRemoveProperty(data, "vendorKey");
 
         this.message = "Updating " + vendorKey + ". " + contributorMessage;
-        this.content = prepareContent(vendor);
+        this.content = prepareContent(data);
         this.sha = fileSHA;
         this.branch = branch;
     }
