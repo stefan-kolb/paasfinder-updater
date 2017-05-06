@@ -8,16 +8,44 @@ Der vorliegende Abschnitt befasst sich mit dem Teil der Wissenserwerbskomponente
 \end{figure}
 Grundsätzlich besteht der Worker aus zwei Komponenten, nämlich \glqq{}\textit{UpdateService}\grqq{} und \glqq{}\textit{UpdateClient}\grqq{}. Die Aufgabe vom UpdateService besteht in der Bereitstellung einer Schnittstelle, die die Daten von außen aufnimmt und die Datenübermittlung an den UpdateClient delegiert. Auf der anderen Seite stellt der UpdateClient die Methoden zur Verfügung, die für die Datenübermittlung zuständig sind.\\
 Generell lässt sich der Ablauf gemäß der Abbildung \ref{fig:worker} folgendermaßen beschreiben. Als erstes werden die Daten von der Wissenserfassungsmethode an den UpdateService gesendet. Darauffolgend werden die Daten vom UpdateService verarbeitet und für den UpdateClient vorbereitet. Im nächsten Schritt wird die Aufgabe der Datenübermittlung an den UpdateClient delegiert. Der UpdateClient erstellt die Anfrage an die Wissensbasis und teilt die Antwort dem UpdateService mit. Anschließend verschickt der UpdateService die Rückmeldung an die Wissenserfassungsmethode.\\ 
-Technisch gesehen erfolgt der Nachrichtenaustausch zwischen Wissenserfassungsmethode, dem Worker und der Wissensbasis mithilfe von \ac{HTTP}\footnote{https://www.w3.org/Protocols}. Für die weitere Betrachtung wird die Wissensträgerschnittstelle aus dem Abschnitt \ref{subsec:Wissensträgerschnittstelle} als Beispiel für die Wissenserfassungsmethode genommen. Die Wissensbasis stellt das Git-Repository von \textit{PaaSfinder} dar, das von einem Bot-Account auf Github \glqq{}geforkt\grqq{} wird\footnote{https://github.com/update-bot/paas-profiles}. In anderen Worten wird das ursprüngliche Git-Repository von einem Account kopiert, der den schreibenden Zugriff auf die Wissensbasis hat.
-%Als erstes werden die Daten als JSON an den UpdateService geschickt (Request). Im nächsten Schritt wird das JSON vom UpdateService verarbeitet (\glqq{}geparsed\grqq{}{}) und die Pull-Request-Erstellung an den UpdateClient delegiert. An dieser Stelle wird davon ausgegangen, dass der Pull-Request erfolgreich erstellt wurde. Der genaue Ablauf der Pull-Request-Erstellung wird im späteren Verlauf detaillierter angesprochen. Nachdem der Pull-Request erstellt wurde, schickt der UpdateService eine Rückmeldung (Response) an die Wissenserfassungsmethode.\\
-%Technischbezogen erfolgt auf Basis von \ac{HTTP}\footnote{https://www.w3.org/Protocols} unter Verwendung von \ac{REST}-Architekturstil, der ursprünglich aus der Dissertation von Fielding \cite{fielding2000} stammt. Das zentrale Konzept vom Rest besteht in Ressourcen, die im globalen Raum mithilfe von \ac{URI}\footnote{https://tools.ietf.org/html/rfc3986} eindeutig identifiziert werden \cite[S.11,35]{tilkov2015}. Ein wichtiges Merkmal von REST ist die lose Kopplung zwischen dem Client und dem Server, auch als statuslose Kommunikation bezeichnet \cite[S.18]{tilkov2015}. Der Server (Worker) interessiert sich für den Client (Wissenserfassungsmethode) nur für den Zeitpunkt der Request-Verarbeitung. Danach ist der Zustand des Clients für den Server nicht mehr relevant.\\
-%Der UpdateService wird auf Basis Spark\footnote{http://sparkjava.com} umgesetzt. Spark stellt ein Micro-Framework dar, das eine kompakte, Java-basierte Implementierung von REST-API ermöglicht. Um die Daten von außen empfangen zu können, stellt der UpdateService die \glqq{}/vendor\grqq{} Route zur Verfügung, die vom Typ POST\footnote{https://tools.ietf.org/html/rfc7231\#section-4.3.3} ist und JSON als Medientyp erwartet.\\
-%Die Erstellung eines Pull-Requests erfolgt mithilfe von Github REST-API\footnote{https://developer.github.com/v3}. Diese Aufgabe wird durch den UpdateClient durchgeführt und setzt sich aus folgenden Schritten zusammen:
-%\begin{itemize}
-%\item[1.] \acs{SHA}-Wert vom Master-Branch holen und einen neuen Branch erstellen
-%\item[2.] \acs{SHA}-Wert der betroffenen JSON-Datei holen und die JSON-Datei innerhalb von Branch aktualisieren 
-%\item[3.] einen Pull-Request erstellen
-%\end{itemize}
-%Diese Schritte werden der UpdateClient unter Verwendung von OkHttp\footnote{https://square.github.io/okhttp} implementiert und dem UpdateService als Methoden zur Verfügung gestellt.\\
-%Im folgenden Beispiel wird der Ablauf der Aktualisierung von dargestellt 
-%\textit{Beispiel beschreiben}
+Im Weiteren wird die Wissensträgerschnittstelle aus dem Abschnitt \ref{subsec:Wissensträgerschnittstelle} als Wissenserfassungsmethode betrachtet. Die Wissensbasis stellt das Git-Repository von \textit{PaaSfinder} dar, das von einem Bot-Account auf Github \glqq{}geforkt\grqq{} wird\footnote{https://github.com/update-bot/paas-profiles}. In anderen Worten wird das ursprüngliche Git-Repository von \textit{PaaSfinder} kopiert, sodass der Bot-Account einen schreibenden Zugriff auf die Wissensbasis hat.\\
+Technisch gesehen erfolgt der Nachrichtenaustausch zwischen Wissenserfassungsmethode, dem Worker und der Wissensbasis auf Basis von \ac{HTTP}\footnote{https://www.w3.org/Protocols} und \ac{REST} Architekturstil, der ursprünglich aus der Dissertation von Fielding \cite{fielding2000} stammt. Das zentrale Konzept von REST basiert auf Ressourcen, die im globalen Raum mithilfe von \ac{URI}\footnote{https://tools.ietf.org/html/rfc3986} eindeutig identifiziert werden \cite[S.11,35]{tilkov2015}. Zusammenfassend wird ein PaaS-Profil als Ressource an REST API per HTTP Protokoll verschickt.\\
+Wie bereits angedeutet wurde, implementiert der UpdateService die REST Schnittstelle, die die Daten von außen entgegennimmt. In diesem Fall wurde das Spark\footnote{http://sparkjava.com} Framework als Technologie zur Umsetzung der Schnittstelle verwendet. Die Schnittstelle stellt die Route \glqq{}/vendor\grqq{} dar, die vom Typ POST\footnote{https://tools.ietf.org/html/rfc7231\#section-4.3.3} ist und die Daten in JSON Format akzeptiert. Für das Parsen und Erstellen der JSON-Objekte wurde die Gson\footnote{https://sites.google.com/site/gson/Home} Bibliothek verwendet. In Bezug auf die Notation wird die Route in Listing \ref{service} abgebildet.
+\begin{lstlisting}[basicstyle=\ttfamily, label=service,
+					captionpos=b, caption={\glqq{}/vendor\grqq{} Route}]
+post("/vendor", "application/json", (request, response) -> {
+   ...
+});
+\end{lstlisting}
+Der Ablauf der Pull-Request-Erstellung besteht aus folgenden Schritten:
+\begin{enumerate}
+\item Branch erstellen
+\item Das Profil im erstellten Branch aktualisieren
+\item Pull-Request erstellen
+\end{enumerate}
+Die oben beschriebenen Schritte werden als Anfragen an die Github API\footnote{https://developer.github.com/v3} umgesetzt. Für das Bilden der Anfragen wird intern der HTTP Client von OkHttp\footnote{https://square.github.io/okhttp} verwendet. Die Schnittstelle vom UpdateClient erwartet als Eingabeparameter die Nachricht, die an das Repository gesendet werden soll. Bei einer Nachricht handelt es sich entweder um einen Branch, eine File oder einen PullRequest. Zusammenfassend werden die Anfragen in Listing \ref{client} skizziert:
+\begin{lstlisting}[basicstyle=\ttfamily, label=client,
+					captionpos=b, caption={Schnittstelle vom UpdateClient}]
+class UpdateClient {
+    void postBranch(Branch branch) {...}
+
+    void putFile(File file) {...}
+
+    void postPullRequest(PullRequest pullRequest) {...}
+}
+\end{lstlisting}
+Im Abschnitt \ref{subsec:Wissensträgerschnittstelle} wurde das Profil \glqq{}Heroku\grqq{} aktualisiert. Sobald der Benutzer auf \glqq{}Submit\grqq{} klickt, werden die Daten als JSON in der POST-Anfrage an den Worker gesendet, nämlich an die Schnittstelle vom UpdateService. Im besten Fall werden die Nachrichten (Branch, File und PullRequest) erfolgreich erstellt und vom UpdateClient an das Git-Repository übermittelt (siehe Abbildung \ref{fig:pull-requests}).
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/pull-requests.png}
+	\caption{Github Pull-Requests Ansicht}
+	\label{fig:pull-requests}
+\end{figure}
+In der Detailansicht werden ebenso die Änderungen explizit gezeigt. Dabei werden die gelöschten Zeilen als rot markiert und die dazugekommenen als grün. Im Beisiel von \glqq{}Heroku\grqq{} wird das in Abbildung \ref{fig:pull-request-detail} verdeutlicht.
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/pull-request-detail.png}
+	\caption{Heroku Pull Request}
+	\label{fig:pull-request-detail}
+\end{figure}
+Ausgehend vom erfolgreichen Übermitteln der Daten an das Repository schickt der UpdateService die Antwort (Response) mit dem Statuscode 200 (\glqq{}OK\grqq{}) an die Wissenserfassungsmethode zurück. In Bezug auf die Fehlerbehandlung wird ein logischer Schritt (Branch erstellen, File aktualisieren und PullRequest erstellen) in einem eigenen try-catch-Block ausgeführt, sodass der Client eine aussagekräftige Fehlermeldung bekommt.
