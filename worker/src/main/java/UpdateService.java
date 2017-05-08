@@ -1,5 +1,7 @@
 import Messages.*;
 import com.google.gson.JsonObject;
+import org.apache.commons.lang.RandomStringUtils;
+
 import java.io.IOException;
 
 import static spark.Spark.*;
@@ -7,6 +9,7 @@ import static spark.Spark.*;
 public class UpdateService {
 
     private static final UpdateClient client = new UpdateClient();
+    private static final int BRANCH_ID_LENGTH = 10;
 
     public static void main(String[] args) {
         port(9090);
@@ -31,25 +34,29 @@ public class UpdateService {
         post("/vendor", "application/json", (request, response) -> {
             JsonObject data = client.jsonParser.parse(request.body()).getAsJsonObject();
             final String vendorKey = data.get("vendorKey").getAsString();
+            final String branchName = "updating-" + vendorKey + "-" + RandomStringUtils.randomAlphanumeric(BRANCH_ID_LENGTH);
 
-            final Branch branch = new Branch(vendorKey, client.getMasterSHA());
+            // create branch
             try {
+                final Branch branch = new Branch(branchName, client.getMasterSHA());
                 client.postBranch(branch);
             } catch (IOException e) {
                 response.status(422);
                 return "Error while posting branch";
             }
 
+            // update file
             try {
-                final File file = new File(data, client.getFileSHA(vendorKey), branch.getBranchName());
+                final File file = new File(data, client.getFileSHA(vendorKey), branchName);
                 client.putFile(file);
             } catch (IOException e) {
                 response.status(422);
                 return "Error while updating vendor";
             }
 
+            // create pull request
             try {
-                final PullRequest pullRequest = new PullRequest(branch.getBranchName());
+                final PullRequest pullRequest = new PullRequest(branchName);
                 client.postPullRequest(pullRequest);
             } catch (IOException e) {
                 response.status(422);

@@ -1,0 +1,15 @@
+\subsection{Abgrenzung der Informationsquellen}\label{subsec:Informationsquellen}
+Allgemein beschränkt sich die Datenerfassung wie im Kapitel \ref{sec:Umsetzung} auf die Aktualisierung der bestehenden Einträgen der Wissensbasis von \textit{PaaSfinder}. Dabei lassen sich folgende Informationsquellen identifizieren: 
+\begin{itemize}
+\item Webseiten von PaaS-Anbietern
+\item Web-Feeds (z.B. News-Feeds)
+\item Soziale Netzwerke 
+\end{itemize}
+Die Analyse der Webseiten wäre die naheliegende Vorgehensweise, neue Daten über einen PaaS-Anbieter zu erschließen. Die Wissensbasis von \textit{PaaSfinder} beinhaltet bereits die Homepage-URLs, die als Ausgangspunkt (Seed) bei einem Web-Crawler benutzt werden können. Auch die Fachliteratur bietet zahlreiche Informationen bezüglich der Umsetzung eines Web-Crawlers (z.B. \cite[S.35-50]{croft2010}). Allerdings macht das Webseiten-Crawling aus folgenden Gründen wenig Sinn:
+\begin{itemize}
+\item \textit{Webseitenstruktur}. Unter den PaaS-Anbietern gibt es keine einheitliche Sicht, wie die Informationen auf der Webseiten strukturiert werden können.
+\item \textit{Datenverarbeitung (Parsen)}. Bei der kleinsten Änderung der Seitenstruktur kann die gesamte Anfrage (meist HTML-Tag-Selektoren) zusammengebrochen werden.
+\item \textit{Neuheit der Information}. Im Kontext von bestehenden Daten ist es höchstwahrscheinlich, dass die Daten bereits erfasst wurden. 
+\end{itemize}
+In Bezug auf Parsen der Webseiten wurde im Abschnitt \ref{subsec:webdaten} das Konzept von Wrapper angesprochen. Allerdings ist an der Stelle die Verwendung der REST-API einfacher zu nutzen und zu warten. Das Argument mit der Neuheit der Information kann umstritten werden, wenn es um die Erfassung eines noch nicht in der Wissensbasis vorhandenen PaaS-Anbieters geht. Aber selbst in diesem Fall stellt sich die Frage der Glaubwürdigkeit eines PaaS-Profils, das auf maschinelle Weise erstellt wurde.\\
+Eine weitere Kategorie der Informationsquelle stellen Web-Feeds und soziale Netzwerke dar. Aus Sicht der Datenaktualität sind Web-Feeds und soziale Netzwerke hervorragend geeignet. Die Daten werden in kleinen zeitlich geordneten Informationseinheiten dargestellt. Außerdem bieten einige PaaS-Anbieter einen Service, der sich auf ein bestimmtes Thema spezialisiert. Aufgrund dessen wird im Weiteren der Bereich von Web-Feeds und sozialen Netzwerken genauer betrachtet.

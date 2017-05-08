@@ -13,7 +13,7 @@ Der Ablauf in Abbildung \ref{fig:update-allgemein} lässt sich in zwei Schritte a
 \item \textit{Überprüfung} der Daten (Review Page)
 \item \textit{Absenden} der Daten (Sumbit)
 \end{enumerate}
-Der gesamte Prozess lässt sich in Abbildung \ref{fig:activity} als ein Aktivitätsdiagramm darstellen. Die verwendete Notation entspricht dem UML-Standard 2.5 \cite[S.398]{uml2}. Es werden Knoten (Rechteck) für Aktivitäten und Kanten (Pfeile) für Verbindungen verwendet. Bei den Verbindungen werden Kontrollfluss- und Datenflussverbindungen unterschieden. Im Fall einer Datenflussverbindung gibt es ein Ein- und der Ausgabe-Pin (kleiner Quadrat) am Anfang oder am Ende des Pfeils. Im vorliegenden Fall werden noch Fallunterscheidungen verwendet, die durch eine Raute gekennzeichnet sind.
+Der gesamte Prozess lässt sich in Abbildung \ref{fig:activity} als ein Aktivitätsdiagramm darstellen. Die verwendete Notation entspricht dem UML-Standard 2.5 \footnote{http://www.omg.org/spec/UML/2.5/PDF}. Es werden Knoten (Rechteck) für Aktivitäten und Kanten (Pfeile) für Verbindungen verwendet. Bei den Verbindungen werden Kontrollfluss- und Datenflussverbindungen unterschieden. Im Fall einer Datenflussverbindung gibt es ein Ein- und der Ausgabe-Pin (kleiner Quadrat) am Anfang oder am Ende des Pfeils. Im vorliegenden Fall werden noch Fallunterscheidungen verwendet, die durch eine Raute gekennzeichnet sind.
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=1.0\textwidth]{images/activity.png}
@@ -24,7 +24,7 @@ Ausgehend von einer Vendor Page wird der Ablauf mit \glqq{}Add an Update\grqq{} 
 Die Update Page umfasst zwei Aspekte. Erstens sollen die Profildaten für den Wissensträger geeignet dargestellt werden Zweitens soll die Eingabe der Daten ermöglicht werden. Außerdem sollen die Änderungen am Profil dynamisch zwischengespeichert werden. Das ist eine herausfordernde Aufgabe, da ein Profil, abgesehen von allgemeinen Eigenschaften (z.B. \glqq{}name\grqq{}), aus komplexen und teils verschachtelten Datentypen besteht. In Abbildung \ref{fig:profil} wird das am Beispiel von \glqq{}runtimes\grqq{} (Laufzeitumgehungen) gezeigt. Farbe gelb steht dabei für ein Objekt, grau für eine Liste und weiß für ein String (Zeichenkette). Hier umfasst ein Profil (\glqq{}vendor\grqq{}) eine Liste von \glqq{}runtimes\grqq{}. \glqq{}Runtime\grqq{} besteht wiederum aus \glqq{}language\grqq{} und \glqq{}versions\grqq{}.
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=1.0\textwidth]{images/vendor.png}
+	\includegraphics[width=0.90\textwidth]{images/vendor.png}
 	\caption{Komplexe Datentypen im PaaS-Profil}
 	\label{fig:profil}
 \end{figure}
