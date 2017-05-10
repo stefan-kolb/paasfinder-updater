@@ -1,4 +1,44 @@
-\subsection{Web-Feeds und soziale Netzwerke}\label{subsec:feeds}
+\subsection{Vergleich der Informationsquellen}\label{subsec:vergleich}
+Im Zuge des Vergleich wurden 30 Vendors (n=30) nach Vorhandensein der Informationsquellen ausgewertet. Als Informationsquellen wurden RSS-Feeds, Twitter und Newsletter ausgewählt. Ein weiteres Kriterium in der Auswertung ist das Datum des letzten Updates. Das Datum wird nach dem neuesten Eintrag zwischen den vorliegenden Informationsquellen zum Zeitpunkt 10.05.2017 bestimmt. Die Zusammenfassung der Ergebnisse wird in Tabelle \ref{tab:vergleich} dargestellt: 
+\begin{table}[H] 
+\centering 
+\begin{tabular}{ |l|c|c|c|c| }
+\hline
+\textbf{Vendor} & \textbf{RSS} & \textbf{Twitter} & \textbf{Newsletter} & \textbf{Last Update} \\ \hline
+\hline
+Anynines & nein & ja & ja & 18.08.15 \\ \hline
+App42 PaaS & nein & ja & nein & 10.05.17 \\ \hline
+AppFog & nein & ja & ja & 10.05.17 \\ \hline
+AppHarbor & nein & ja & nein & 22.05.16 \\ \hline
+BitNami & nein & ja & nein & 10.05.17 \\ \hline
+Brightbox & nein & ja & nein & 25.04.17 \\ \hline
+Clever Cloud & nein & ja & nein & 26.04.17 \\ \hline
+Cloudnode & nein & ja & nein & 23.04.17 \\ \hline
+CloudUnit & nein & ja & nein & 10.05.17 \\ \hline
+Cloudways & nein & ja & ja & 10.05.17 \\ \hline
+EngineYard & nein & ja & nein & 29.04.17 \\ \hline
+Flynn & nein & ja & ja & 17.10.16 \\ \hline 
+fortrabbit & nein & ja & nein & 04.05.17 \\ \hline
+Getup Cloud & nein & ja & nein & 09.05.17 \\ \hline
+Google App Engine & nein & ja & ja & 10.05.17 \\ \hline
+Heroku & ja & ja & ja & 10.05.17 \\ \hline
+Jelastic & nein & ja & ja & 10.05.17 \\ \hline
+Mendix & nein & ja & nein & 28.04.17 \\ \hline
+mOSAIC & ja & nein & nein & 05.04.13 \\ \hline
+OpenShift Container Platform & nein & ja & nein & 22.04.17 \\ \hline
+Oracle Cloud PaaS & ja & ja & nein & 01.12.16 \\ \hline
+OrangeScape & nein & ja & nein & 05.04.17 \\ \hline
+Pagoda Box & nein & ja & nein & 06.05.16 \\ \hline
+Platformer.com & ja & ja & nein & 01.04.17 \\ \hline
+SAP HANA Cloud Platform & nein & ja & nein & 02.05.17 \\ \hline
+Software AG Live & nein & ja & nein & 10.05.17 \\ \hline
+Tsuru & nein & ja & ja & 12.04.17 \\ \hline
+Voxoz & nein & ja & nein & 08.01.17 \\ \hline
+WSO2 App Cloud & nein & ja & ja & 10.05.17 \\ \hline   
+\end{tabular}
+\caption {Vergleich der Informationsquellen (RSS, Twitter und Newsletter)} 
+\label{tab:vergleich}
+\end{table} 
 In Bezug auf Web-Feeds spricht man von \glqq{}Content Syndication\grqq{}, was im deutschsprachigen Raum als \glqq{}Syndikation\grqq{} bezeichnet wird. Unter Syndikation wird Bereitstellung von Daten für Übertragung, Aggregierung und Online-Publikation\footnote{http://web.resource.org/rss/1.0/} verstanden. Ein verbreitetes Format für Web-Feeds ist RSS. Ursprünglich fand RSS besondere Verbreitung bei Webbloggern \cite[S.103]{tilkov2015}. Aufgrund des einfachen Konzeptes ist RSS in kürzer Zeit zum meistgenutzten Format zur Änderungsbenachrichtigung geworden.\\
 Je nach Quelle wird die Abkürzung RSS unterschiedlich interpretiert. In der ersten Version (RSS 1.0) stand die Abkürzung für \glqq{}RDF Site Summary\grqq{}. In der Version 2.0 wird jedoch \glqq{}Really Simple Syndikation\grqq{}\footnote{https://validator.w3.org/feed/docs/rss2.html\label{rss2.0}} erwähnt. Ein RSS 2.0 Dokument wird in XML-Format definiert und als Wurzel den Rss-Tag enthält, der den Namensraum der Elemente und die Version von RSS bestimmt. Im Rss-Tag wird der Channel-Tag definiert, der folgende Elemente enthalten muss (siehe \ref{rss2.0}):
 \begin{itemize}

@@ -30,43 +30,37 @@ Als erstes werden die Daten geparsed. Danach wird ein neuer Branch erzeugt und a
 Wenn man den oben beschriebenen Ablauf auf das Beispiel mit \glqq{}Heroku\grqq{} aus dem Abschnitt \ref{subsec:Wissensträgerschnittstelle} überträgt, ergibt sich Folgendes. Sobald der Benutzer auf \glqq{}Submit\grqq{} klickt, werden die Daten als JSON in der POST-Anfrage an den Worker gesendet, nämlich an die Schnittstelle vom UpdateService. Das erfolgreiche Branch bzw. Pull-Request-Erstellen wird durch den Code 201 (\glqq{}Created\grqq{}) im Response der Github-API mitgeteilt (siehe Listing \ref{branch} und \ref{pullrequest}). Beim erfolgreichen Updaten der Datei wird der Statuscode 200 (\glqq{}OK\grqq{}) zurückgeliefert (siehe Listing \ref{file}).
 \begin{lstlisting}[basicstyle=\ttfamily, breaklines=true, label=branch,
 					captionpos=b, caption={Response beim erfolgreichen Branch-Erstellen}]
-{
   protocol=http/1.1,
   code=201, 
   message=Created,
   url=https://api.github.com/repos/update-bot/paas-profiles/git/refs
-}
 \end{lstlisting}
 
 \begin{lstlisting}[basicstyle=\ttfamily, breaklines=true, label=file,
 					captionpos=b, caption={Response beim erfolgreichen File-Update}]
-{
   protocol=http/1.1,
   code=200, 
   message=OK, 
   url=https://api.github.com/repos/update-bot/paas-profiles/contents/profiles/heroku.json
-}
 \end{lstlisting}
 
 \begin{lstlisting}[basicstyle=\ttfamily, breaklines=true, label=pullrequest,
 					captionpos=b, caption={Response beim erfolgreichen Pull-Request-Erstellen}]
-{
   protocol=http/1.1,
   code=201,
   message=Created,
   url=https://api.github.com/repos/update-bot/paas-profiles/pulls
-}
 \end{lstlisting}
 Nach der erfolgreichen Pull-Request-Erstellung kann der Update von Heroku auf Github betrachtet werden (siehe Abbildung \ref{fig:pull-requests}). In der Detailansicht werden ebenso die Änderungen explizit gezeigt. Dabei werden die gelöschten Zeilen als rot markiert und die hinzugefügten als grün (siehe Abbildung \ref{fig:pull-request-detail}).
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.95\textwidth]{images/pull-requests.png}
+	\includegraphics[width=1.0\textwidth]{images/pull-requests.png}
 	\caption{Pull-Requests Ansicht auf Github}
 	\label{fig:pull-requests}
 \end{figure}
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.95\textwidth]{images/pull-request-detail.png}
+	\includegraphics[width=1.0\textwidth]{images/pull-request-detail.png}
 	\caption{Heroku Pull Request}
 	\label{fig:pull-request-detail}
 \end{figure}
