@@ -1,5 +1,5 @@
 \subsection{Vergleich der Informationsquellen}\label{subsec:vergleich}
-Im Zuge des Vergleich wurde die Analyse von 30 Vendors durchgeführt, indem die Unterstützung von RSS-Feeds, Twitter, Newsletter und Blogs geprüft wurde. Als zusätzliche Information wurde das Datum des letzten Updates miteinbezogen, das nach dem neuesten Eintrag aus den betrachteten Datenquellen zum Zeitpunkt vom 10. Mai 2017 bestimmt wird. Die Ergebnisse werden in Tabelle \ref{tab:vergleich} zusammengefasst.
+Im Zuge des Vergleichs wurden 30 Vendors nach Unterstützung von RSS-Feeds, Twitter, Newsletter und Blogs analysiert. Zusätzlich wurde das Datum des letzten Updates in Format TT.MM.JJ erfasst, das nach dem neuesten Eintrag aus den betrachteten Datenquellen zum Zeitpunkt vom 10. Mai 2017 bestimmt wird. Die Ergebnisse werden in Tabelle \ref{tab:vergleich} zusammengefasst.
 \begin{table}[H] 
 \centering 
 \begin{tabular}{ |l|c|c|c|c|c| }
@@ -7,7 +7,7 @@ Im Zuge des Vergleich wurde die Analyse von 30 Vendors durchgeführt, indem die U
 \textbf{Vendor} & \textbf{RSS} & \textbf{Twitter} & \textbf{Newsletter} & \textbf{Blogs} & \textbf{Last Update} \\ \hline
 \hline
 Anynines & nein & ja & ja & nein & 18.08.15 \\ \hline
-App42 PaaS & nein & ja & nein & ja & 10.05.17 \\ \hline
+App42 PaaS & nein & ja & ja & ja & 10.05.17 \\ \hline
 AppFog & nein & ja & ja & ja & 10.05.17 \\ \hline
 AppHarbor & nein & ja & nein & ja & 22.05.16 \\ \hline
 BitNami & nein & ja & ja & ja & 10.05.17 \\ \hline
@@ -39,3 +39,12 @@ WSO2 App Cloud & nein & ja & ja & ja & 10.05.17 \\ \hline
 \caption{Vergleich von RSS, Twitter, Newsletter und Blogs} 
 \label{tab:vergleich}
 \end{table} 
+In der Tabelle \ref{tab:vergleich} sieht man deutlich, dass Twitter die höchste Verbreitung unter den betrachteten Quellen hat. Nur in einem Fall wird es nicht unterstützt, und zwar bei mOSAIC\footnote{http://www.mosaic-cloud.eu/}. Allerdings lässt sich nach dem Datum des letzten Updates (05.04.13) sagen, dass es bei mOSAIC generell nicht viel passiert. Ansonsten gilt Twitter als Favorit in Bezug auf Verbreitung, Datenformat (Kurznachrichten) und Datenzugriff (API).\\
+Bei RSS sieht es leider schlecht aus. Während es bei bekannten Anbietern wie Heroku hervorragend unterstützt wird (siehe Abbildung \ref{rss-heroku}), bieten kleinere Vendors diesen Service nicht an. Ein möglicher Grund dafür ist die Einfachheit von Twitter, mit dem man das Gleiche erreicht, ohne den RSS Aufwand zu haben. \\
+Erstaunlicherweise sind Blogs sehr verbreitet. Meist sind Blogs für das Publikum mit dem technischen Hintergrund gedacht. Aber wie bereits in Abschnitt \ref{subsec:Abgrenzung der Datenquellen} erwähnt wurde, werden dabei die Updates in Form eines Artikels publiziert. Bezüglich der Newsletters gibt es kein klares Bild. Etwa ein Drittel der betrachteten Vendors sehen diese Option vor. Dabei muss beachtet werden, dass Newsletter fallweise zu einem Blog angeboten wird.
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/heroku-feeds.png}
+	\caption{RSS Angebot bei Heroku}
+	\label{rss-heroku}
+\end{figure} 

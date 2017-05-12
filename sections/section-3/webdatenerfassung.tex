@@ -1,5 +1,5 @@
 \subsection{Datenerfassung aus dem Web}\label{subsec:webdaten}
-Der Prozess der Webdatenerfassung umfasst die Datenextraktion aus den unstrukturierten bwz. semi-strukturierten Webdokumenten (z.B. eine Webseite oder eine E-Mail) und die Transformation der erfassten Daten in eine strukturierte Form für spätere Verwendung \cite[S.301]{ferrara2014}. Im Folgenden werden die allgemeinen Probleme bei der Erfassung der Webdaten angesprochen. Darauffolgend werden generelle Paradigmen der Datenerfassung erläutert, nämlich Baumparadigma, Web Wrapper und hybrides System.\\
+Der Prozess der Webdatenerfassung umfasst die Datenextraktion aus den unstrukturierten bwz. semi-strukturierten Webdokumenten (z.B. eine Webseite oder eine E-Mail) und die Transformation der erfassten Daten in eine strukturierte Form für spätere Verwendung \cite[S.301]{ferrara2014}. Im Folgenden werden die allgemeinen Probleme bei der Erfassung der Webdaten angesprochen. Darauffolgend werden generelle Paradigmen der Datenerfassung erläutert, nämlich Baumparadigma, Web-Wrapper und hybrides System.\\
 Bei der Erfassung der Webdaten gibt es mehrere Faktoren, die berücksichtigt werden sollen. Ferrara et al identifizieren folgende Herausforderungen \cite[S.302]{ferrara2014}:
 \begin{itemize}
 \item \textit{Automatisierungsgrad}: Die Erfassung der Webdaten soll oft von einem menschlichen Experten überwacht werden, um die Genauigkeit der Daten zu gewährleisten.
@@ -17,13 +17,13 @@ Da HTML ein Dialekt von \acf{XML} ist, kann \acf{XPath}\footnote{https://www.w3.
 	\label{xpath}
 \end{figure} 
 Der Hauptnachteil von XPath besteht darin, dass XPath-Ausdrücke strikt an der DOM-Struktur gebunden sind. Wenn eine Änderung im DOM stattfindet, funktioniert der von der Änderung betroffene Ausdruck nicht mehr. Aus diesem Grund müssen die XPath-Ausdrücke nach jeder Veränderung der HTML-Webseite manuell angepasst werden. In Bezug auf dieses Problem wurde im letzten Release von XPath\footnote{https://www.w3.org/TR/xpath20} relative XPath-Ausdrücke eingeführt \cite[S.304]{ferrara2014}.\\
-Ein weiterer Ansatz, die Webdaten zu erfassen, stellt ein Web Wrapper dar. Das Web Wrapper umfasst in der Regel einen oder mehreren Algorithmen, die zur Datenerfassung aus den Webdokumenten eingesetzt werden. Anschließend werden die erfassten Daten in eine strukturierte Form transformiert und für weitere Nutzung gespeichert. Ein Web Wrapper umfasst folgende Schritte \cite[S.305]{ferrara2014}:
+Ein weiterer Ansatz, die Webdaten zu erfassen, stellt ein Web-Wrapper dar. Das Web-Wrapper umfasst in der Regel einen oder mehreren Algorithmen, die zur Datenerfassung aus den Webdokumenten eingesetzt werden. Anschließend werden die erfassten Daten in eine strukturierte Form transformiert und für weitere Nutzung gespeichert. Ein Web-Wrapper umfasst folgende Schritte \cite[S.305]{ferrara2014}:
 \begin{itemize}
 \item[1.]\textit{Generierung}: Definition des Wrappers.
 \item[2.]\textit{Ausführung}: Datenerfassung mithilfe des Wrappers.
 \item[3.]\textit{Wartung}: Anpassung des Wrappers bei der Änderung der DOM-Struktur.
 \end{itemize}
-Nach Ferrara et al kann ein Web Wrapper mittels folgender Ansätze generiert und ausgeführt werden \cite[S.306]{ferrara2014}:
+Nach Ferrara et al kann ein Web-Wrapper mittels folgender Ansätze generiert und ausgeführt werden \cite[S.306]{ferrara2014}:
 \begin{itemize}
 \item \textit{Reguläre Ausdrücke}: Daten werden gemäß Regeln (expressions) gewonnen. Im Rahmen dieser Arbeit wird es im Weiteren aus reguläre Ausdrücke beschränkt.
 \item \textit{Logikbasierter Ansatz}: Zur Datenerfassung wird eine Wrapper Programmiersprache eingesetzt (wrapper programming language).
@@ -31,8 +31,8 @@ Nach Ferrara et al kann ein Web Wrapper mittels folgender Ansätze generiert und 
 \item \textit{Maschinelles Lernen}: Daten werden mithilfe eines Lernalgorithmus und einer Trainingsmenge erfasst.
 \end{itemize} 
 Reguläre Ausdrücke ermöglichen die Erkennung von Patterns in der unstrukturierten bzw. semi-strukturierten Dokumenten unter Verwendung der Regeln, die z.B. in Form von Wortgrenzen oder HTML-Tags definiert werden. Der Vorteil der regulären Ausdrücken besteht in der Möglichkeit, beliebiges Element auf einer Webseite anzusprechen. Außerdem bieten einige Implementierungen ein grafisches Benutzerinterface, sodass der Benutzer die Elemente auf einfache Weise auswählen kann. Die Regeln werden dann automatisch generiert. Eine mögliche Umsetzung des Wrappers wird in \cite{sahuguet1999} mit W4F vorgestellt. Das Tool verfügt über eine Hilfsmethode, die den Benutzer bei der Auswahl der Elementen unterstützt. Auf Basis der ausgewählten Elementen werden die Regeln erstellt. Allerdings sind die Regeln in Bezug auf DOM-Änderungen nicht flexibel und können sehr schnell verletzt werden \cite[S.306]{ferrara2014}.\\
-In der dritten Phase geht es um die Anpassung des Web Wrappers im Hinblick auf die Veränderungen der DOM-Struktur. Die Anpassung erfolgt entweder manuell oder in gewisser Weise automatisiert. Ferrara et al betonen, dass der Automatisierungsgrad der Wartung besonders kritisch ist \cite[S.308]{ferrara2014}. Bei einer kleinen Dokumentenanzahl ist die manuelle Anpassung noch akzeptabel. Allerdings ist die manuelle Wartung bei einer großen Menge der Dokumente nicht mehr denkbar.\\
-Ein Beispiel der automatisierter Wrapper-Wartung wird in \cite{meng2003} mit dem System namens SG-WRAM (Schema-Guided Wrapper Maintenance for Web-Data Extraction) vorgestellt. Die Architektur vom SG-WRAM wird in der Abbildung \ref{wram} dargestellt.
+In der dritten Phase geht es um die Anpassung des Web-Wrappers im Hinblick auf die Veränderungen der DOM-Struktur. Die Anpassung erfolgt entweder manuell oder in gewisser Weise automatisiert. Ferrara et al betonen, dass der Automatisierungsgrad der Wartung besonders kritisch ist \cite[S.308]{ferrara2014}. Bei einer kleinen Dokumentenanzahl ist die manuelle Anpassung noch akzeptabel. Allerdings ist die manuelle Wartung bei einer großen Menge der Dokumente nicht mehr denkbar.\\
+Ein Beispiel der automatisierter Wrapper-Wartung wird in \cite{meng2003} mit dem System namens SG-WRAM (Schema-Guided Wrapper Maintenance for Web-Data Extraction) vorgestellt. Die Architektur vom SG-WRAM wird in Abbildung \ref{wram} dargestellt.
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=0.95\textwidth]{images/wram.png}
