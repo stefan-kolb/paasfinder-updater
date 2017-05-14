@@ -1,11 +1,11 @@
 \subsection{Wissensbasis}\label{subsec:Wissensbasis}
-Neben der Inferenzmaschine stellt die Wissensbasis den zentralen Teil eines Expertensystems, der die Daten des gesamten Systems beinhaltet \cite[S.754]{wachsmuth1993}. Im Folgenden werden der allgemeine Prozess der Wissensbasisentwicklung, der Inhalt der Wissensbasis und die Möglichkeiten der Wissensrepräsentation thematisiert. Gheorghe Tecuci beschreibt folgende Phasen bei der Entwicklung der Wissensbasis \cite[S.1444]{tecuci1992}: 
+Neben der Inferenzmaschine stellt die Wissensbasis den zentralen Teil eines Expertensystems da, der die Daten des gesamten Systems beinhaltet \cite[S.754]{wachsmuth1993}. Im Folgenden werden der allgemeine Prozess der Wissensbasisentwicklung, der Inhalt der Wissensbasis und die Möglichkeiten der Wissensrepräsentation thematisiert. Gheorghe Tecuci beschreibt folgende Phasen bei der Entwicklung der Wissensbasis \cite[S.1444]{tecuci1992}: 
 \begin{itemize}
 \item[1.] Systematische Erfassung vom Expertenwissen
 \item[2.] Verfeinerung der Wissensbasis
 \item[3.] Reorganisation der Wissensbasis
 \end{itemize}
-In der ersten Phase werden das Vokabular und die geeignete Wissensrepräsentation festgelegt. Gebus und Leivisk{\"a} betonen, dass die Wissensrepräsentation den entscheidenden Einfluss auf die Generierung und spätere Handhabung der Wissensbasis hat \cite[S.95]{gebus2009}. Die initialen Daten werden meistens im Rahmen eines Interviews zwischen dem Wissensingenieur und dem Experten erfasst \cite[S.1444]{tecuci1992}. Das Ergebnis der ersten Phase ist eine initiale Wissensbasis, die unvollständig und teilweise widersprüchlich ist. In der zweiten Phase wird die initiale Wissensbasis mithilfe der geeigneten Datenerfassungsmethoden solange erweitert und verbessert, bis sie vollständig und korrekt genug ist, um ein gegebenes Problem richtig zu lösen. In der dritten Phase wird die vollständige und korrekte Wissensbasis reorganisiert, um die Effizienz der Lösungsberechnung zu steigern \cite[S.1445]{tecuci1992}. Zusammenfassend werden die Phasen in Abbildung \ref{drei_phasen} dargestellt.  
+In der ersten Phase werden das Vokabular und die geeignete Wissensrepräsentation festgelegt. Gebus und Leivisk{\"a} betonen, dass die Wissensrepräsentation den entscheidenden Einfluss auf die Generierung und spätere Handhabung der Wissensbasis hat \cite[S.95]{gebus2009}. Die initialen Daten werden meistens im Rahmen eines Interviews mit einem Experten erfasst \cite[S.1444]{tecuci1992}. Das Ergebnis der ersten Phase ist eine initiale Wissensbasis, die unvollständig und teilweise widersprüchlich ist. In der zweiten Phase wird die initiale Wissensbasis mithilfe der geeigneten Datenerfassungsmethoden solange erweitert und verbessert, bis sie vollständig und korrekt genug ist, um ein gegebenes Problem richtig zu lösen. In der dritten Phase wird die vollständige und korrekte Wissensbasis reorganisiert, um die Effizienz der Lösungsberechnung zu steigern \cite[S.1445]{tecuci1992}. Zusammenfassend werden die Phasen in Abbildung \ref{drei_phasen} dargestellt.  
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=0.7\textwidth]{images/drei_phasen.png}
@@ -19,14 +19,14 @@ In Bezug auf den Inhalt der Wissensbasis unterscheiden Beierle und Kern-Isberner
 nur auf den gerade betrachteten Problemfall bezieht. Das sind z.B. Fakten, die von Beobachtungen oder Untersuchungsergebnissen stammen.
 \item \textit{Regelhaftes Wissen}, das den eigentlichen Kern der Wissensbasis darstellt. Dieses Wissen kann noch genauer differenziert werden: 
 	\begin{itemize}
-	\item \textit{Bereichsbezogenes Wissen}, das sich auf den gesamten Problembereich beziehen. Das kann sowohl theoretisches Fachwissen als auch Erfahrungswissen sein. Anders gesagt handelt es sich um generisches Wissen.
+	\item \textit{Bereichsbezogenes Wissen}, das sich auf den gesamten Problembereich bezieht. Das kann sowohl theoretisches Fachwissen als auch Erfahrungswissen sein.
 	\item \textit{Allgemeinwissen}, das z.B. um generelle Problemlösungsheuristiken, Optimierungsregeln oder auch allgemeines Wissen über Objekte und Beziehungen in der realen Welt beinhaltet.
 	\end{itemize}
 \end{itemize}
 Unter Berücksichtigung der Differenzierung der Wissensarten innerhalb der Wissensbasis beschreiben die Autoren in \cite[S.18]{beierle2014} auf eigene Weise die Architektur des Expertensystems, die in Abbildung \ref{expertensystem_beierle}  dargestellt wird.
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.7\textwidth]{images/expertensystem_beierle.png}
+	\includegraphics[width=0.75\textwidth]{images/expertensystem_beierle.png}
 	\caption{Expertensystem nach Beierle und Kern-Isberner, \cite[S.18]{beierle2014}}
 	\label{expertensystem_beierle}
 \end{figure} 
@@ -41,8 +41,8 @@ Hinsichtlich der Wissensrepräsentation stellen Ferstl und Sinz imperative und de
 Allgemein beziehen sich die Autoren darauf, dass an ein wissensbasiertes System nur geringe Anforderungen bezüglich Vollständigkeit, Widerspruchsfreiheit und Eindeutigkeit gestellt werden können. Aus diesem Grund ist das deklarative Paradigma für die Wissensrepräsentation besser geeignet. Folgende Gründe nennen die Autoren für die deklarative Umsetzung der Wissensbasis \cite[S.366]{sinz2013}: 
 \begin{itemize}
 \item \textit{Wissensdarstellung}: Da ein Mensch das Erfahrungswissen durch assoziative Beziehungsmuster aufbaut, ist die deklarative Wissensdarstellung eher geeignet.
-\item \textit{Wissensauswertung}: Änderungen von Erfahrungswissen werden normalerweise in deklarativen Form erfasst.
+\item \textit{Wissensauswertung}: Änderungen von Erfahrungswissen werden normalerweise in deklarativer Form erfasst.
 \item \textit{Wissensverfügbarkeit}: Die Codewartung von einem imperativen Programm ist fehleranfällig, kosten- und zeitintensiv, da das Erfahrungswissen häufig geändert und aktualisiert werden muss.
 \end{itemize}
-Der objektorientierte Ansatz ist eine weitere Möglichkeit, das Wissen zu beschreiben. Ein Beispiel für die objektorientierte Implementierung wird in \cite{leung1990} vorgestellt. Die Wissensbasis wird dabei als eine Sammlung von Klassen, Objekten und Methoden definiert \cite[S.40]{leung1990}. Der große Vorteil solcher Umsetzung besteht in der Modularität des Wissens. Das Wissen in unabhängige Module aufgeteilt wird. Da die einzelnen Module unabhängig voneinander sind, können sie getrennt getestet und modifiziert werden, ohne den Rest der Wissensbasis zu beeinträchtigen. Dies ermöglicht hohe Flexibilität bei der Wissensbasiserweiterung \cite[S.43]{leung1990}.\\
+Der objektorientierte Ansatz ist eine weitere Möglichkeit, das Wissen zu beschreiben. Ein Beispiel für die objektorientierte Implementierung wird in \cite{leung1990} vorgestellt. Die Wissensbasis wird dabei als eine Sammlung von Klassen, Objekten und Methoden definiert \cite[S.40]{leung1990}. Der große Vorteil dieser Umsetzung besteht in der Modularität des Wissens, weil das Wissen in unabhängige Module aufgeteilt wird. Da die einzelnen Module voneinander unabhängig sind, können sie getrennt getestet und modifiziert werden, ohne den Rest der Wissensbasis zu beeinträchtigen. Dies ermöglicht hohe Flexibilität bei der Wissensbasiserweiterung \cite[S.43]{leung1990}.\\
 Neben der Implementierung der Wissensbasis ist eine geeignete Umsetzung der Wissenserwerbskomponente erforderlich, um die Wissensbasis aktuell, möglichst fehlerfrei und konsistent zu halten. Im Folgenden wird die Wissenserwerbskomponente in Hinsicht auf den allgemeinen Aufbau und Funktionen thematisiert.  

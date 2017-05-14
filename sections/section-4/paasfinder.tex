@@ -22,7 +22,7 @@ Die Umsetzung der Wissenserwerbskomponente erfolgt am Beispiel von \textit{PaaSf
 \end{enumerate}
 Ein Profil wird als ein \acs{JSON}\footnote{\label{foot:json}http://json.org}-Eintrag gespeichert. JSON stellt ein Datenaustauschformat dar und basiert auf zwei Datenstrukturen: 
 \begin{itemize}
-\item \textit{Name/Wert Paar}, das als ein Objekt darstellt (siehe Abbildung \ref{fig:json-object}).
+\item \textit{Name/Wert Paar}, das ein Objekt darstellt (siehe Abbildung \ref{fig:json-object}).
 \item \textit{Eine geordnete Liste von Werten (Array)}, die kein oder mehrere durch Komma getrennte Objekte enthält (siehe Abbildung \ref{fig:json-array}).
 \end{itemize}
 \begin{figure}[H] 
@@ -43,4 +43,4 @@ Die Wissensdatenbank und der Programmcode von \textit{PaaSfinder} befinden sich 
 \item \textit{Direkter Kontakt mit dem Systementwickler} 
 \end{itemize}
 Beim Pull Request wird das gesamte Git-Repository lokal gespeichert. Danach werden Änderungen vorgenommen und anschließend ein Pull Request erstellt. Der Pull Request wird vom Projektmaster überprüft und zugehörige Änderungen übernommen (\glqq{}gemerged\grqq{}), falls keine Konflikte vorliegen. Wenn der Wissensträger mit dem Git-System nicht vertraut ist, kann ein direkter Kontakt (beispielsweise per E-Mail) mit dem Systementwickler aufgenommen werden. Die Daten werden dann manuell vom Systemverwalter in die Wissensbasis eingetragen.\\
-Sowohl Pull Request als auch Kontakt mit dem Systementwickler entspricht dem direkten Wissenserwerb gemäß der Klassifikation in Kapitel \ref{subsec:Wissenserwerbskomponente}. Der Vorteil dabei ist, dass die Daten nicht manuell gesucht werden sollen, sondern gleich vom Wissensträger stammen. Anderseits wird die Datenerfassung durch Git-Kenntnisse des Wissensträgers beschränkt. Um den direkten Wissenserwerb zu erleichtern, wird im weiteren Verlauf die Wissensträgerschnittstelle entwickelt, die es dem Wissensträger ermöglicht, einen bestehenden Vendor zu aktualisieren. Nach dem erfolgreichen Absenden der Änderungen soll automatisch ein Pull Request erstellt werden. 
+Sowohl Pull Request als auch Kontakt mit dem Systementwickler entspricht dem direkten Wissenserwerb gemäß der Klassifikation in Kapitel \ref{subsec:Wissenserwerbskomponente}. Der Vorteil dabei ist, dass die Daten nicht manuell gesucht werden sollen, sondern gleich vom Wissensträger stammen. Andererseits wird die Datenerfassung durch Git-Kenntnisse des Wissensträgers beschränkt. Um den direkten Wissenserwerb zu erleichtern, wird im weiteren Verlauf die Wissensträgerschnittstelle entwickelt, die es dem Wissensträger ermöglicht, einen bestehenden Vendor zu aktualisieren. Nach dem erfolgreichen Absenden der Änderungen soll automatisch ein Pull Request erstellt werden. 
