@@ -304,11 +304,11 @@ gehen
     <node id="n16">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="16.13168797631957" width="110.0" x="388.71750116024623" y="255.78462636936487"/>
+          <y:Geometry height="16.13168797631957" width="90.96240601503757" x="398.23629815272744" y="255.7846263693649"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle hasColor="false" raised="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="27.5546875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="100.640625" x="4.0" y="-5.7114997618402015">Daten sind 
-an Worker gesendet<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="27.5546875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="88.0478515625" x="4.0" y="-5.7114997618402015">Daten an Worker 
+gesendet<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -322,10 +322,10 @@ an Worker gesendet<y:LabelModel>
     <node id="n17">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="258.4878276576901" width="822.8224201831885" x="-302.37950240874864" y="54.90663207333347"/>
+          <y:Geometry height="245.38449046519818" width="822.8224201831885" x="-302.37950240874864" y="54.90663207333348"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="22.84375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="164.0859375" x="11.84012661705765" y="12.540592177739498">Vendor aktualisieren<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="22.84375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="164.0859375" x="11.84012661705765" y="11.904880974672494">Vendor aktualisieren<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>

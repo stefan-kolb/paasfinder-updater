@@ -1,7 +1,7 @@
 \subsection{Wissensbasis}\label{subsec:Wissensbasis}
-Neben der Inferenzmaschine stellt die Wissensbasis den zentralen Teil eines Expertensystems dar, der die Daten des gesamten Systems beinhaltet \cite[S.754]{wachsmuth1993}. Im Folgenden werden der allgemeine Prozess der Wissensbasisentwicklung, der Inhalt der Wissensbasis und die Möglichkeiten der Wissensrepräsentation thematisiert. Gheorghe Tecuci beschreibt folgende Phasen bei der Entwicklung der Wissensbasis \cite[S.1444]{tecuci1992}: 
+Neben der Inferenzmaschine stellt die Wissensbasis den zentralen Teil eines Ex\-per\-ten\-sys\-tems dar, der die Wissensdaten des gesamten Systems beinhaltet \cite[S.754]{wachsmuth1993}. Im Folgenden werden der allgemeine Prozess der Wissensbasisentwicklung, der Inhalt der Wissensbasis und die Möglichkeiten der Wissensrepräsentation thematisiert. Gheorghe Tecuci beschreibt folgende Phasen bei der Entwicklung der Wissensbasis \cite[S.1444]{tecuci1992}: 
 \begin{itemize}
-\item Systematische Erfassung vom Expertenwissen
+\item Systematische Erfassung des Expertenwissens
 \item Verfeinerung der Wissensbasis
 \item Reorganisation der Wissensbasis
 \end{itemize}
@@ -12,7 +12,7 @@ In der ersten Phase werden das Vokabular und die geeignete Wissensrepräsentation
 	\caption{Phasen der Expertensystementwicklung, \cite[S.138]{tecuci1994}}
 	\label{drei_phasen}
 \end{figure}
-In Abbildung \ref{drei_phasen} sieht man, dass Tecuci dem Experten die gesamte Kontrolle über die Entwicklung der Wissensbasis zuweist. Allerdings ist diese Sichtweise nicht vollständig, da im Entwicklungsprozess der Wissensingenieur und der Systementwickler beteiligt sind und dementsprechend berücksichtigt werden müssen.\\
+Aus Abbildung \ref{drei_phasen} wird deutlich, dass Tecuci dem Experten die gesamte Kontrolle über die Entwicklung der Wissensbasis zuweist. Allerdings ist diese Sichtweise nicht vollständig, da im Entwicklungsprozess der Wissensingenieur und der Systementwickler beteiligt sind und dementsprechend berücksichtigt werden müssen.\\
 In Bezug auf den Inhalt der Wissensbasis unterscheiden Beierle und Kern-Isberner folgende Wissensarten \cite[S.5]{beierle2014}:
 \begin{itemize}
 \item \textit{Fachspezifisches Wissen}: Dabei handelt es sich um das spezifische Wissen, das sich
@@ -30,19 +30,19 @@ Unter Berücksichtigung der Differenzierung der Wissensarten innerhalb der Wissen
 	\caption{Expertensystem nach Beierle und Kern-Isberner, \cite[S.18]{beierle2014}}
 	\label{expertensystem_beierle}
 \end{figure} 
-Laut Beierle und Kern-Isberner können verschiedene Wissensarten in einem wissensbasierten System je nach dem Anwendungsbereich unterschiedlich umfangreich auftreten. Ein hochspezialisiertes System kann beispielsweise über sehr wenig oder gar kein Allgemeinwissen verfügen. Auf der anderen Seite kann ein wissensbasiertes System den Schwerpunkt auf das gewöhnliche Alltagswissen legen \cite[S.5-6]{beierle2014}.\\
-Ein weiterer Aspekt beim Aufbau der Wissensbasis ist die Wissensrepräsentation. Die grundlegende Aufgabe der Wissensrepräsentation ist die Formalisierung von Wissen, um eine maschinelle Verarbeitung zu ermöglichen \cite[S.22]{haun2000}. Sinz und Ferstl unterscheiden folgende Formen der Wissensrepräsentation \cite[S.366]{sinz2013}:
+Laut Beierle und Kern-Isberner können verschiedene Wissensarten in einem wissensbasierten System je nach dem Anwendungsbereich in unterschiedlichem Umfang auftreten. Ein hochspezialisiertes System kann beispielsweise über sehr wenig bis gar kein Allgemeinwissen verfügen. Auf der anderen Seite kann ein wissensbasiertes System den Schwerpunkt auf gewöhnliches Alltagswissen legen \cite[S.5-6]{beierle2014}.\\
+Ein weiterer Aspekt beim Aufbau der Wissensbasis ist die Wissensrepräsentation. Deren grundlegende Aufgabe ist die Formalisierung von Wissen, um eine maschinelle Verarbeitung zu ermöglichen \cite[S.22]{haun2000}. Sinz und Ferstl unterscheiden folgende Formen der Wissensrepräsentation \cite[S.366]{sinz2013}:
 \begin{itemize}
 \item \textit{Regelorientierte Darstellung}, in der das Wissen in Form von WENN-DANN-Regeln beschrieben wird. Diese Darstellungsform wird beispielsweise bei Prolog\footnote{Für weitere Informationen siehe z.B. http://www.swi-prolog.org/}-Regeln eingesetzt.
 \item \textit{Objektorientierte Darstellung}, die das Konzept der Objekttypen übernimmt und mit deklarativen Operatorbeschreibungen verbindet.
-\item \textit{Constraints Darstellung}, die Modellbeschreibungen aus dem Bereich der Operation Research benutzt. Dabei handelt es sich um Lösungsräume durch Nebenbedingungen und Zielvorgaben.   
+\item \textit{Constraints Darstellung}, die Modellbeschreibungen aus dem Bereich des Operation Researchs benutzt. Dabei handelt es sich um Lösungsräume durch Nebenbedingungen und Zielvorgaben.   
 \end{itemize}
-Hinsichtlich der Wissensrepräsentation stellen Ferstl und Sinz imperative und deklarative Paradigmen gegenüber \cite[S.366]{sinz2013}. Ein Programm, das dem imperativen Paradigma folgt, besteht aus einer Folge von Befehlen, die nacheinander ausgeführt werden \cite[S.341]{sinz2013}. Bei einem deklarativen Programm handelt es sich um eine Beschreibung der Aufgabenaußensicht. Ein deklaratives Programm hat keine festgelegten Lösungsverfahren je Aufgabe. Stattdessen wird eine Lösung zum Zeitpunkt der Aufgabendurchführung mittels Inferenzmaschine abgeleitet \cite[S.361]{sinz2013}.\\
-Allgemein beziehen sich die Autoren darauf, dass an ein wissensbasiertes System nur geringe Anforderungen bezüglich Vollständigkeit, Widerspruchsfreiheit und Eindeutigkeit gestellt werden können. Aus diesem Grund ist das deklarative Paradigma für die Wissensrepräsentation besser geeignet. Folgende Gründe nennen die Autoren für die deklarative Umsetzung der Wissensbasis \cite[S.366]{sinz2013}: 
+Hinsichtlich der Wissensrepräsentation stellen Ferstl und Sinz imperative und deklarative Paradigmen gegenüber \cite[S.366]{sinz2013}. Ein Programm, das dem imperativen Paradigma folgt, besteht aus einer Folge von Befehlen, die nacheinander ausgeführt werden \cite[S.341]{sinz2013}. Bei einem deklarativen Programm handelt es sich um eine Beschreibung der Aufgabenaußensicht. Ein deklaratives Programm hat keine festgelegten Lösungsverfahren für jede Aufgabe. Stattdessen wird eine Lösung zum Zeitpunkt der Aufgabendurchführung mittels Inferenzmaschine abgeleitet \cite[S.361]{sinz2013}.\\
+Im Allgemeinen beziehen sich die Autoren darauf, dass an ein wissensbasiertes System nur geringe Anforderungen bezüglich Vollständigkeit, Widerspruchsfreiheit und Eindeutigkeit gestellt werden können. Aus diesem Grund ist das deklarative Paradigma für die Wissensrepräsentation besser geeignet. Folgende Gründe nennen die Autoren für die deklarative Umsetzung der Wissensbasis \cite[S.366]{sinz2013}: 
 \begin{itemize}
-\item \textit{Wissensdarstellung}: Da ein Mensch das Erfahrungswissen durch assoziative Beziehungsmuster aufbaut, ist die deklarative Wissensdarstellung eher geeignet.
+\item \textit{Wissensdarstellung}: Der ein Mensch baut das Erfahrungswissen durch assoziative Beziehungsmuster auf.
 \item \textit{Wissensauswertung}: Änderungen von Erfahrungswissen werden normalerweise in deklarativer Form erfasst.
-\item \textit{Wissensverfügbarkeit}: Die Codewartung eines imperativen Programms ist fehleranfällig sowie kosten- und zeitintensiv, da das Erfahrungswissen häufig geändert und aktualisiert werden muss.
+\item \textit{Wissensverfügbarkeit}: Die Codewartung eines imperativen Programms ist fehleranfällig, sowie kosten- und zeitintensiv, da das Erfahrungswissen häufig geändert und aktualisiert werden muss.
 \end{itemize}
 Der objektorientierte Ansatz ist eine weitere Möglichkeit, das Wissen zu beschreiben. Ein Beispiel für die objektorientierte Implementierung wird in \cite{leung1990} vorgestellt. Die Wissensbasis wird dabei als eine Sammlung von Klassen, Objekten und Methoden definiert \cite[S.40]{leung1990}. Der große Vorteil einer solchen Umsetzung besteht in der Modularität des Wissens, d.h. das Wissen wird in unabhängige Module aufgeteilt. Da die einzelnen Module voneinander unabhängig sind, können sie getrennt getestet und modifiziert werden, ohne den Rest der Wissensbasis zu beeinträchtigen. Dies ermöglicht eine hohe Flexibilität bei der Wissensbasiserweiterung \cite[S.43]{leung1990}.\\
 Neben der Implementierung der Wissensbasis ist eine geeignete Umsetzung der Wissenserwerbskomponente erforderlich, um die Wissensbasis aktuell, möglichst fehlerfrei und konsistent zu halten. Im Folgenden wird die Wissenserwerbskomponente in Hinsicht auf den allgemeinen Aufbau und ihre Funktionen thematisiert.  
