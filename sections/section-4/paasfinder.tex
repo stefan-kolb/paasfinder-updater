@@ -1,14 +1,14 @@
 \subsection{Systembeschreibung}
-Die Umsetzung der Wissenserwerbskomponente erfolgt am Beispiel von \textit{PaaSfinder}\footnote{{\label{foot:paasfinder}}https://paasfinder.org}, einem Expertensystem und Open-Source-Projekt im Bereich von \acf{PaaS}. Das Ziel des Systems besteht darin, zahlreiche PaaS-Anbieter (im Weiteren Vendors) vergleichbar zu machen. \textit{PaaSfinder} verfügt bereits über eine umfangreiche Wissensdatenbank, die aufgrund der häufigen Änderungen im gegebenen Anwendungsbereich regelmäßig aktualisiert werden muss. Die Struktur von \textit{PaaSfinder} lässt sich in Abbildung \ref{fig:paasfinder} folgendermaßen beschreiben.
+Die Umsetzung der Wissenserwerbskomponente erfolgt am Beispiel von \textit{PaaSfinder}\footnote{{\label{foot:paasfinder}}https://paasfinder.org}, einem Expertensystem und Open-Source-Projekt im Bereich von \acf{PaaS}. Das Ziel des Systems besteht darin, zahlreiche PaaS-Anbieter (im Weiteren Vendors) vergleichbar zu machen. \textit{PaaSfinder} verfügt bereits über eine umfangreiche Wissensdatenbank, die aufgrund der häufigen Änderungen im gegebenen Anwendungsbereich regelmäßig aktualisiert werden muss. Die Struktur von \textit{PaaSfinder} lässt sich wie in Abbildung \ref{fig:paasfinder} folgendermaßen beschreiben.
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=1.0\textwidth]{images/paasfinder.png}
 	\caption{Die Struktur vom \textit{PaaSfinder}}
 	\label{fig:paasfinder}
 \end{figure} 
-\textit{PaaSfinder} setzt sich aus dem Programmcode mit der Wissensdatenbank und der Webanwendung zusammen. Die Webanwendung wird wiederum auf einem Server betrieben. Ein Vendor wird in einem Profil\footnote{https://github.com/stefan-kolb/paas-profiles\#profile-specification} beschrieben, das wie folgt aufgebaut ist:
+\textit{PaaSfinder} setzt sich aus dem Programmcode der Wissensdatenbank und der Webanwendung zusammen. Die Webanwendung wird wiederum auf einem Server betrieben. Ein Vendor wird in einem Profil\footnote{https://github.com/stefan-kolb/paas-profiles\#profile-specification} beschrieben, das wie folgt aufgebaut ist:
 \begin{enumerate}
-\item \textbf{General Properties}: allgemeine Eigenschaften des Vendors (z.B. Name, URL, Status, Type etc.)
+\item \textbf{General Properties}: allgemeine Eigenschaften des Vendors (z.B. Name, URL, Status, Typ etc.)
 \item \textbf{Extensible}: generelle Erweiterungsmöglichkeit nach Kundenbedarf (z.B. spezielle Laufzeitumgebung)
 \item \textbf{Pricing}: verfügbare Preismodelle
 \item \textbf{Quality of Service}: die Servicequalität (z.B. Verfügbarkeit)
@@ -20,7 +20,7 @@ Die Umsetzung der Wissenserwerbskomponente erfolgt am Beispiel von \textit{PaaSf
 \item \textbf{Services} (z.B. Datenspeicher)
 \item \textbf{Infrastructures} (z.B. Informationen zum Standort)
 \end{enumerate}
-Ein Profil wird als ein \acs{JSON}\footnote{\label{foot:json}http://json.org}-Eintrag gespeichert. JSON stellt ein Datenaustauschformat dar und basiert auf zwei Datenstrukturen: 
+Ein Vendor wird als \acs{JSON}\footnote{\label{foot:json}http://json.org}-Eintrag gespeichert. JSON stellt ein Datenaustauschformat dar und basiert auf zwei Datenstrukturen: 
 \begin{itemize}
 \item \textit{Name/Wert Paar}, das ein Objekt darstellt (siehe Abbildung \ref{fig:json-object}).
 \item \textit{Eine geordnete Liste von Werten (Array)}, die kein oder mehrere durch Komma getrennte Objekte enthält (siehe Abbildung \ref{fig:json-array}).
@@ -28,19 +28,19 @@ Ein Profil wird als ein \acs{JSON}\footnote{\label{foot:json}http://json.org}-Ei
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=0.85\textwidth]{images/json-object.png}
-	\caption{JSON-Objekt Spezifikation, \ref{foot:json}}
+	\caption{JSON-Objekt Spezifikation}
 	\label{fig:json-object}
 \end{figure} 
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=0.75\textwidth]{images/json-array.png}
-	\caption{JSON-Array Spezifikation, \ref{foot:json}}
+	\caption{JSON-Array Spezifikation}
 	\label{fig:json-array}
 \end{figure} 
-Die Wissensdatenbank und der Programmcode von \textit{PaaSfinder} befinden sich in einem Git-Repository. Bei Git\footnote{https://git-scm.com} handelt es sich um ein verteiltes System zur Projektverwaltung. Da \textit{PaaSfinder} ein Open-Source-Projekt ist, kann jeder der Wissensdatenbank beitragen. Momentan kann das auf zwei Weisen erfolgen (siehe Abbildung \ref{fig:paasfinder}):
+Die Wissensdatenbank und der Programmcode von \textit{PaaSfinder} befinden sich in einem Git-Repository. Bei Git\footnote{https://git-scm.com} handelt es sich um ein verteiltes System zur Projektverwaltung. Da \textit{PaaSfinder} ein Open-Source-Projekt ist, kann im Prinzip jeder die Wissensdatenbank erweitern bzw. modifizieren. Momentan kann das auf zwei Weisen erfolgen (siehe Abbildung \ref{fig:paasfinder}):
 \begin{itemize}
 \item \textit{Pull Request\footnote{https://git-scm.com/docs/git-request-pull}}
 \item \textit{Direkter Kontakt mit dem Systementwickler} 
 \end{itemize}
-Beim Pull Request wird das gesamte Git-Repository lokal gespeichert. Danach werden Änderungen vorgenommen und anschließend ein Pull Request erstellt. Der Pull Request wird vom Projektmaster überprüft und zugehörige Änderungen übernommen (\glqq{}gemerged\grqq{}), falls keine Konflikte vorliegen. Wenn der Wissensträger mit dem Git-System nicht vertraut ist, kann ein direkter Kontakt (beispielsweise per E-Mail) mit dem Systementwickler aufgenommen werden. Die Daten werden dann manuell vom Systemverwalter in die Wissensbasis eingetragen.\\
-Sowohl Pull Request als auch Kontakt mit dem Systementwickler entspricht dem direkten Wissenserwerb gemäß der Klassifikation in Kapitel \ref{subsec:Wissenserwerbskomponente}. Der Vorteil dabei ist, dass die Daten nicht manuell gesucht werden sollen, sondern gleich vom Wissensträger stammen. Andererseits wird die Datenerfassung durch Git-Kenntnisse des Wissensträgers beschränkt. Um den direkten Wissenserwerb zu erleichtern, wird im weiteren Verlauf die Wissensträgerschnittstelle entwickelt, die es dem Wissensträger ermöglicht, einen bestehenden Vendor zu aktualisieren. Nach dem erfolgreichen Absenden der Änderungen soll automatisch ein Pull Request erstellt werden. 
+Beim Pull Request wird zuerst das gesamte Git-Repository lokal gespeichert. Danach werden Änderungen vorgenommen und anschließend ein Pull Request erstellt. Der Pull Request wird vom Projektmaster überprüft und zugehörige Änderungen übernommen (\glqq{}gemerged\grqq{}), falls keine Konflikte vorliegen. Wenn der Wissensträger mit dem Git-System nicht vertraut ist, kann direkter Kontakt (beispielsweise per E-Mail) mit dem Systementwickler aufgenommen werden. Die Daten werden dann manuell vom Systemverwalter in die Wissensbasis eingetragen.\\
+Sowohl Pull Request als auch der Kontakt mit dem Systementwickler entsprechen dem direkten Wissenserwerb gemäß der Klassifikation in Kapitel \ref{subsec:Wissenserwerbskomponente}. Der Vorteil dabei ist, dass die Daten nicht manuell gesucht werden müssen, sondern gleich vom Wissensträger stammen. Andererseits wird die Datenerfassung durch Git-Kenntnisse des Wissensträgers beschränkt. Um den direkten Wissenserwerb zu erleichtern, wird im weiteren Verlauf die Wissensträgerschnittstelle entwickelt, die es dem Wissensträger ermöglicht, einen bestehenden Vendor zu aktualisieren. Nach dem erfolgreichen Absenden der Änderungen soll automatisch ein Pull Request erstellt werden. 
