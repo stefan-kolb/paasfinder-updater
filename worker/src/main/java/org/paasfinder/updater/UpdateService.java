@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.paasfinder.updater.models.Branch;
 import org.paasfinder.updater.models.File;
 import org.paasfinder.updater.models.PullRequest;
@@ -16,6 +17,7 @@ import static spark.Spark.post;
 public class UpdateService {
 
     private static final GithubClient client = new GithubClient();
+    private static final JsonParser jsonParser = new JsonParser();
 
     public UpdateService() {
         port(getAssignedPort());
@@ -38,7 +40,7 @@ public class UpdateService {
         });
 
         post("/vendor", "application/json", (request, response) -> {
-            JsonObject data = client.jsonParser.parse(request.body()).getAsJsonObject();
+            JsonObject data = jsonParser.parse(request.body()).getAsJsonObject();
 
             final String vendorKey = data.get("vendorKey").getAsString();
             final String branchName = String.format("update-%s-%s", vendorKey, LocalDateTime.now());

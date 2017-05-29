@@ -19,8 +19,8 @@ import org.paasfinder.updater.models.PullRequest;
 public class GithubClient {
     private static final Logger LOGGER = Logger.getLogger(GithubClient.class.getName());
 
-    public static JsonParser jsonParser = new JsonParser();
-    public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static JsonParser jsonParser = new JsonParser();
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private final String repository = "stefan-kolb/worker";
     // Authorization: token OAUTH-TOKEN
