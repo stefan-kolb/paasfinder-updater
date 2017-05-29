@@ -1,10 +1,6 @@
-package Messages;
+package org.paasfinder.updater.models;
 
-import java.io.Serializable;
-
-public class Branch implements Serializable{
-
-    private static final transient long serialVersionUID = 1L;
+public class Branch {
     private final transient String branchName;
 
     private final String ref;

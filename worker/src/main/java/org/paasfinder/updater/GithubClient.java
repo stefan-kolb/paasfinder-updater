@@ -1,20 +1,31 @@
-import Messages.*;
-import com.google.gson.*;
-import okhttp3.*;
+package org.paasfinder.updater;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import java.util.logging.Logger;
 
-class UpdateClient {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import org.paasfinder.updater.models.Branch;
+import org.paasfinder.updater.models.File;
+import org.paasfinder.updater.models.PullRequest;
+
+public class GithubClient {
+    private static final Logger LOGGER = Logger.getLogger(GithubClient.class.getName());
 
     public static JsonParser jsonParser = new JsonParser();
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    private final String user = System.getenv("UPDATEBOT_LOGIN");
-    private final String password = System.getenv("UPDATEBOT_PASSWORD");
-    private final String credentials = Base64.getEncoder().encodeToString((user + ":" + password).getBytes(StandardCharsets.UTF_8));
-    private final String baseURL = "https://api.github.com/repos/" + user + "/paas-profiles";
+    private final String repository = "stefan-kolb/worker";
+    // Authorization: token OAUTH-TOKEN
+    private final String credentials = "49948254492ab32b3a2993fe96f0b1a3826d7c72";
+    private final String baseURL = "https://api.github.com/repos/" + repository;
 
     private final OkHttpClient client = new OkHttpClient();
     private final MediaType mediaType = MediaType.parse("application/json");
@@ -25,11 +36,11 @@ class UpdateClient {
                 .url(baseURL + "/git/refs")
                 .post(requestBody)
                 .addHeader("content-type", "application/json")
-                .addHeader("authorization", "Basic " + credentials)
+                .addHeader("authorization", "token " + credentials)
                 .build();
 
         Response response = client.newCall(request).execute();
-        System.out.println("Create Branch " + response);
+        LOGGER.info("Create Branch " + response);
     }
 
     void putFile(File file) throws IOException {
@@ -38,11 +49,11 @@ class UpdateClient {
                 .url(baseURL + "/contents/profiles/" + file.getVendorKey() + ".json")
                 .put(requestBody)
                 .addHeader("content-type", "application/json")
-                .addHeader("authorization", "Basic " + credentials)
+                .addHeader("authorization", "token " + credentials)
                 .build();
 
         Response response = client.newCall(request).execute();
-        System.out.println("Update File " + response);
+        LOGGER.info("Update File " + response);
     }
 
     void postPullRequest(PullRequest pullRequest) throws IOException {
@@ -51,11 +62,11 @@ class UpdateClient {
                 .url(baseURL + "/pulls")
                 .post(body)
                 .addHeader("content-type", "application/json")
-                .addHeader("authorization", "Basic " + credentials)
+                .addHeader("authorization", "token " + credentials)
                 .build();
 
         Response response = client.newCall(request).execute();
-        System.out.println("Create Pull Request " + response);
+        LOGGER.info("Create Pull Request " + response);
     }
 
     String getMasterSHA() throws IOException{

@@ -1,18 +1,24 @@
-import Messages.*;
-import com.google.gson.JsonObject;
-import org.apache.commons.lang.RandomStringUtils;
+package org.paasfinder.updater;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
-import static spark.Spark.*;
+import com.google.gson.JsonObject;
+import org.paasfinder.updater.models.Branch;
+import org.paasfinder.updater.models.File;
+import org.paasfinder.updater.models.PullRequest;
+
+import static spark.Spark.before;
+import static spark.Spark.options;
+import static spark.Spark.port;
+import static spark.Spark.post;
 
 public class UpdateService {
 
-    private static final UpdateClient client = new UpdateClient();
-    private static final int BRANCH_ID_LENGTH = 10;
+    private static final GithubClient client = new GithubClient();
 
-    public static void main(String[] args) {
-        port(9090);
+    public UpdateService() {
+        port(getAssignedPort());
 
         before((request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
@@ -33,8 +39,10 @@ public class UpdateService {
 
         post("/vendor", "application/json", (request, response) -> {
             JsonObject data = client.jsonParser.parse(request.body()).getAsJsonObject();
+
             final String vendorKey = data.get("vendorKey").getAsString();
-            final String branchName = "updating-" + vendorKey + "-" + RandomStringUtils.randomAlphanumeric(BRANCH_ID_LENGTH);
+            final String branchName = String.format("update-%s-%s", vendorKey, LocalDateTime.now());
+            final String message = data.get("contributorMessage").getAsString();
 
             // create branch
             try {
@@ -56,7 +64,7 @@ public class UpdateService {
 
             // create pull request
             try {
-                final PullRequest pullRequest = new PullRequest(branchName);
+                final PullRequest pullRequest = new PullRequest(branchName, message);
                 client.postPullRequest(pullRequest);
             } catch (IOException e) {
                 response.status(422);
@@ -66,6 +74,17 @@ public class UpdateService {
             response.status(200);
             return "OK";
         });
+    }
 
+    public static void main(String[] args) {
+        new UpdateService();
+    }
+
+    private static int getAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567;
     }
 }

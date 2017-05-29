@@ -1,19 +1,17 @@
-package Messages;
+package org.paasfinder.updater.models;
 
-import java.io.Serializable;
-
-public class PullRequest implements Serializable {
-
-    private static final transient long serialVersionUID = 1L;
+public class PullRequest {
 
     private final String title;
     private final String head;
     private final String base = "master";
+    private final String body;
     private final boolean maintainer_can_modify = true;
 
-    public PullRequest(String head){
+    public PullRequest(String head, String message){
         this.title = "PR " + head;
         this.head = head;
+        this.body = message;
     }
 
 }

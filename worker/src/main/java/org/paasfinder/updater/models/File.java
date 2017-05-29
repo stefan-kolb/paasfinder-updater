@@ -1,16 +1,13 @@
-package Messages;
+package org.paasfinder.updater.models;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
-import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+public class File {
 
-public class File implements Serializable{
-
-    // will not be included in the result JSON
-    private static final transient long serialVersionUID = 1L;
     private final transient String vendorKey;
     private final transient String contributorName;
     private final transient String contributorEmail;
