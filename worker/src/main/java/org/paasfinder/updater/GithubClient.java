@@ -30,7 +30,7 @@ public class GithubClient {
     private final OkHttpClient client = new OkHttpClient();
     private final MediaType mediaType = MediaType.parse("application/json");
 
-    void postBranch(Branch branch) throws IOException {
+    public void createBranch(Branch branch) throws IOException {
         RequestBody requestBody = RequestBody.create(mediaType, gson.toJson(branch));
         Request request = new Request.Builder()
                 .url(baseURL + "/git/refs")
@@ -43,7 +43,7 @@ public class GithubClient {
         LOGGER.info("Create Branch " + response);
     }
 
-    void putFile(File file) throws IOException {
+    public void updateFile(File file) throws IOException {
         RequestBody requestBody = RequestBody.create(mediaType, gson.toJson(file));
         Request request = new Request.Builder()
                 .url(baseURL + "/contents/profiles/" + file.getVendorKey() + ".json")
@@ -56,7 +56,7 @@ public class GithubClient {
         LOGGER.info("Update File " + response);
     }
 
-    void postPullRequest(PullRequest pullRequest) throws IOException {
+    public void createPullRequest(PullRequest pullRequest) throws IOException {
         RequestBody body = RequestBody.create(mediaType, gson.toJson(pullRequest));
         Request request = new Request.Builder()
                 .url(baseURL + "/pulls")
@@ -69,7 +69,7 @@ public class GithubClient {
         LOGGER.info("Create Pull Request " + response);
     }
 
-    String getMasterSHA() throws IOException{
+    public String getMasterSHA() throws IOException{
         Request request = new Request.Builder()
                 .url(baseURL + "/git/refs/heads/master")
                 .get()
@@ -80,7 +80,7 @@ public class GithubClient {
         return jo.get("object").getAsJsonObject().get("sha").getAsString();
     }
 
-    String getFileSHA(String fileName) throws IOException{
+    public String getFileSHA(String fileName) throws IOException{
         Request request = new Request.Builder()
                 .url(baseURL + "/contents/profiles/" + fileName + ".json")
                 .get()

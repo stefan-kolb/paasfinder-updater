@@ -47,7 +47,7 @@ public class UpdateService {
             // create branch
             try {
                 final Branch branch = new Branch(branchName, client.getMasterSHA());
-                client.postBranch(branch);
+                client.createBranch(branch);
             } catch (IOException e) {
                 response.status(422);
                 return "Error while posting branch";
@@ -56,7 +56,7 @@ public class UpdateService {
             // update file
             try {
                 final File file = new File(data, client.getFileSHA(vendorKey), branchName);
-                client.putFile(file);
+                client.updateFile(file);
             } catch (IOException e) {
                 response.status(422);
                 return "Error while updating vendor";
@@ -65,7 +65,7 @@ public class UpdateService {
             // create pull request
             try {
                 final PullRequest pullRequest = new PullRequest(branchName, message);
-                client.postPullRequest(pullRequest);
+                client.createPullRequest(pullRequest);
             } catch (IOException e) {
                 response.status(422);
                 return "Error while sending pull request";

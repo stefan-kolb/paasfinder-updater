@@ -6,7 +6,7 @@ public class PullRequest {
     private final String head;
     private final String base = "master";
     private final String body;
-    private final boolean maintainer_can_modify = true;
+    private final boolean maintainerCanModify = true;
 
     public PullRequest(String head, String message){
         this.title = "PR " + head;
