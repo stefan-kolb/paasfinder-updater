@@ -50,33 +50,30 @@ public class ProfileResource {
             final String message = data.get("contributorMessage").getAsString();
             final String title = String.format("%s Profile Update", data.get("name"));
 
-            // create branch
-            try {
-                final Branch branch = new Branch(branchName, client.getLatestMasterSHA());
-                client.createBranch(branch);
-            } catch (IOException e) {
-                response.status(422);
-                return "Error while posting branch";
-            }
+            final Branch branch = new Branch(branchName, client.getLatestMasterSHA());
 
-            // update file
             try {
-                final File file = new File(data, client.getLatestFileSHA(vendorKey), branchName);
-                client.updateFile(file);
-            } catch (IOException e) {
-                // TODO retry? delete branch
-                response.status(422);
-                return "Error while updating vendor";
-            }
+                boolean success;
+                // create branch
+                if (success = client.createBranch(branch)) {
+                    // update file
+                    final File file = new File(data, client.getLatestFileSHA(vendorKey), branchName);
+                    if (success = client.updateFile(file)) {
+                        // create pull request
+                        final PullRequest pullRequest = new PullRequest(branchName, title, message);
+                        success = client.createPullRequest(pullRequest);
+                    }
+                }
 
-            // create pull request
-            try {
-                final PullRequest pullRequest = new PullRequest(branchName, title, message);
-                client.createPullRequest(pullRequest);
+                if (!success) {
+                    client.deleteBranch(branch);
+                    response.status(422);
+                    return "A request of the transaction could not be fulfilled";
+                }
             } catch (IOException e) {
-                // TODO retry? delete branch
-                response.status(422);
-                return "Error while sending pull request";
+                client.deleteBranch(branch);
+                response.status(503);
+                return "A network error occurred";
             }
 
             response.status(200);

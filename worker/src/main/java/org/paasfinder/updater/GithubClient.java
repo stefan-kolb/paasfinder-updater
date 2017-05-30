@@ -30,7 +30,7 @@ public class GithubClient {
     private final OkHttpClient client = new OkHttpClient();
     private final MediaType mediaType = MediaType.parse("application/json");
 
-    public void createBranch(Branch branch) throws IOException {
+    public boolean createBranch(Branch branch) throws IOException {
         RequestBody requestBody = RequestBody.create(mediaType, gson.toJson(branch));
         Request request = new Request.Builder()
                 .url(baseURL + "/git/refs")
@@ -41,9 +41,23 @@ public class GithubClient {
 
         Response response = client.newCall(request).execute();
         LOGGER.info("Create Branch " + response);
+        return response.isSuccessful();
     }
 
-    public void updateFile(File file) throws IOException {
+    public boolean deleteBranch(Branch branch) throws IOException {
+        Request request = new Request.Builder()
+                .url(baseURL + "/git/refs/heads/" + branch.getBranchName())
+                .delete()
+                .addHeader("content-type", "application/json")
+                .addHeader("authorization", "token " + oauthToken)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        LOGGER.info("Deleted Branch " + response);
+        return response.isSuccessful();
+    }
+
+    public boolean updateFile(File file) throws IOException {
         RequestBody requestBody = RequestBody.create(mediaType, gson.toJson(file));
         Request request = new Request.Builder()
                 .url(baseURL + "/contents/profiles/" + file.getVendorKey() + ".json")
@@ -54,9 +68,10 @@ public class GithubClient {
 
         Response response = client.newCall(request).execute();
         LOGGER.info("Update File " + response);
+        return response.isSuccessful();
     }
 
-    public void createPullRequest(PullRequest pullRequest) throws IOException {
+    public boolean createPullRequest(PullRequest pullRequest) throws IOException {
         RequestBody body = RequestBody.create(mediaType, gson.toJson(pullRequest));
         Request request = new Request.Builder()
                 .url(baseURL + "/pulls")
@@ -67,6 +82,7 @@ public class GithubClient {
 
         Response response = client.newCall(request).execute();
         LOGGER.info("Create Pull Request " + response);
+        return response.isSuccessful();
     }
 
     public String getLatestMasterSHA() throws IOException{
