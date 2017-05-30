@@ -71,7 +71,6 @@ public class ProfileResource {
                     return "A request of the transaction could not be fulfilled";
                 }
             } catch (IOException e) {
-                client.deleteBranch(branch);
                 response.status(503);
                 return "A network error occurred";
             }
