@@ -7,7 +7,6 @@ public class Branch {
     private final String sha;
 
     public Branch(String branchName, String masterSHA){
-        super();
         this.branchName = branchName;
 
         this.ref = "refs/heads/" + branchName;

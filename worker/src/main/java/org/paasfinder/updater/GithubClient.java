@@ -1,7 +1,6 @@
 package org.paasfinder.updater;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,16 +14,17 @@ import okhttp3.Response;
 import org.paasfinder.updater.models.Branch;
 import org.paasfinder.updater.models.File;
 import org.paasfinder.updater.models.PullRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GithubClient {
-    private static final Logger LOGGER = Logger.getLogger(GithubClient.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(GithubClient.class);
 
     private static JsonParser jsonParser = new JsonParser();
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static Gson gson = new GsonBuilder().create();
 
     private final String repository = "stefan-kolb/worker";
-    // Authorization: token OAUTH-TOKEN
-    private final String credentials = "49948254492ab32b3a2993fe96f0b1a3826d7c72";
+    private final String oauthToken = System.getenv("GITHUB_OAUTH_TOKEN");
     private final String baseURL = "https://api.github.com/repos/" + repository;
 
     private final OkHttpClient client = new OkHttpClient();
@@ -36,7 +36,7 @@ public class GithubClient {
                 .url(baseURL + "/git/refs")
                 .post(requestBody)
                 .addHeader("content-type", "application/json")
-                .addHeader("authorization", "token " + credentials)
+                .addHeader("authorization", "token " + oauthToken)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -49,7 +49,7 @@ public class GithubClient {
                 .url(baseURL + "/contents/profiles/" + file.getVendorKey() + ".json")
                 .put(requestBody)
                 .addHeader("content-type", "application/json")
-                .addHeader("authorization", "token " + credentials)
+                .addHeader("authorization", "token " + oauthToken)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -62,14 +62,14 @@ public class GithubClient {
                 .url(baseURL + "/pulls")
                 .post(body)
                 .addHeader("content-type", "application/json")
-                .addHeader("authorization", "token " + credentials)
+                .addHeader("authorization", "token " + oauthToken)
                 .build();
 
         Response response = client.newCall(request).execute();
         LOGGER.info("Create Pull Request " + response);
     }
 
-    public String getMasterSHA() throws IOException{
+    public String getLatestMasterSHA() throws IOException{
         Request request = new Request.Builder()
                 .url(baseURL + "/git/refs/heads/master")
                 .get()
@@ -80,7 +80,7 @@ public class GithubClient {
         return jo.get("object").getAsJsonObject().get("sha").getAsString();
     }
 
-    public String getFileSHA(String fileName) throws IOException{
+    public String getLatestFileSHA(String fileName) throws IOException{
         Request request = new Request.Builder()
                 .url(baseURL + "/contents/profiles/" + fileName + ".json")
                 .get()
