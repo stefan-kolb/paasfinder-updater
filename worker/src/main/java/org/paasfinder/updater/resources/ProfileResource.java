@@ -37,7 +37,7 @@ public class ProfileResource {
             if (accessControlRequestMethod != null) {
                 response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
             }
-            return "OK";
+            return "";
         });
 
         post("/vendor", "application/json", (request, response) -> {
@@ -75,8 +75,8 @@ public class ProfileResource {
                 return "A network error occurred";
             }
 
-            response.status(200);
-            return "OK";
+            response.status(201);
+            return "";
         });
     }
 }
