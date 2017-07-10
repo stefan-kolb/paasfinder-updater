@@ -1,0 +1,29 @@
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.5'
+    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.7.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.5'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version:'1.6.4'
+
+    testCompile 'junit:junit:4.12'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0.1'
+}
+
+task stage(dependsOn: ['clean', 'installDist'])
+
+mainClassName = "org.paasfinder.updater.UpdateService"

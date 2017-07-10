@@ -1,33 +1,27 @@
-### LaTeX ###
-*.aux
-*.lof
-*.log
-*.lot
-*.fls
-*.out
-*.toc
-*.fmt
-*.fot
-*.cb
-*.cb2
+### Intellij ###
+.idea/
+target/
+*.iws
 
-## Bibliography auxiliary files
-*.bbl
-*.bcf
-*.blg
-*-blx.aux
-*-blx.bib
-*.brf
-*.run.xml
-*.lol
+### Gradle ###
+.gradle
 
-## Build tool auxiliary files:
-*.fdb_latexmk
-*.synctex
-*.synctex(busy)
-*.synctex.gz
-*.synctex.gz(busy)
-*.pdfsync
+# Java build artifacts class files
+*.class
 
-### OSX ###
-*.DS_Store
+# other generated files
+bin/
+gen/
+build/
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# local configuration file
+local.properties
+
+# OSX files
+.DS_Store

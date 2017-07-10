@@ -1,0 +1,1 @@
+web: ./build/install/paasfinder-updater/bin/paasfinder-updater
