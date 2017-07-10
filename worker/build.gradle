@@ -24,4 +24,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '4.0.1'
 }
 
+task stage(dependsOn: ['clean', 'installApp'])
+
 mainClassName = "org.paasfinder.updater.UpdateService"
