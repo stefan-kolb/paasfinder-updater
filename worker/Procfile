@@ -1,1 +1,1 @@
-web: ./build/scripts/paasfinder-updater
+web: ./build/install/paasfinder-updater/bin/paasfinder-updater
