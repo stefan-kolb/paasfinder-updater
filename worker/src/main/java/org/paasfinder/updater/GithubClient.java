@@ -24,7 +24,7 @@ public class GithubClient {
     private static Gson gson = new GsonBuilder().create();
 
     private final String repository = "stefan-kolb/worker";
-    private final String oauthToken = System.getenv("GITHUB_OAUTH_TOKEN");
+    private final String oauthToken = System.getenv("OAUTH_TOKEN");
     private final String baseURL = "https://api.github.com/repos/" + repository;
 
     private final OkHttpClient client = new OkHttpClient();
