@@ -33,7 +33,7 @@ public class File {
         this.sha = fileSHA;
         this.branch = branch;
         Author author = new Author(contributorName, contributorEmail);
-        if (author.getName() != null && author.getEmail() != null) {
+        if (!author.getName().isEmpty() && !author.getEmail().isEmpty()) {
             this.author = author;
         }
     }
