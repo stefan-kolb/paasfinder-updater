@@ -40,15 +40,18 @@ public class ProfileResource {
             return "";
         });
 
-        post("/vendor", "application/json", (request, response) -> {
-            JsonObject data = jsonParser.parse(request.body()).getAsJsonObject();
+        post("/vendors/:id", "application/json", (request, response) -> {
+            String profileId = request.params(":id");
+            JsonObject payload = jsonParser.parse(request.body()).getAsJsonObject();
+            JsonObject metadata = payload.getAsJsonObject("metadata");
+            JsonObject profile = payload.getAsJsonObject("profile");
 
-            final String vendorKey = data.get("vendorKey").getAsString();
             LocalDateTime time = LocalDateTime.now();
             String timestamp = String.format("%d%02d%02d-%02d%02d", time.getYear(), time.getMonthValue(), time.getDayOfMonth(), time.getHour(), time.getMinute());
-            final String branchName = String.format("update-%s-%s", vendorKey, timestamp);
-            final String message = data.get("contributorMessage").getAsString();
-            final String title = String.format("%s Profile Update", data.get("name"));
+            // PR info
+            final String branchName = String.format("update-%s-%s", profileId, timestamp);
+            final String message = metadata.get("contributor_message").getAsString();
+            final String title = String.format("%s Profile Update", profile.get("name"));
 
             final Branch branch = new Branch(branchName, client.getLatestMasterSHA());
 
@@ -57,7 +60,7 @@ public class ProfileResource {
                 // create branch
                 if (success = client.createBranch(branch)) {
                     // update file
-                    final File file = new File(data, client.getLatestFileSHA(vendorKey), branchName);
+                    final File file = new File(profile, metadata, client.getLatestFileSHA(profileId), branchName);
                     if (success = client.updateFile(file)) {
                         // create pull request
                         final PullRequest pullRequest = new PullRequest(branchName, title, message);
