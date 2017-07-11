@@ -23,7 +23,7 @@ public class GithubClient {
     private static JsonParser jsonParser = new JsonParser();
     private static Gson gson = new GsonBuilder().create();
 
-    private final String repository = "stefan-kolb/worker";
+    private final String repository = "stefan-kolb/paas-profiles";
     private final String oauthToken = System.getenv("OAUTH_TOKEN");
     private final String baseURL = "https://api.github.com/repos/" + repository;
 
