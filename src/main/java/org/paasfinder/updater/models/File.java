@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
  * @see https://developer.github.com/v3/repos/contents/#update-a-file
  */
 public class File {
+
     private final transient String vendorKey;
     private final transient String contributorName;
     private final transient String contributorEmail;
@@ -21,10 +22,11 @@ public class File {
     private final String branch;
     private Author author = null;
 
-    public File(JsonObject data, JsonObject metadata, String fileSHA, String branch){
-        this.contributorName = metadata.get("contributor_name").getAsString();
-        this.contributorEmail = metadata.get("contributor_email").getAsString();
-        this.vendorKey = metadata.get("vendor_key").getAsString();
+    public File(JsonObject data, String fileSHA, String branch){
+        this.contributorName = getAndRemoveProperty(data, "contributorName");
+        this.contributorEmail = getAndRemoveProperty(data, "contributorEmail");
+        getAndRemoveProperty(data, "contributorMessage");
+        this.vendorKey = getAndRemoveProperty(data, "vendorKey");
 
         this.message = String.format("%s Profile Update", data.get("name"));
         this.content = encodeData(data);
@@ -42,7 +44,18 @@ public class File {
         return encodedContent;
     }
 
+    private String getAndRemoveProperty(JsonObject json, String property){
+        String result = null;
+        JsonElement elem = json.get(property);
+        if (elem != null) {
+            result = elem.getAsString();
+            json.remove(property);
+        }
+        return result;
+    }
+
     public String getVendorKey(){
         return vendorKey;
     }
+
 }
