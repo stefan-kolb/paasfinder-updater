@@ -15,6 +15,7 @@ import static spark.Spark.before;
 import static spark.Spark.options;
 import static spark.Spark.port;
 import static spark.Spark.post;
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class ProfileResource {
     private static final GithubClient client = new GithubClient();
@@ -81,5 +82,7 @@ public class ProfileResource {
             response.status(201);
             return "";
         });
+
+        enableDebugScreen();
     }
 }
